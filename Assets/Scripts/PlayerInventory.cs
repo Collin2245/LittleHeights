@@ -5,8 +5,8 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     // Start is called before the first frame update
-    GameObject slot
-    GameObject slot
+    GameObject slot;
+    GameObject slot1;
     void Start()
     {
         

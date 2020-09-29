@@ -31,17 +31,7 @@ public class Inventory : MonoBehaviour
     {
         inventoryGameObject = GameObject.Find("InventoryCanvas");
         inventoryCanvas = inventoryGameObject.GetComponent<Canvas>();
-        templateItem = GameObject.Find("ItemPrefab").GetComponent<Item>();
-        templateItem.id = "Blank";
         //Setting up blank inventory
-        inventoryArray = new Item[][]
-        {
-            new Item[] { templateItem, templateItem, templateItem, templateItem, templateItem, templateItem},
-            new Item[] { templateItem, templateItem, templateItem, templateItem, templateItem, templateItem},
-            new Item[] { templateItem, templateItem, templateItem, templateItem, templateItem, templateItem},
-            new Item[] { templateItem, templateItem, templateItem, templateItem, templateItem, templateItem},
-            new Item[] { templateItem, templateItem, templateItem, templateItem, templateItem, templateItem},
-        };
         inventoryCanvas.enabled = false;
 
     }
@@ -60,17 +50,5 @@ public class Inventory : MonoBehaviour
                 inventoryCanvas.enabled = true;
             }
         }   
-    }
-
-
-    public void generateInventory()
-    {
-        for (int row = 0; row < inventoryArray.Length; row++)
-        {
-            for (int column = 0; column < inventoryArray[0].Length; column++)
-            {
-                inventoryArray[row][column].display(row, column);
-            }
-        }
     }
 }

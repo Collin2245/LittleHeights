@@ -10,7 +10,7 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     public string id;
     public string type;
-    public Sprite sprite;
+    private Sprite sprite;
     private string path;
     public RectTransform rectTransform;
     public Image image;
