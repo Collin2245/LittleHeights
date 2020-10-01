@@ -35,8 +35,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 1.134, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 236.5, y: 194.5}
-  m_SizeDelta: {x: 54.11853, y: 49.41275}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 54.11853, y: 49.41272}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2702323029907725557
 CanvasRenderer:
@@ -60,9 +60,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: Blank
   type: 
-  sprite: {fileID: 0}
   rectTransform: {fileID: 0}
-  spriteRenderer: {fileID: 0}
+  image: {fileID: 0}
 --- !u!114 &5067269191530418487
 MonoBehaviour:
   m_ObjectHideFlags: 0

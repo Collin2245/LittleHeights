@@ -58,10 +58,12 @@
     <Compile Include="Assets\Scripts\Inventory.cs" />
     <Compile Include="Assets\Scripts\Item.cs" />
     <Compile Include="Assets\Scripts\SetTImeUI.cs" />
-    <Compile Include="Assets\Scripts\ClockScript.cs" />
-    <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\InventorySlot.cs" />
     <Compile Include="Assets\Scripts\PlayerInventory.cs" />
+    <Compile Include="Assets\Scripts\ClockScript.cs" />
+    <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\MouseInventorySlot.cs" />
+    <Compile Include="Assets\Scripts\EventManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
