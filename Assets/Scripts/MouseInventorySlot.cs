@@ -6,6 +6,7 @@ public class MouseInventorySlot : MonoBehaviour
 {
     public string itemIdOnMouse;
     public bool itemOnMouse = false;
+    public GameObject itemPrefabOnMouse;
     public static MouseInventorySlot Instance { get; private set; }
 
     private void Awake()
@@ -30,6 +31,9 @@ public class MouseInventorySlot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (itemOnMouse)
+        {
+            itemPrefabOnMouse = transform.GetChild(0).gameObject;
+        }
     }
 }

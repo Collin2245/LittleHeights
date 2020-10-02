@@ -11,10 +11,10 @@ public class InventorySlot : MonoBehaviour
     public string itemId;
     private bool itemHasBeenDrawn;
     public GameObject itemPrefab;
+    //public GameObject MouseInventorySlot.Instance.itemPrefabOnMouse;
     private RectTransform rectTransform;
     private Button btn;
-    private Item item;
-    private Item item2;
+    public Item item;
     public string itemMovement;
     public GameObject mouseInventory;
     void Start()
@@ -22,7 +22,6 @@ public class InventorySlot : MonoBehaviour
         mouseInventory = GameObject.Find("MouseInventorySlot");
         btn = GetComponent<Button>();
         btn.onClick.AddListener(() => InventoryButtonClicked());
-        itemPrefab = Resources.Load("Prefabs/ItemPrefab") as GameObject;
         rectTransform = GetComponent<RectTransform>();
         generateInventory();
     }
@@ -30,26 +29,34 @@ public class InventorySlot : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        // check if itemOnMouse is active, if it is, have item instance follow mouse until button is next clicked
         if (MouseInventorySlot.Instance.itemOnMouse) //item follow mouse
         {
-            Debug.Log("mouse tracking is active");
-            if(this.transform.childCount == 0)
+            //Debug.Log("mouse tracking is active");
+            if (MouseInventorySlot.Instance.transform.childCount == 0)
             {
-                Debug.Log("Generated the item");
+                //Debug.Log("Generated the item");
                 //itemPrefab. .transform(new Vector3(this.transform.position.x, this.transform.position.y, this.transform.position.z));
-                itemPrefab = Instantiate(itemPrefab, new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z), Quaternion.identity);
-                item2 = itemPrefab.GetComponent<Item>();
-                item2.id = itemId;
+                MouseInventorySlot.Instance.itemPrefabOnMouse = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, MouseInventorySlot.Instance.transform);
+                MouseInventorySlot.Instance.itemPrefabOnMouse.GetComponent<Item>().id = MouseInventorySlot.Instance.itemIdOnMouse;
             }
             else
             {
-                Debug.Log("Following the item");
-                itemPrefab.transform.position = new Vector3(Input.mousePosition.x, Input.mousePosition.y, Input.mousePosition.z);
+                //Debug.Log("Following the item");
+                MouseInventorySlot.Instance.itemPrefabOnMouse.transform.position = new Vector3(Input.mousePosition.x + 80, Input.mousePosition.y - 80, Input.mousePosition.z);
             }
 
         }
+        // check if itemOnMouse is active, if it is, have item instance follow mouse until button is next clicked
+
+        else
+        {
+            //maybe do something here
+            //foreach (Transform child in MouseInventorySlot.Instance.transform)
+            //{
+            //    Destroy(child.gameObject);
+            //}
+        }
+        generateInventory();
     }
 
     void generateInventory()
@@ -61,7 +68,7 @@ public class InventorySlot : MonoBehaviour
             {
                 //item has not been drawn yet
 
-                itemPrefab = Instantiate(itemPrefab, rectTransform);
+                itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, rectTransform);
                 item = itemPrefab.GetComponent<Item>();
                 item.id = itemId;
             }
@@ -79,12 +86,27 @@ public class InventorySlot : MonoBehaviour
             if(itemId == "")
             {
                 itemId = MouseInventorySlot.Instance.itemIdOnMouse;
-                MouseInventorySlot.Instance.itemOnMouse = false;
-                MouseInventorySlot.Instance.itemIdOnMouse = "";
+                itemPrefab = Instantiate(itemPrefab, rectTransform);
+                item = itemPrefab.GetComponent<Item>();
+                item.id = itemId;
                 //item swapped and no item on mouse
-                
+                Destroy(MouseInventorySlot.Instance.itemPrefabOnMouse);
+                MouseInventorySlot.Instance.itemIdOnMouse = "";
+                MouseInventorySlot.Instance.itemOnMouse = false;
+                foreach (Transform child in MouseInventorySlot.Instance.transform)
+                {
+                    Destroy(child.gameObject);
+                }
             }
             //add if not empty
+            else
+            {
+                string tempItem = itemId;
+                itemId = MouseInventorySlot.Instance.itemIdOnMouse;
+                item = itemPrefab.GetComponent<Item>();
+                item.id = itemId;
+                MouseInventorySlot.Instance.itemIdOnMouse = tempItem;
+            }
         }
         else //first click
         {
@@ -99,10 +121,12 @@ public class InventorySlot : MonoBehaviour
                 MouseInventorySlot.Instance.itemIdOnMouse = itemId;
                 MouseInventorySlot.Instance.itemOnMouse = true;
                 itemId = "";
-                Destroy(this.transform.GetChild(0).gameObject);
-
-
-
+                item.id = "";
+                MouseInventorySlot.Instance.itemPrefabOnMouse = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, MouseInventorySlot.Instance.transform);
+                foreach (Transform child in rectTransform)
+                {
+                    Destroy(child.gameObject);
+                }
             }
         }
         generateInventory();
