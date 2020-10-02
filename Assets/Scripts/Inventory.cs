@@ -7,7 +7,9 @@ public class Inventory : MonoBehaviour
 {
     public static Inventory Instance { get; private set; }
     GameObject inventoryGameObject;
+    GameObject hotbarGameObject;
     Canvas inventoryCanvas;
+    Canvas hotbarCanvas;
     Item testItem;
     Item templateItem;
     public Item[][] inventoryArray;
@@ -29,10 +31,13 @@ public class Inventory : MonoBehaviour
     }
     void Start()
     {
+        hotbarGameObject = GameObject.Find("Hotbar");
         inventoryGameObject = GameObject.Find("InventoryCanvas");
         inventoryCanvas = inventoryGameObject.GetComponent<Canvas>();
+        hotbarCanvas = hotbarGameObject.GetComponent<Canvas>();
         //Setting up blank inventory
         inventoryCanvas.enabled = false;
+        hotbarCanvas.enabled = true;
 
     }
 
@@ -44,10 +49,12 @@ public class Inventory : MonoBehaviour
             if (inventoryCanvas.enabled == true)
             {
                 inventoryCanvas.enabled = false;
+                hotbarCanvas.enabled = true;
             }
             else
             {
                 inventoryCanvas.enabled = true;
+                hotbarCanvas.enabled = false;
             }
         }   
     }
