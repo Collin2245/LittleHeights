@@ -9,6 +9,7 @@ public class InventorySlot : MonoBehaviour
 {
     // Start is called before the first frame update
     public string itemId;
+    private string path;
     private bool itemHasBeenDrawn;
     public GameObject itemPrefab;
     //public GameObject MouseInventorySlot.Instance.itemPrefabOnMouse;
@@ -72,6 +73,11 @@ public class InventorySlot : MonoBehaviour
                 item = itemPrefab.GetComponent<Item>();
                 item.id = itemId;
             }
+            else
+            {
+                path = "Items/" + this.itemId;
+                transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>(path);
+            }
             //else
             //{
                 
@@ -86,7 +92,7 @@ public class InventorySlot : MonoBehaviour
             if(itemId == "")
             {
                 itemId = MouseInventorySlot.Instance.itemIdOnMouse;
-                itemPrefab = Instantiate(itemPrefab, rectTransform);
+                itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, rectTransform);
                 item = itemPrefab.GetComponent<Item>();
                 item.id = itemId;
                 //item swapped and no item on mouse
@@ -101,11 +107,13 @@ public class InventorySlot : MonoBehaviour
             //add if not empty
             else
             {
-                string tempItem = itemId;
+                string tempItemId = itemId;
                 itemId = MouseInventorySlot.Instance.itemIdOnMouse;
                 item = itemPrefab.GetComponent<Item>();
                 item.id = itemId;
-                MouseInventorySlot.Instance.itemIdOnMouse = tempItem;
+                Item tempItem = MouseInventorySlot.Instance.GetComponentInChildren<Item>();
+                tempItem.id = tempItemId;
+                MouseInventorySlot.Instance.itemIdOnMouse = tempItemId;
             }
         }
         else //first click
@@ -123,7 +131,9 @@ public class InventorySlot : MonoBehaviour
                 itemId = "";
                 item.id = "";
                 MouseInventorySlot.Instance.itemPrefabOnMouse = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, MouseInventorySlot.Instance.transform);
-                foreach (Transform child in rectTransform)
+                Item tempItem = MouseInventorySlot.Instance.GetComponentInChildren<Item>();
+                tempItem.id = itemId;
+                foreach (Transform child in transform)
                 {
                     Destroy(child.gameObject);
                 }

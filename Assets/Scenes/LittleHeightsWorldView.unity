@@ -421,6 +421,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   itemIdOnMouse: 
   itemOnMouse: 0
+  itemPrefabOnMouse: {fileID: 0}
 --- !u!1 &789623669
 GameObject:
   m_ObjectHideFlags: 0
@@ -595,6 +596,10 @@ PrefabInstance:
     - target: {fileID: 1340843010493916481, guid: ee507c276007bf44b967e1b704f028e7, type: 3}
       propertyPath: m_SizeDelta.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1470333055071176698, guid: ee507c276007bf44b967e1b704f028e7, type: 3}
+      propertyPath: itemId
+      value: Square
       objectReference: {fileID: 0}
     - target: {fileID: 1514690664350116295, guid: ee507c276007bf44b967e1b704f028e7, type: 3}
       propertyPath: m_AnchorMin.y

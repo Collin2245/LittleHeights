@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MouseInventorySlot : MonoBehaviour
 {
@@ -8,6 +9,7 @@ public class MouseInventorySlot : MonoBehaviour
     public bool itemOnMouse = false;
     public GameObject itemPrefabOnMouse;
     public static MouseInventorySlot Instance { get; private set; }
+    private string path;
 
     private void Awake()
     {
@@ -34,6 +36,10 @@ public class MouseInventorySlot : MonoBehaviour
         if (itemOnMouse)
         {
             itemPrefabOnMouse = transform.GetChild(0).gameObject;
+            path = "Items/" + this.itemIdOnMouse;
+            GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(path);
         }
+
+
     }
 }
