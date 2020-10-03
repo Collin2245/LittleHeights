@@ -6,14 +6,13 @@ public class HotbarItemHolder : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject itemHolderOnInventory;
+    public GameObject itemPrefab;
+    public Item item;
     public int slotNum;
     void Start()
     {
         switch(slotNum)
         {
-            case 1:
-                itemHolderOnInventory = GameObject.Find("InventorySlot (23)");
-                break;
             case 2:
                 itemHolderOnInventory = GameObject.Find("InventorySlot (24)");
                 break;
@@ -33,11 +32,29 @@ public class HotbarItemHolder : MonoBehaviour
                 itemHolderOnInventory = GameObject.Find("InventorySlot (29)");
                 break;
         }
+        generateHotbarItem();
+    }
+
+    public void generateHotbarItem()
+    {
+        foreach (Transform child in transform)
+        {
+            Destroy(child.gameObject);
+        }
+        if (this.itemHolderOnInventory.GetComponent<InventorySlot>().itemId != "")
+        {
+            itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, transform);
+            item = itemPrefab.GetComponent<Item>();
+            item.id = this.itemHolderOnInventory.GetComponent<InventorySlot>().itemId;
+        }
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            generateHotbarItem();
+        }
     }
 }

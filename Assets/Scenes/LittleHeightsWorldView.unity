@@ -1312,7 +1312,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1227442293045623331, guid: e14e5e7787e673a499b6f582b7b2f08f, type: 3}
       propertyPath: m_Name
-      value: Hotbar
+      value: HotbarCanvas
       objectReference: {fileID: 0}
     - target: {fileID: 2657795334110215260, guid: e14e5e7787e673a499b6f582b7b2f08f, type: 3}
       propertyPath: m_AnchorMin.y

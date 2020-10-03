@@ -31,7 +31,7 @@ public class Inventory : MonoBehaviour
     }
     void Start()
     {
-        hotbarGameObject = GameObject.Find("Hotbar");
+        hotbarGameObject = GameObject.Find("HotbarCanvas");
         inventoryGameObject = GameObject.Find("InventoryCanvas");
         inventoryCanvas = inventoryGameObject.GetComponent<Canvas>();
         hotbarCanvas = hotbarGameObject.GetComponent<Canvas>();
