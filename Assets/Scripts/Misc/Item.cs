@@ -15,7 +15,7 @@ public class Item : MonoBehaviour
     public RectTransform rectTransform;
     public Image image;
     public int maxQuantity;
-    public int currQuantity;
+    //public int currQuantity;
 
     
 
@@ -45,9 +45,4 @@ public class Item : MonoBehaviour
 
     }
 
-    public void display(float x, float y, float z = 0)
-    {
-        Vector3 location = new Vector3(x, y, z);
-        rectTransform.position = location;
-    }
 }

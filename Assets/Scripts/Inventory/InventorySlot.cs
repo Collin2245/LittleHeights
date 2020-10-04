@@ -18,6 +18,7 @@ public class InventorySlot : MonoBehaviour
     public Item item;
     public string itemMovement;
     public GameObject mouseInventory;
+    public int currAmount;
     void Start()
     {
         mouseInventory = GameObject.Find("MouseInventorySlot");
@@ -36,10 +37,11 @@ public class InventorySlot : MonoBehaviour
             {
                 MouseInventorySlot.Instance.itemPrefabOnMouse = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, MouseInventorySlot.Instance.transform);
                 MouseInventorySlot.Instance.itemPrefabOnMouse.GetComponent<Item>().id = MouseInventorySlot.Instance.itemIdOnMouse;
+                //MouseInventorySlot.Instance.itemPrefabOnMouse.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             }
             else
             {
-                MouseInventorySlot.Instance.itemPrefabOnMouse.transform.position = new Vector3(Input.mousePosition.x + 80, Input.mousePosition.y - 80, Input.mousePosition.z);
+                MouseInventorySlot.Instance.itemPrefabOnMouse.transform.position = new Vector3(Input.mousePosition.x + 60, Input.mousePosition.y - 60, Input.mousePosition.z);
             }
 
         }

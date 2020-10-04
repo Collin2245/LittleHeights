@@ -9,6 +9,8 @@ public class HotbarItemHolder : MonoBehaviour
     public GameObject itemPrefab;
     public Item item;
     public int slotNum;
+    public int currAmount;
+    public string itemId;
     void Start()
     {
         switch(slotNum)

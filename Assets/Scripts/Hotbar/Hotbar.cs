@@ -28,6 +28,6 @@ public class Hotbar : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 }
