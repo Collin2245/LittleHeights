@@ -38,6 +38,7 @@ public class MouseInventorySlot : MonoBehaviour
             itemPrefabOnMouse = transform.GetChild(0).gameObject;
             path = "Items/" + this.itemIdOnMouse;
             GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(path);
+            GetComponentInChildren<Item>().id = itemIdOnMouse;
         }
 
 
