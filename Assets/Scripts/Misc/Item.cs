@@ -17,7 +17,7 @@ public class Item : MonoBehaviour
     public Image image;
     public int maxQuantity;
     //public int currQuantity;
-    public int currQuantity;
+    public int currAmount;
     GameObject itemCountPrefab;
     public float itemCountOffsetX;
     public float itemCountOffsetY;
@@ -36,8 +36,6 @@ public class Item : MonoBehaviour
         {
             maxQuantity = ItemQuantities.quantityForItem[id];
         }
-        itemCountOffsetX = -70;
-        itemCountOffsetY = 70;
 
     }
 
@@ -67,22 +65,17 @@ public class Item : MonoBehaviour
             //    Debug.Log("Oberwriting text");
             //    this.currQuantity = 1;
             //}
-            itemCountPrefab.GetComponentInChildren<TextMeshProUGUI>().SetText(currQuantity.ToString());
+            itemCountPrefab.GetComponentInChildren<TextMeshProUGUI>().SetText(currAmount.ToString());
             
             //itemCountPrefab.GetComponentInChildren<TextMeshProUGUI>().GetComponent<TextContainer>().width = 20;
 
         }
+        itemCountPrefab.GetComponentInChildren<TextMeshProUGUI>().SetText(currAmount.ToString());
 
+    }
 
-
-        //this is for checking the quantity of the itme, I think it should only be ran when checking quantity of item -- refer to later in pickup
-        //if(id != null)
-        //{
-        //    if (ItemQuantities.quantityForItem.TryGetValue(this.id, out int result))
-        //    {
-        //        Debug.Log(result);
-        //    }
-        //}
+    void addQuantity(int ammount)
+    {
 
     }
 

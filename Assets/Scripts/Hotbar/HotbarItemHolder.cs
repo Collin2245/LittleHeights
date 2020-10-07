@@ -39,6 +39,7 @@ public class HotbarItemHolder : MonoBehaviour
 
     public void generateHotbarItem()
     {
+        itemHolderOnInventory.GetComponent<InventorySlot>().generateInventory();
         foreach (Transform child in transform)
         {
             Destroy(child.gameObject);
@@ -47,7 +48,8 @@ public class HotbarItemHolder : MonoBehaviour
         {
             itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, transform);
             item = itemPrefab.GetComponent<Item>();
-            item.id = this.itemHolderOnInventory.GetComponent<InventorySlot>().itemId;
+            item.id = this.itemHolderOnInventory.GetComponentInChildren<InventorySlot>().itemId;
+            item.currAmount = this.itemHolderOnInventory.GetComponent<InventorySlot>().currAmount;
         }
     }
 

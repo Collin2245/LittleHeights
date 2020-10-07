@@ -8,6 +8,7 @@ public class MouseInventorySlot : MonoBehaviour
     public string itemIdOnMouse;
     public bool itemOnMouse = false;
     public GameObject itemPrefabOnMouse;
+    public int currAmount;
     public static MouseInventorySlot Instance { get; private set; }
     private string path;
 

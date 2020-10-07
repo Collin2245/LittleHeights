@@ -48,7 +48,7 @@ public class InventorySlot : MonoBehaviour
         generateInventory();
     }
 
-    void generateInventory()
+    public void generateInventory()
     {
         if (itemId != "")
         {
@@ -63,6 +63,7 @@ public class InventorySlot : MonoBehaviour
                 path = "Items/" + this.itemId;
                 transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>(path);
             }
+            currAmount = item.currAmount;
         }
     }
 
@@ -73,26 +74,36 @@ public class InventorySlot : MonoBehaviour
             if(itemId == "")
             {
                 itemId = MouseInventorySlot.Instance.itemIdOnMouse;
+                currAmount = MouseInventorySlot.Instance.currAmount;
                 itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, rectTransform);
                 item = itemPrefab.GetComponent<Item>();
                 item.id = itemId;
-                Destroy(MouseInventorySlot.Instance.itemPrefabOnMouse);
-                MouseInventorySlot.Instance.itemIdOnMouse = "";
-                MouseInventorySlot.Instance.itemOnMouse = false;
-                foreach (Transform child in MouseInventorySlot.Instance.transform)
-                {
-                    Destroy(child.gameObject);
-                }
+                item.currAmount = currAmount;
+                DestroyMousePrefab();
             }
             else
             {
-                string tempItemId = itemId;
-                itemId = MouseInventorySlot.Instance.itemIdOnMouse;
-                item = itemPrefab.GetComponent<Item>();
-                item.id = itemId;
-                Item tempItem = MouseInventorySlot.Instance.GetComponentInChildren<Item>();
-                tempItem.id = tempItemId;
-                MouseInventorySlot.Instance.itemIdOnMouse = tempItemId;
+                if(itemId == MouseInventorySlot.Instance.itemIdOnMouse && currAmount + MouseInventorySlot.Instance.currAmount <= ItemQuantities.quantityForItem[itemId])
+                {
+                    currAmount = currAmount + MouseInventorySlot.Instance.currAmount;
+                    DestroyMousePrefab();
+                    item.currAmount = currAmount;
+                }
+                else
+                {
+                    string tempItemId = itemId;
+                    int tempQuantity = currAmount;
+                    itemId = MouseInventorySlot.Instance.itemIdOnMouse;
+                    currAmount = MouseInventorySlot.Instance.currAmount;
+                    item = itemPrefab.GetComponent<Item>();
+                    item.id = itemId;
+                    item.currAmount = currAmount;
+                    Item tempItem = MouseInventorySlot.Instance.GetComponentInChildren<Item>();
+                    tempItem.id = tempItemId;
+                    tempItem.currAmount = tempQuantity;
+                    MouseInventorySlot.Instance.itemIdOnMouse = tempItemId;
+                    MouseInventorySlot.Instance.currAmount = tempQuantity;
+                }
             }
         }
         else //first click
@@ -106,12 +117,14 @@ public class InventorySlot : MonoBehaviour
                 Debug.Log("Clicked item with no item on mouse and valid item in slot");
                 //make this another function
                 MouseInventorySlot.Instance.itemIdOnMouse = itemId;
+                MouseInventorySlot.Instance.currAmount = currAmount;
                 MouseInventorySlot.Instance.itemOnMouse = true;
                 itemId = "";
                 item.id = "";
                 MouseInventorySlot.Instance.itemPrefabOnMouse = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, MouseInventorySlot.Instance.transform);
                 Item tempItem = MouseInventorySlot.Instance.GetComponentInChildren<Item>();
                 tempItem.id = itemId;
+                tempItem.currAmount = currAmount;
                 foreach (Transform child in transform)
                 {
                     Destroy(child.gameObject);
@@ -119,5 +132,17 @@ public class InventorySlot : MonoBehaviour
             }
         }
         generateInventory();
+    }
+
+    void DestroyMousePrefab()
+    {
+        Destroy(MouseInventorySlot.Instance.itemPrefabOnMouse);
+        MouseInventorySlot.Instance.itemIdOnMouse = "";
+        MouseInventorySlot.Instance.itemOnMouse = false;
+        MouseInventorySlot.Instance.currAmount = 0;
+        foreach (Transform child in MouseInventorySlot.Instance.transform)
+        {
+            Destroy(child.gameObject);
+        }
     }
 }

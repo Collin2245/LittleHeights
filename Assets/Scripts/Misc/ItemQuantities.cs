@@ -9,7 +9,7 @@ public class ItemQuantities : MonoBehaviour
         { "Blank", 1 },
         {"Square",2 },
         {"woodenSword",1 },
-        {"tempHoe",1 },
+        {"tempHoe",5 },
     };
 }
 

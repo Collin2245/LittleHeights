@@ -64,7 +64,9 @@ MonoBehaviour:
   rectTransform: {fileID: 0}
   image: {fileID: 0}
   maxQuantity: 0
-  currQuantity: 0
+  currAmount: 1
+  itemCountOffsetX: 30
+  itemCountOffsetY: 45
 --- !u!114 &5067269191530418487
 MonoBehaviour:
   m_ObjectHideFlags: 0
