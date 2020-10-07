@@ -101,6 +101,9 @@ MonoBehaviour:
   rectTransform: {fileID: 0}
   image: {fileID: 0}
   maxQuantity: 0
+  currAmount: 1
+  itemCountOffsetX: 0
+  itemCountOffsetY: 0
 --- !u!61 &134600214015547759
 BoxCollider2D:
   m_ObjectHideFlags: 0

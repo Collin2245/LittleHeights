@@ -169,6 +169,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentItemHolder: {fileID: 0}
   currentItemId: 
+  itemHolder1: {fileID: 0}
+  itemHolder2: {fileID: 0}
+  itemHolder3: {fileID: 0}
+  itemHolder4: {fileID: 0}
+  itemHolder5: {fileID: 0}
+  itemHolder6: {fileID: 0}
+  itemHolder7: {fileID: 0}
+  itemHolder8: {fileID: 0}
+  itemHolder9: {fileID: 0}
+  itemHolder10: {fileID: 0}
+  itemHolder11: {fileID: 0}
+  itemHolder12: {fileID: 0}
+  itemHolder13: {fileID: 0}
+  itemHolder14: {fileID: 0}
+  itemHolder15: {fileID: 0}
+  itemHolder16: {fileID: 0}
+  itemHolder17: {fileID: 0}
+  itemHolder18: {fileID: 0}
+  itemHolder19: {fileID: 0}
+  itemHolder20: {fileID: 0}
+  itemHolder21: {fileID: 0}
+  itemHolder22: {fileID: 0}
+  itemHolder23: {fileID: 0}
+  itemHolder24: {fileID: 0}
+  itemHolder25: {fileID: 0}
+  itemHolder26: {fileID: 0}
+  itemHolder27: {fileID: 0}
+  itemHolder28: {fileID: 0}
+  itemHolder29: {fileID: 0}
+  itemHolder30: {fileID: 0}
+  itemHolders: []
 --- !u!95 &6811485030329027252
 Animator:
   serializedVersion: 3

@@ -51,6 +51,7 @@ MonoBehaviour:
   itemIdOnMouse: 
   itemOnMouse: 0
   itemPrefabOnMouse: {fileID: 0}
+  currAmount: 0
 --- !u!1 &5014251538597571
 GameObject:
   m_ObjectHideFlags: 0
@@ -140,7 +141,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c25e88149d2284da93c16baefd75ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: tempHoe
+  itemId: 
   itemPrefab: {fileID: 0}
   item: {fileID: 0}
   itemMovement: 
@@ -554,7 +555,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c25e88149d2284da93c16baefd75ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: tempHoe
+  itemId: 
   itemPrefab: {fileID: 0}
   item: {fileID: 0}
   itemMovement: 
@@ -2682,7 +2683,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c25e88149d2284da93c16baefd75ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: tempHoe
+  itemId: 
   itemPrefab: {fileID: 0}
   item: {fileID: 0}
   itemMovement: 
@@ -3378,7 +3379,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c25e88149d2284da93c16baefd75ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: tempHoe
+  itemId: 
   itemPrefab: {fileID: 0}
   item: {fileID: 0}
   itemMovement: 
@@ -3654,7 +3655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c25e88149d2284da93c16baefd75ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: tempHoe
+  itemId: 
   itemPrefab: {fileID: 0}
   item: {fileID: 0}
   itemMovement: 
@@ -4344,7 +4345,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 15c25e88149d2284da93c16baefd75ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  itemId: tempHoe
+  itemId: 
   itemPrefab: {fileID: 0}
   item: {fileID: 0}
   itemMovement: 
