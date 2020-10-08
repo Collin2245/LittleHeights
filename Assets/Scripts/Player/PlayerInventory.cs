@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Experimental.SceneManagement;
+using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
@@ -98,10 +99,12 @@ public class PlayerInventory : MonoBehaviour
     {
         if(TryToAddItemToExistingItem(item))
         {
+            Debug.Log("Picked up existing item and added to count");
             return;
         }
         if(TryToAddItemToEmptySlot(item))
         {
+            Debug.Log("Added new item to inventory");
             return;
         }
         Debug.Log("Inventory is full");
@@ -145,6 +148,9 @@ public class PlayerInventory : MonoBehaviour
                 Item tempItem = temp.GetComponent<Item>();
                 tempItem.id = item.id;
                 tempItem.currAmount = item.currAmount;
+                //need to set inventoryslot stuff
+                itemHolders[i].GetComponent<InventorySlot>().itemId = item.id;
+                itemHolders[i].GetComponent<InventorySlot>().currAmount = item.currAmount;
                 return true;
             }
         }
