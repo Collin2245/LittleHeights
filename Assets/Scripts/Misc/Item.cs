@@ -11,7 +11,7 @@ public class Item : MonoBehaviour
     // Start is called before the first frame update
     public string id;
     public string type;
-    private Sprite sprite;
+    public Sprite sprite;
     private string path;
     public RectTransform rectTransform;
     public Image image;
@@ -21,17 +21,24 @@ public class Item : MonoBehaviour
     GameObject itemCountPrefab;
     public float itemCountOffsetX;
     public float itemCountOffsetY;
+    private bool hasImage;
 
     
 
 
     void Start()
     {
-        rectTransform = GetComponent<RectTransform>();
-        image = GetComponent<Image>();
+        hasImage = false;
         path = "Items/" + this.id;
         sprite = Resources.Load<Sprite>(path);
-        image.sprite = this.sprite;
+        rectTransform = GetComponent<RectTransform>();
+        if(this.TryGetComponent(out Image image))
+        {
+            hasImage = true;
+            image = GetComponent<Image>();
+            image.sprite = this.sprite;
+        }
+        
         if (this.id != "")
         {
             maxQuantity = ItemQuantities.quantityForItem[id];
@@ -51,7 +58,10 @@ public class Item : MonoBehaviour
         image = GetComponent<Image>();
         path = "Items/" + this.id;
         sprite = Resources.Load<Sprite>(path);
-        image.sprite = this.sprite;
+        if(hasImage)
+        {
+            image.sprite = this.sprite;
+        }
         if(this.id != "")
         {
             maxQuantity = ItemQuantities.quantityForItem[id];

@@ -100,7 +100,11 @@ public class PlayerInventory : MonoBehaviour
         {
             return;
         }
-        TryToAddItemToEmptySlot(item);
+        if(TryToAddItemToEmptySlot(item))
+        {
+            return;
+        }
+        Debug.Log("Inventory is full");
     }
 
     private bool TryToAddItemToExistingItem(Item item)
@@ -128,16 +132,22 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
-    private void TryToAddItemToEmptySlot(Item item)
+    private bool TryToAddItemToEmptySlot(Item item)
     {
-        for (int i = 0; i < this.itemHolders.Length; i++)
+        for (int i = 0; i < this.itemHolders.Length; i++) 
         {
             if (itemHolders[i].GetComponent<InventorySlot>().itemId == "")
             {
-                itemHolders[i].GetComponent<InventorySlot>().GetComponent<Item>().id = item.id;
-                itemHolders[i].GetComponent<InventorySlot>().GetComponent<Item>().currAmount = item.currAmount;
-                return;
+                ////instantiate!!!!
+                //itemHolders[i].gameObject.GetComponentInChildren<Item>().id = item.id;
+                //itemHolders[i].gameObject.GetComponent<InventorySlot>().GetComponentInChildren<Item>().currAmount = item.currAmount;
+                GameObject temp = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, itemHolders[i].transform);
+                Item tempItem = temp.GetComponent<Item>();
+                tempItem.id = item.id;
+                tempItem.currAmount = item.currAmount;
+                return true;
             }
         }
+        return false;
     }
 }

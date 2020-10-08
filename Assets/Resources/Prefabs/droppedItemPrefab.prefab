@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 134600214015547757}
   - component: {fileID: 134600214015547756}
   - component: {fileID: 134600214015547759}
+  - component: {fileID: 4761467133621906129}
   m_Layer: 0
   m_Name: droppedItemPrefab
   m_TagString: Untagged
@@ -98,6 +99,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   id: 
   type: 
+  sprite: {fileID: 0}
   rectTransform: {fileID: 0}
   image: {fileID: 0}
   maxQuantity: 0
@@ -128,5 +130,17 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.0001, y: 0.0001}
-  m_EdgeRadius: 0
+  m_Size: {x: 1, y: 1}
+  m_EdgeRadius: 1
+--- !u!114 &4761467133621906129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 134600214015547758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff4afb0afead2db4b99e0781f9b7f228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
