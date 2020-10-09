@@ -40,6 +40,7 @@ public class MouseInventorySlot : MonoBehaviour
             path = "Items/" + this.itemIdOnMouse;
             GetComponentInChildren<Image>().sprite = Resources.Load<Sprite>(path);
             GetComponentInChildren<Item>().id = itemIdOnMouse;
+            GetComponentInChildren<Item>().currAmount = currAmount;
         }
 
 

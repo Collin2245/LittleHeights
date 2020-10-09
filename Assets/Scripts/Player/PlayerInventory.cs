@@ -121,7 +121,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if(itemHolders[i].GetComponent<InventorySlot>().currAmount + item.currAmount <= ItemQuantities.quantityForItem[item.id])
                 {
-                    itemHolders[i].GetComponent<InventorySlot>().currAmount += item.currAmount;
+                    itemHolders[i].GetComponent<InventorySlot>().GetComponentInChildren<Item>().currAmount += item.currAmount;
                     return true;
                 }
                 Debug.Log("Found matching, but max quantity has been reached");

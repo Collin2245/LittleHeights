@@ -39,26 +39,29 @@ public class HotbarItemHolder : MonoBehaviour
 
     public void generateHotbarItem()
     {
-        itemHolderOnInventory.GetComponent<InventorySlot>().generateInventory();
-        foreach (Transform child in transform)
+        if(itemHolderOnInventory.GetComponent<InventorySlot>().itemId != "")
         {
-            Destroy(child.gameObject);
-        }
-        if (this.itemHolderOnInventory.GetComponent<InventorySlot>().itemId != "")
+            if(this.transform.childCount == 0)
+            {
+                itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, transform);
+                item = itemPrefab.GetComponent<Item>();
+                item.id = itemHolderOnInventory.GetComponent<InventorySlot>().itemId;
+                item.currAmount = itemHolderOnInventory.GetComponent<InventorySlot>().currAmount;
+            }
+            item.id = itemHolderOnInventory.GetComponent<InventorySlot>().itemId;
+            item.currAmount = itemHolderOnInventory.GetComponent<InventorySlot>().currAmount;
+        }else
         {
-            itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, transform);
-            item = itemPrefab.GetComponent<Item>();
-            item.id = this.itemHolderOnInventory.GetComponentInChildren<InventorySlot>().itemId;
-            item.currAmount = this.itemHolderOnInventory.GetComponent<InventorySlot>().currAmount;
+            foreach (Transform child in transform)
+            {
+                Destroy(child.gameObject);
+            }
         }
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            generateHotbarItem();
-        }
+        generateHotbarItem();
     }
 }

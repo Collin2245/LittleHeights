@@ -10,6 +10,7 @@ public class ItemQuantities : MonoBehaviour
         {"Square",2 },
         {"woodenSword",1 },
         {"tempHoe",5 },
+        {"itemName",999 },
     };
 }
 

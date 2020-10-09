@@ -10,7 +10,6 @@ public class InventorySlot : MonoBehaviour
     // Start is called before the first frame update
     public string itemId;
     private string path;
-    private bool itemHasBeenDrawn;
     public GameObject itemPrefab;
     //public GameObject MouseInventorySlot.Instance.itemPrefabOnMouse;
     private RectTransform rectTransform;
@@ -56,14 +55,17 @@ public class InventorySlot : MonoBehaviour
             {
                 itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, rectTransform);
                 item = itemPrefab.GetComponent<Item>();
-                item.id = itemId;
+                itemId = item.id;
+                currAmount = item.currAmount;
             }
             else
             {
                 path = "Items/" + this.itemId;
                 transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>(path);
+                item = GetComponentInChildren<Item>();
+                itemId = item.id;
+                currAmount = item.currAmount;
             }
-            currAmount = item.currAmount;
         }
     }
 
@@ -91,13 +93,11 @@ public class InventorySlot : MonoBehaviour
                 }
                 else
                 {
-                    string tempItemId = itemId;
-                    int tempQuantity = currAmount;
-                    itemId = MouseInventorySlot.Instance.itemIdOnMouse;
-                    currAmount = MouseInventorySlot.Instance.currAmount;
-                    item = itemPrefab.GetComponent<Item>();
-                    item.id = itemId;
-                    item.currAmount = currAmount;
+                    item = this.GetComponentInChildren<Item>();
+                    string tempItemId = item.id;
+                    int tempQuantity = item.currAmount;
+                    item.id = MouseInventorySlot.Instance.itemIdOnMouse;
+                    item.currAmount = MouseInventorySlot.Instance.currAmount;
                     Item tempItem = MouseInventorySlot.Instance.GetComponentInChildren<Item>();
                     tempItem.id = tempItemId;
                     tempItem.currAmount = tempQuantity;
@@ -120,7 +120,7 @@ public class InventorySlot : MonoBehaviour
                 MouseInventorySlot.Instance.currAmount = currAmount;
                 MouseInventorySlot.Instance.itemOnMouse = true;
                 itemId = "";
-                item.id = "";
+                item.id = "";   //something weird here
                 MouseInventorySlot.Instance.itemPrefabOnMouse = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, MouseInventorySlot.Instance.transform);
                 Item tempItem = MouseInventorySlot.Instance.GetComponentInChildren<Item>();
                 tempItem.id = itemId;
