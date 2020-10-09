@@ -97,7 +97,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 758797643fefd0540b93f48d158f79dc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 
+  id: tempHoe
   type: 
   sprite: {fileID: 0}
   rectTransform: {fileID: 0}
@@ -131,7 +131,7 @@ BoxCollider2D:
   m_AutoTiling: 0
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
-  m_EdgeRadius: 1
+  m_EdgeRadius: 0
 --- !u!114 &4761467133621906129
 MonoBehaviour:
   m_ObjectHideFlags: 0

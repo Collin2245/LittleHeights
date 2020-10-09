@@ -1,14 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
-using UnityEditor.Experimental.SceneManagement;
-using UnityEditor.SceneManagement;
 using UnityEngine;
 
 public class PlayerInventory : MonoBehaviour
 {
     // Start is called before the first frame update
     public GameObject currentItemHolder;
-    public string currentItemId;
+    public Item currentItem;
     public GameObject itemHolder1;
     public GameObject itemHolder2;
     public GameObject itemHolder3;
@@ -86,11 +84,11 @@ public class PlayerInventory : MonoBehaviour
         currentItemHolder = GameObject.Find("CurrentItemSelector").GetComponent<currentItem>().currentSlot;
         if(currentItemHolder.transform.childCount > 0)
         {
-            currentItemId = currentItemHolder.GetComponentInChildren<Item>().id;
+            currentItem = currentItemHolder.GetComponentInChildren<Item>();
         }
         else
         {
-            currentItemId = "";
+            currentItem = null;
         }
         
     }
@@ -100,11 +98,13 @@ public class PlayerInventory : MonoBehaviour
         if(TryToAddItemToExistingItem(item))
         {
             Debug.Log("Picked up existing item and added to count");
+            Destroy(item.transform.gameObject);
             return;
         }
         if(TryToAddItemToEmptySlot(item))
         {
             Debug.Log("Added new item to inventory");
+            Destroy(item.transform.gameObject);
             return;
         }
         Debug.Log("Inventory is full");
