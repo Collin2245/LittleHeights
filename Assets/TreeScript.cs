@@ -80,7 +80,9 @@ public class TreeScript : MonoBehaviour
     {
         if(treeCounter >= 100)
         {
-            //Instantiate()
+            GameObject wood = Instantiate(Resources.Load("Prefabs/DroppedItemPrefab"), new Vector3(transform.position.x + Random.Range(-3f,3f), transform.position.y + Random.Range(-3f,3f), transform.position.z), Quaternion.identity) as GameObject;
+            wood.GetComponent<Item>().id = "tempHoe";
+            wood.GetComponent<Item>().currAmount = Random.Range(1,5);
             Destroy(transform.gameObject);
         }
     }
