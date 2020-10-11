@@ -33,7 +33,6 @@ public class DroppedItemScript : MonoBehaviour
         if(collider.gameObject.CompareTag("Player"))
         {
             Debug.Log("Hit player tag");
-            Debug.Log(item.id);
             collider.gameObject.GetComponent<PlayerInventory>().TryToAddItemToInventory(item);
         }
     }

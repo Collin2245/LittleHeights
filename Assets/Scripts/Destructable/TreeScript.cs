@@ -19,11 +19,10 @@ public class TreeScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         CheckActiveItem();
         TryChopTree();
-        Debug.Log(treeCounter);
         TryDestroyTree();
     }
 
@@ -64,6 +63,7 @@ public class TreeScript : MonoBehaviour
                 case "tempHoe":
                     treeCounter += 1;
                     Debug.Log("Chopping with temp hoe");
+                    Debug.Log(treeCounter);
                     break;
                 default:
                     Debug.Log("Not an axe");
@@ -73,6 +73,7 @@ public class TreeScript : MonoBehaviour
         else
         {
             treeCounter = 0;
+            Debug.Log("No item in hand");
         }
     }
 
