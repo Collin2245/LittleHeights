@@ -7,32 +7,32 @@ public class MouseHoverController : MonoBehaviour
     // Start is called before the first frame update
     public Tile mouseHoverTile;
     public Tilemap mouseHoverTileMap; 
+    public bool isActiveArea;
     Vector3 mousePos;
     Vector3Int prevPos;
     Vector3Int currPos;
 
     Vector3Int mousePosition;
     Vector3Int playerPosition;
-    void Start()
-    {
-
-        
-    }
-
-    // Update is called once per frame
+    int playerPosOffsetX;
+    int playerPosOffsetY;
     void Update()
     {
         mousePosition =  mouseHoverTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         playerPosition = mouseHoverTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(GameObject.FindGameObjectWithTag("Player").transform.position));
-        Debug.Log("player: " + playerPosition.ToString());
-        Debug.Log("mouse: " + mousePosition.ToString());
-        if((Mathf.Abs(playerPosition.x) > Mathf.Abs(mousePosition.x) -200) || (Mathf.Abs(playerPosition.y) > Mathf.Abs(mousePosition.y) -200))
+        playerPosOffsetY = mousePosition.y - playerPosition.y - 5;
+        playerPosOffsetX = mousePosition.x - 9 -playerPosition.x;
+        if(playerPosOffsetX <4 && playerPosOffsetX > -4 && playerPosOffsetY <4 && playerPosOffsetY> -4)
         {
-            Debug.Log("Outside of target area");
+            SetAndDestroyTile();
+            isActiveArea = true;
+            Debug.Log("Inside of target area");
         }
         else
         {
-            SetMouseHoverTile();
+            isActiveArea=false;
+            mouseHoverTileMap.SetTile(currPos,null);
+            Debug.Log("Outside of target area");
         }
     }
 
