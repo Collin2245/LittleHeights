@@ -10,12 +10,15 @@ public class TreeScript : MonoBehaviour
     PlayerInventory playerInventory;
     public Item currentItem;
     string possibleAxe;
+    GameObject tileManager;
+    bool playAudio = false;
 
     bool tempHoe;
     void Start()
     {
         playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         treeCounter = 0;
+        tileManager = GameObject.FindGameObjectWithTag("TileManager");
     }
 
     // Update is called once per frame
@@ -56,12 +59,19 @@ public class TreeScript : MonoBehaviour
 
     void TryChopTree()
     {
-        if (mouseOnTree && Input.GetMouseButton(0) && currentItem)
+        if (mouseOnTree && Input.GetMouseButton(0) && currentItem && tileManager.GetComponent<MouseHoverScript>().isActiveArea)
         {
             switch (possibleAxe)
             {
                 case "tempHoe":
                     treeCounter += 1;
+                    playAudio = true;
+                    if(playAudio && this.GetComponent<AudioSource>().isPlaying == false)
+                    {
+                        this.GetComponent<AudioSource>().PlayOneShot(this.GetComponent<AudioSource>().clip);
+                        new WaitForSeconds(this.GetComponent<AudioSource>().clip.length * 2);
+                        playAudio = false;
+                    }
                     Debug.Log("Chopping with temp hoe");
                     Debug.Log(treeCounter);
                     break;
@@ -72,6 +82,8 @@ public class TreeScript : MonoBehaviour
         }
         else
         {
+            this.GetComponent<AudioSource>().Stop();
+            playAudio = false;
             treeCounter = 0;
             Debug.Log("No item in hand");
         }
@@ -81,19 +93,22 @@ public class TreeScript : MonoBehaviour
     {
         if(treeCounter >= 100)
         {
-           int randomNumWoord = Random.Range(1,5);
+           int randomNumWoord = Random.Range(1,6);
             for(int i = 0; i < randomNumWoord; i ++)
             {
-            GameObject wood = Instantiate(Resources.Load("Prefabs/DroppedItemPrefab"), new Vector3(transform.position.x + Random.Range(-3f,3f), transform.position.y + Random.Range(-3f,3f), transform.position.z), Quaternion.identity) as GameObject;
+            GameObject wood  = Resources.Load("Prefabs/DroppedItemPrefab") as GameObject;
             wood.GetComponent<Item>().id = "wood";
-            wood.GetComponent<Item>().currAmount = Random.Range(1,3);
+            wood.GetComponent<Item>().currAmount = Random.Range(1,4);
+            Instantiate(wood, new Vector3(transform.position.x + Random.Range(-3f,3f), transform.position.y + Random.Range(-3f,3f), transform.position.z), Quaternion.identity);
+ 
             }
             int randomNumAcorn = Random.Range(1,3);
             for(int i = 0; i < randomNumAcorn; i ++)
             {
-            GameObject acorn = Instantiate(Resources.Load("Prefabs/DroppedItemPrefab"), new Vector3(transform.position.x + Random.Range(-3f,3f), transform.position.y + Random.Range(-3f,3f), transform.position.z), Quaternion.identity) as GameObject;
+            GameObject acorn = Resources.Load("Prefabs/DroppedItemPrefab") as GameObject;
             acorn.GetComponent<Item>().id = "acorn";
             acorn.GetComponent<Item>().currAmount = 1;
+            Instantiate(acorn, new Vector3(transform.position.x + Random.Range(-3f,3f), transform.position.y + Random.Range(-3f,3f), transform.position.z), Quaternion.identity);
             }
             Destroy(transform.gameObject);
         }

@@ -27,7 +27,7 @@ public class DroppedItemScript : MonoBehaviour
         spriteRenderer.sprite = item.sprite;
     }
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerStay2D(Collider2D collider)
     {
         Debug.Log("Hit dropped item collider");
         if(collider.gameObject.CompareTag("Player"))
