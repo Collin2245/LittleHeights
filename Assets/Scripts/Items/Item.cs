@@ -69,13 +69,13 @@ public class Item : MonoBehaviour
         if(this.transform.childCount == 0)
         {
             itemCountPrefab = Instantiate(Resources.Load("Prefabs/ItemCountPrefab"), this.transform) as GameObject;
-            itemCountPrefab.transform.position = new Vector3(this.transform.position.x - itemCountOffsetX, this.transform.position.y - itemCountOffsetY, this.transform.position.z);
+            // itemCountPrefab.transform.position = new Vector3(this.transform.position.x - itemCountOffsetX, this.transform.position.y - itemCountOffsetY, this.transform.position.z);
             //if(this.currQuantity.ToString() == "")
             //{
             //    Debug.Log("Oberwriting text");
             //    this.currQuantity = 1;
             //}
-            itemCountPrefab.GetComponentInChildren<TextMeshProUGUI>().SetText(currAmount.ToString());
+            itemCountPrefab.GetComponentInChildren<TextMeshProUGUI>().SetText(currAmount.ToString(),true);
             
             //itemCountPrefab.GetComponentInChildren<TextMeshProUGUI>().GetComponent<TextContainer>().width = 20;
 

@@ -8,6 +8,7 @@ public class MouseHoverScript : MonoBehaviour
     public Tile mouseHoverTile;
     public Tilemap mouseHoverTileMap; 
     public bool isActiveArea;
+    bool isInventoryOn;
     Vector3 mousePos;
     Vector3Int prevPos;
     Vector3Int currPos;
@@ -18,11 +19,12 @@ public class MouseHoverScript : MonoBehaviour
     int playerPosOffsetY;
     void Update()
     {
+        isInventoryOn =  GameObject.Find("InventoryCanvas").GetComponent<Canvas>().isActiveAndEnabled;
         mousePosition =  mouseHoverTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         playerPosition = mouseHoverTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(GameObject.FindGameObjectWithTag("Player").transform.position));
         playerPosOffsetY = mousePosition.y - playerPosition.y - 5;
         playerPosOffsetX = mousePosition.x - 9 -playerPosition.x;
-        if(playerPosOffsetX <4 && playerPosOffsetX > -4 && playerPosOffsetY <4 && playerPosOffsetY> -4)
+        if(playerPosOffsetX <4 && playerPosOffsetX > -4 && playerPosOffsetY <4 && playerPosOffsetY> -4 && !isInventoryOn)
         {
             SetAndDestroyTile();
             isActiveArea = true;

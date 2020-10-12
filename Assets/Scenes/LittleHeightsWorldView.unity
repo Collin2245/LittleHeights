@@ -12559,7 +12559,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 134600214015547756, guid: ed016c6041356f54b8df9896f0cbdb04, type: 3}
       propertyPath: id
-      value: tempHoe
+      value: woodenAxe
       objectReference: {fileID: 0}
     - target: {fileID: 134600214015547758, guid: ed016c6041356f54b8df9896f0cbdb04, type: 3}
       propertyPath: m_Name

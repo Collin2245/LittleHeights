@@ -63,8 +63,8 @@ public class TreeScript : MonoBehaviour
         {
             switch (possibleAxe)
             {
-                case "tempHoe":
-                    treeCounter += 1;
+                case "woodenAxe":
+                    treeCounter += 2;
                     playAudio = true;
                     if(playAudio && this.GetComponent<AudioSource>().isPlaying == false)
                     {
@@ -77,6 +77,14 @@ public class TreeScript : MonoBehaviour
                     break;
                 default:
                     Debug.Log("Not an axe");
+                                        playAudio = true;
+                    if(playAudio && this.GetComponent<AudioSource>().isPlaying == false)
+                    {
+                        this.GetComponent<AudioSource>().PlayOneShot(this.GetComponent<AudioSource>().clip);
+                        new WaitForSeconds(this.GetComponent<AudioSource>().clip.length * 2);
+                        playAudio = false;
+                    }
+                    treeCounter += 1;
                     break;
             }
         }

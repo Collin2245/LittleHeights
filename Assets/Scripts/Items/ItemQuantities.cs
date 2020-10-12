@@ -12,7 +12,8 @@ public class ItemQuantities : MonoBehaviour
         {"tempHoe",5 },
         {"itemName",999 },
         {"wood",99},
-        {"acorn",99}
+        {"acorn",99},
+        {"woodenAxe",1}
     };
 }
 
