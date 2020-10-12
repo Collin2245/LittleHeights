@@ -39,6 +39,7 @@ public class PlayerInventory : MonoBehaviour
     public GameObject itemHolder30;
 
     public GameObject[] itemHolders;
+    AudioSource audioSource;
     
     //GameObject hotbar;
     void Start()
@@ -76,6 +77,7 @@ public class PlayerInventory : MonoBehaviour
             itemHolder29,
             itemHolder30,
         };
+        audioSource = this.GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -99,12 +101,14 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log("Picked up existing item and added to count");
             Destroy(item.transform.gameObject);
+            audioSource.PlayOneShot(audioSource.clip);
             return;
         }
         if(TryToAddItemToEmptySlot(item))
         {
             Debug.Log("Added new item to inventory");
             Destroy(item.transform.gameObject);
+            audioSource.PlayOneShot(audioSource.clip);
             return;
         }
         Debug.Log("Inventory is full");
