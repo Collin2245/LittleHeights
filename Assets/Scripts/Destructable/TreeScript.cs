@@ -81,10 +81,37 @@ public class TreeScript : MonoBehaviour
     {
         if(treeCounter >= 100)
         {
+           int randomNumWoord = Random.Range(1,5);
+            for(int i = 0; i < randomNumWoord; i ++)
+            {
             GameObject wood = Instantiate(Resources.Load("Prefabs/DroppedItemPrefab"), new Vector3(transform.position.x + Random.Range(-3f,3f), transform.position.y + Random.Range(-3f,3f), transform.position.z), Quaternion.identity) as GameObject;
-            wood.GetComponent<Item>().id = "tempHoe";
-            wood.GetComponent<Item>().currAmount = Random.Range(1,5);
+            wood.GetComponent<Item>().id = "wood";
+            wood.GetComponent<Item>().currAmount = Random.Range(1,3);
+            }
+            int randomNumAcorn = Random.Range(1,3);
+            for(int i = 0; i < randomNumAcorn; i ++)
+            {
+            GameObject acorn = Instantiate(Resources.Load("Prefabs/DroppedItemPrefab"), new Vector3(transform.position.x + Random.Range(-3f,3f), transform.position.y + Random.Range(-3f,3f), transform.position.z), Quaternion.identity) as GameObject;
+            acorn.GetComponent<Item>().id = "acorn";
+            acorn.GetComponent<Item>().currAmount = 1;
+            }
             Destroy(transform.gameObject);
         }
     }
 }
+
+
+        //    int randomNumWoord = Random.Range(1,5);
+        //     for(int i = 0; i < randomNumWoord; i ++)
+        //     {
+        //     GameObject wood = Instantiate(Resources.Load("Prefabs/ItemPrefab"), new Vector3(transform.position.x + Random.Range(-3f,3f), transform.position.y + Random.Range(-3f,3f), transform.position.z), Quaternion.identity) as GameObject;
+        //     wood.GetComponent<Item>().id = "wood";
+        //     wood.GetComponent<Item>().currAmount = Random.Range(1,2);
+        //     }
+        //     int randomNumAcorn = Random.Range(1,3);
+        //     for(int i = 0; i < randomNumAcorn; i ++)
+        //     {
+        //     GameObject wood = Instantiate(Resources.Load("Prefabs/ItemPrefab"), new Vector3(transform.position.x + Random.Range(-3f,3f), transform.position.y + Random.Range(-3f,3f), transform.position.z), Quaternion.identity) as GameObject;
+        //     wood.GetComponent<Item>().id = "acorn";
+        //     wood.GetComponent<Item>().currAmount = 1;
+        //     }
