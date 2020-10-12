@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-public class MouseHoverController : MonoBehaviour
+public class MouseHoverScript : MonoBehaviour
 {
     // Start is called before the first frame update
     public Tile mouseHoverTile;
