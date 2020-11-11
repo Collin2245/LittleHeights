@@ -41,7 +41,7 @@ public class Item : MonoBehaviour
         
         if (this.id != "")
         {
-            maxQuantity = ItemQuantities.quantityForItem[id];
+            maxQuantity = ItemProperties.quantityForItem[id];
         }
 
     }
@@ -64,7 +64,7 @@ public class Item : MonoBehaviour
         }
         if(this.id != "")
         {
-            maxQuantity = ItemQuantities.quantityForItem[id];
+            maxQuantity = ItemProperties.quantityForItem[id];
         }
         if(this.transform.childCount == 0)
         {

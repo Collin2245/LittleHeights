@@ -1,5 +1,4 @@
-﻿using Microsoft.Unity.VisualStudio.Editor;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -85,7 +84,7 @@ public class InventorySlot : MonoBehaviour
             }
             else
             {
-                if(itemId == MouseInventorySlot.Instance.itemIdOnMouse && currAmount + MouseInventorySlot.Instance.currAmount <= ItemQuantities.quantityForItem[itemId])
+                if(itemId == MouseInventorySlot.Instance.itemIdOnMouse && currAmount + MouseInventorySlot.Instance.currAmount <= ItemProperties.quantityForItem[itemId])
                 {
                     currAmount = currAmount + MouseInventorySlot.Instance.currAmount;
                     DestroyMousePrefab();

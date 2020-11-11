@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ItemQuantities : MonoBehaviour
+public class ItemProperties : MonoBehaviour
 {
     public static Dictionary<string, int> quantityForItem = new Dictionary<string, int>()
     {

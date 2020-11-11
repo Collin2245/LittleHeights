@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
 
 public class PlaceTile : MonoBehaviour
 {
@@ -36,8 +36,11 @@ public class PlaceTile : MonoBehaviour
         {
             tryToPlaceTile(currentItem.id);
         }
-        
-
+        else
+        {
+            placeableItemTileMap.SetTile(prevPos,null);
+            placeableItemTileMap.SetTile(currPos,null);
+        }
     }
 
     bool tryToPlaceTile(string itemId)
@@ -45,28 +48,35 @@ public class PlaceTile : MonoBehaviour
         
         if(isActive)
         {
-            Tile tile = new Tile();
+            Tile tile = ScriptableObject.CreateInstance<Tile>();
             tile.sprite = Resources.Load<Sprite>("Items/" + itemId); 
-            placeableItemTileMap.SetTile(mousePosition,tile);
+            // placeableItemTileMap.SetTile(mousePosition,tile);
+            SetAndDestroyTile(tile);
             return true;
+        }
+        else
+        {
+            placeableItemTileMap.SetTile(prevPos,null);
+            placeableItemTileMap.SetTile(currPos,null);
+            currPos =  placeableItemTileMap.WorldToCell(mousePos);
         }
         return false;
     }
 
-     void SetMouseHoverTile()
+     void SetMouseHoverTile(Tile tile)
     {
         placeableItemTileMap.SetTile(prevPos,null);
-        placeableItemTileMap.SetTile(currPos,mouseHoverTile);
+        placeableItemTileMap.SetTile(currPos,tile);
         prevPos = currPos;
     }
 
-    void SetAndDestroyTile()
+    void SetAndDestroyTile(Tile tile)
     {
         mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         currPos =  placeableItemTileMap.WorldToCell(mousePos);
         if(prevPos != currPos)
         {
-            SetMouseHoverTile();
+            SetMouseHoverTile(tile);
         }
     }
 }

@@ -123,7 +123,7 @@ public class PlayerInventory : MonoBehaviour
                 continue;
             }else if(itemHolders[i].GetComponent<InventorySlot>().itemId == item.id)
             {
-                if(itemHolders[i].GetComponent<InventorySlot>().currAmount + item.currAmount <= ItemQuantities.quantityForItem[item.id])
+                if(itemHolders[i].GetComponent<InventorySlot>().currAmount + item.currAmount <= ItemProperties.quantityForItem[item.id])
                 {
                     itemHolders[i].GetComponent<InventorySlot>().GetComponentInChildren<Item>().currAmount += item.currAmount;
                     return true;
