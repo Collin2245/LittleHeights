@@ -10,26 +10,13 @@ public class PlayerAnimation : MonoBehaviour
     void Start()
     {
         animator = this.GetComponent<Animator>();
+        animator.GetFloat("Horizontal");
+        animator.GetFloat("Vertical");
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetAxisRaw("Horizontal") < 0)
-        {
-            animator.Play("walkLeft");
-        }
-        if (Input.GetAxisRaw("Horizontal") > 0)
-        {
-            animator.Play("walkRight");
-        }
-        if (Input.GetAxisRaw("Vertical") > 0)
-        {
-            animator.Play("walkUp");
-        }
-        if (Input.GetAxisRaw("Vertical") < 0)
-        {
-            animator.Play("walkDown");
-        }
+
     }
 }

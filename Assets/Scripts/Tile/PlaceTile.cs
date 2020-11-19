@@ -34,7 +34,13 @@ public class PlaceTile : MonoBehaviour
         mousePosition =  placeableItemTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         if(currentItem)
         {
-            tryToPlaceTile(currentItem.id);
+            tryToHoverTile(currentItem.id);
+            if(Input.GetMouseButtonDown(1))
+            {
+                Debug.Log("tried to place " + currentItem.id);
+                // Debug.Log("tried to place on " + ItemProperties.itemsTilemap[currentItem.id]);
+                Debug.Log("tried to make prefab " + ItemProperties.itemPlaced[currentItem.id]);
+            }
         }
         else
         {
@@ -43,7 +49,7 @@ public class PlaceTile : MonoBehaviour
         }
     }
 
-    bool tryToPlaceTile(string itemId)
+    bool tryToHoverTile(string itemId)
     {
         
         if(isActive)

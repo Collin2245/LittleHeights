@@ -28,13 +28,13 @@ public class MouseHoverScript : MonoBehaviour
         {
             SetAndDestroyTile();
             isActiveArea = true;
-            Debug.Log("Inside of target area");
+           
         }
         else
         {
             isActiveArea=false;
             mouseHoverTileMap.SetTile(currPos,null);
-            Debug.Log("Outside of target area");
+           
         }
     }
 

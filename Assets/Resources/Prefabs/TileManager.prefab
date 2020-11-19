@@ -10,6 +10,8 @@ GameObject:
   m_Component:
   - component: {fileID: 2946190703623136612}
   - component: {fileID: 2946190703623136610}
+  - component: {fileID: 2946190703244146378}
+  - component: {fileID: 6177705860134683461}
   m_Layer: 0
   m_Name: TileManager
   m_TagString: TileManager
@@ -46,3 +48,30 @@ MonoBehaviour:
   mouseHoverTile: {fileID: 11400000, guid: 0f17ebd1d15a7b9468715231698ae3b6, type: 2}
   mouseHoverTileMap: {fileID: 0}
   isActiveArea: 0
+--- !u!114 &2946190703244146378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946190703623136613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2cc846a125a6e5f44a9e89069755eab5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentItem: {fileID: 0}
+  placeableItemTileMap: {fileID: 0}
+  tileToPlace: {fileID: 0}
+--- !u!114 &6177705860134683461
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946190703623136613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34fa88f595afed148bc81bb9b962e887, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

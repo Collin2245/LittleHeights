@@ -93,7 +93,6 @@ public class TreeScript : MonoBehaviour
             this.GetComponent<AudioSource>().Stop();
             playAudio = false;
             treeCounter = 0;
-            Debug.Log("No item in hand");
         }
     }
 
