@@ -13,9 +13,14 @@ public class PlayerController : MonoBehaviour
     float horizontal;
     float vertical;
     float moveLimiter = 0.7f;
+    bool lastMoveLeft;
+    bool lastMoveUp;
+    bool lastMoveDown;
+    bool lastMoveRight;
 
     public float runSpeed;
     bool isMoving;
+    string prevAnimation;
 
     void Start()
     {
@@ -28,24 +33,48 @@ public class PlayerController : MonoBehaviour
         // Gives a value between -1 and 1
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
         vertical = Input.GetAxisRaw("Vertical"); // -1 is down
-        if(horizontal !=0 || vertical != 0)
+        if (horizontal !=0 || vertical != 0)
         {
             isMoving = true;
+            animator.SetBool("IsMoving", isMoving);
+            animator.SetFloat("Horizontal", horizontal);
+            animator.SetFloat("Vertical", vertical);
+            lastMoveLeft = false;
+            lastMoveUp = false;
+            lastMoveDown = false;
+            lastMoveRight = false;
+            prevAnimation = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
+            //Debug.Log(prevAnimation);
         }
         else
         {
-            isMoving = false;    
+            switch (prevAnimation)
+            {
+                case "PlayerAnimated_walkLeft":
+                    lastMoveLeft = true;
+                    break;
+                case "PlayerAnimated_walkRight":
+                    lastMoveRight = true;
+                    break;
+                case "PlayerAnimated_walkUp":
+                    lastMoveUp = true;
+                    break;
+                case "PlayerAnimated_walkDown":
+                    lastMoveDown = true;
+                    break;
+            }
+            isMoving = false;
         }
+        animator.SetBool("lastMoveLeft", lastMoveLeft);
+        animator.SetBool("lastMoveUp", lastMoveUp);
+        animator.SetBool("lastMoveRight", lastMoveRight);
+        animator.SetBool("lastMoveDown", lastMoveDown);
         animator.SetBool("IsMoving", isMoving);
-        
-        //implement use button based on current item
-        //need to import player inventory
     }
 
     void FixedUpdate()
     {
-        animator.SetFloat("Horizontal", horizontal);
-        animator.SetFloat("Vertical", vertical);
+
 
         if (horizontal != 0 && vertical != 0) // Check for diagonal movement
         {
