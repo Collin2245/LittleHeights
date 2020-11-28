@@ -168,7 +168,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentItemHolder: {fileID: 0}
-  currentItemId: 
+  currentItem: {fileID: 0}
   itemHolder1: {fileID: 0}
   itemHolder2: {fileID: 0}
   itemHolder3: {fileID: 0}

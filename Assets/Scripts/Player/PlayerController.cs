@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     bool lastMoveUp;
     bool lastMoveDown;
     bool lastMoveRight;
+    public bool activeArea;
 
     public float runSpeed;
     bool isMoving;
@@ -26,6 +27,15 @@ public class PlayerController : MonoBehaviour
     {
         body = GetComponent<Rigidbody2D>();
         animator = this.GetComponent<Animator>();
+    }
+
+    private void OnMouseOver()
+    {
+        activeArea = true;
+    }
+    private void OnMouseExit()
+    {
+        activeArea = false;
     }
 
     void Update()

@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 3412877080279723936}
   - component: {fileID: 8453263689613166732}
   - component: {fileID: 8453263689613166733}
-  - component: {fileID: 8453263689613166738}
   - component: {fileID: 5312316344783289867}
   - component: {fileID: 7372503055686566953}
   - component: {fileID: -4711068113504643867}
+  - component: {fileID: 6569474820769955197}
   m_Layer: 0
   m_Name: OakTreePrefab
   m_TagString: Untagged
@@ -105,32 +105,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentItem: {fileID: 0}
---- !u!61 &8453263689613166738
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8453263689613166734}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -2.6961374}
-  m_SpriteTilingProperty:
-    border: {x: 0, y: 0, z: 0, w: 0}
-    pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 2.4375, y: 8}
-    newSize: {x: 6, y: 6}
-    adaptiveTilingThreshold: 0.5
-    drawMode: 0
-    adaptiveTiling: 0
-  m_AutoTiling: 0
-  serializedVersion: 2
-  m_Size: {x: 1, y: 2.0935116}
-  m_EdgeRadius: 0
 --- !u!114 &5312316344783289867
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -303,3 +277,52 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!60 &6569474820769955197
+PolygonCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8453263689613166734}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0, y: 0}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.4375, y: 8}
+    newSize: {x: 6, y: 6}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  m_Points:
+    m_Paths:
+    - - {x: 0.5779886, y: -0.4326992}
+      - {x: 0.62545204, y: -0.4244564}
+      - {x: 0.3762684, y: -0.55498195}
+      - {x: 0.5297098, y: -0.9718294}
+      - {x: 0.4639187, y: -0.39458388}
+      - {x: 0.08577919, y: -0.449728}
+      - {x: -0.15316963, y: -0.48061562}
+      - {x: -0.37626743, y: -0.3770833}
+      - {x: -0.36440277, y: -0.5386777}
+      - {x: -0.4142208, y: -0.778442}
+      - {x: -0.5691881, y: -0.8078234}
+      - {x: -0.547102, y: -3.276087}
+      - {x: -0.981431, y: -3.5}
+      - {x: -1.0288954, y: -3.7357788}
+      - {x: -0.856431, y: -3.8457427}
+      - {x: -0.524704, y: -3.8770666}
+      - {x: 0.44897175, y: -3.8937864}
+      - {x: 0.73061657, y: -3.7982788}
+      - {x: 1.0526266, y: -3.735779}
+      - {x: 1.0051632, y: -3.471558}
+      - {x: 1.09375, y: -3.4375}
+      - {x: 0.540761, y: -3.050634}
+      - {x: 0.54959965, y: -1.6434504}
+      - {x: 0.5352354, y: -0.4817936}

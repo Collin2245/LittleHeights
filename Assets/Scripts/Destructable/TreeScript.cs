@@ -59,6 +59,8 @@ public class TreeScript : MonoBehaviour
 
     void TryChopTree()
     {
+        Debug.Log(tileManager.GetComponent<MouseHoverScript>().isActiveArea);
+        Debug.Log(mouseOnTree + "Mpuse on tree");
         if (mouseOnTree && Input.GetMouseButton(0) && currentItem && tileManager.GetComponent<MouseHoverScript>().isActiveArea)
         {
             switch (possibleAxe)
@@ -72,7 +74,6 @@ public class TreeScript : MonoBehaviour
                         new WaitForSeconds(this.GetComponent<AudioSource>().clip.length * 2);
                         playAudio = false;
                     }
-                    Debug.Log("Chopping with temp hoe");
                     Debug.Log(treeCounter);
                     break;
                 default:

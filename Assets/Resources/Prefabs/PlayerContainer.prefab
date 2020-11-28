@@ -96,6 +96,32 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!61 &7374944988916863252
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2675111554100850277}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_UsedByComposite: 1
+  m_Offset: {x: 0, y: 0.75}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0}
+    oldSize: {x: 1, y: 1.5}
+    newSize: {x: 0.16, y: 0.24}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 0.6, y: 1.5}
+  m_EdgeRadius: 0
 --- !u!1 &4856916667927922275
 GameObject:
   m_ObjectHideFlags: 0
@@ -149,6 +175,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 6486133008107591665}
     m_Modifications:
+    - target: {fileID: 519420031, guid: 7eb068ad80aabc94c9388d228a120b2f, type: 3}
+      propertyPath: orthographic size
+      value: 7
+      objectReference: {fileID: 0}
     - target: {fileID: 890646103, guid: 7eb068ad80aabc94c9388d228a120b2f, type: 3}
       propertyPath: itemHolder1
       value: 
@@ -269,6 +299,18 @@ PrefabInstance:
       propertyPath: itemHolder30
       value: 
       objectReference: {fileID: 3669461440052742982}
+    - target: {fileID: 897324327, guid: 7eb068ad80aabc94c9388d228a120b2f, type: 3}
+      propertyPath: m_Radius
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 897324327, guid: 7eb068ad80aabc94c9388d228a120b2f, type: 3}
+      propertyPath: m_UsedByEffector
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 897324327, guid: 7eb068ad80aabc94c9388d228a120b2f, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7403795071390992514, guid: 7eb068ad80aabc94c9388d228a120b2f, type: 3}
       propertyPath: m_LocalPosition.x
       value: -734.2

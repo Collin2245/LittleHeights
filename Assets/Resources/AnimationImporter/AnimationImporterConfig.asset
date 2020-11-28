@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: AnimationImporterConfig
   m_EditorClassIdentifier: 
   _animationNamesThatDoNotLoop: []
-  _automaticImporting: 0
-  _spritePixelsPerUnit: 100
+  _automaticImporting: 1
+  _spritePixelsPerUnit: 16
   _targetObjectType: 2
   _spriteAlignment: 7
   _spriteAlignmentCustomX: 0

@@ -29,8 +29,7 @@ public class DroppedItemScript : MonoBehaviour
 
     void OnTriggerStay2D(Collider2D collider)
     {
-        Debug.Log("Hit dropped item collider");
-        if(collider.gameObject.CompareTag("Player"))
+        if(collider.gameObject.CompareTag("Player") && !collider.isTrigger)
         {
             Debug.Log("Hit player tag");
             collider.gameObject.GetComponent<PlayerInventory>().TryToAddItemToInventory(item);

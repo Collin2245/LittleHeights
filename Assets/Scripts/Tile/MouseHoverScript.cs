@@ -15,16 +15,13 @@ public class MouseHoverScript : MonoBehaviour
 
     Vector3Int mousePosition;
     Vector3Int playerPosition;
-    int playerPosOffsetX;
-    int playerPosOffsetY;
+
     void Update()
     {
         isInventoryOn =  GameObject.Find("InventoryCanvas").GetComponent<Canvas>().isActiveAndEnabled;
         mousePosition =  mouseHoverTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         playerPosition = mouseHoverTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(GameObject.FindGameObjectWithTag("Player").transform.position));
-        playerPosOffsetY = mousePosition.y - playerPosition.y - 5;
-        playerPosOffsetX = mousePosition.x - 9 -playerPosition.x;
-        if(playerPosOffsetX <4 && playerPosOffsetX > -4 && playerPosOffsetY <4 && playerPosOffsetY> -4 && !isInventoryOn)
+        if( !isInventoryOn)
         {
             SetAndDestroyTile();
             isActiveArea = true;
