@@ -6,12 +6,12 @@ using UnityEngine.Tilemaps;
 public class ItemProperties : MonoBehaviour
 {
 
-    public static Tilemap placeableSoil;
+    //public static Tilemap placeableSoil;
 
     void Start()
     {
         //set up tileMaps
-        placeableSoil = GameObject.FindGameObjectWithTag("PlaceableSoil").GetComponent<Tilemap>();
+        //placeableSoil = GameObject.FindGameObjectWithTag("PlaceableSoil").GetComponent<Tilemap>();
     }
     public static Dictionary<string, int> quantityForItem = new Dictionary<string, int>()
     {
@@ -32,10 +32,10 @@ public class ItemProperties : MonoBehaviour
         { "woodenAxe", ""}
     };
 
-    public Dictionary<string, Tilemap> itemsTilemap = new Dictionary<string, Tilemap>()
-    {
-        {"acorn", placeableSoil}
-    };
+    //public Dictionary<string, Tilemap> itemsTilemap = new Dictionary<string, Tilemap>()
+    //{
+    //    {"acorn", placeableSoil}
+    //};
 }
 
 

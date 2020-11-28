@@ -15,7 +15,7 @@ GameObject:
   - component: {fileID: 7372503055686566953}
   - component: {fileID: -4711068113504643867}
   - component: {fileID: 6569474820769955197}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: OakTreePrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}

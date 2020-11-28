@@ -21,7 +21,7 @@ public class MouseHoverScript : MonoBehaviour
         isInventoryOn =  GameObject.Find("InventoryCanvas").GetComponent<Canvas>().isActiveAndEnabled;
         mousePosition =  mouseHoverTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         playerPosition = mouseHoverTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(GameObject.FindGameObjectWithTag("Player").transform.position));
-        if( !isInventoryOn)
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().activeArea &&  !isInventoryOn)
         {
             SetAndDestroyTile();
             isActiveArea = true;

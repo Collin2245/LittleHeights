@@ -12,13 +12,23 @@ public class TreeScript : MonoBehaviour
     string possibleAxe;
     GameObject tileManager;
     bool playAudio = false;
+    bool inLastCheck;
+    Camera mainCamera;
+    int treeMask;
 
     bool tempHoe;
+    private void Awake()
+    {
+        treeMask = LayerMask.GetMask("Tree");
+
+    }
     void Start()
     {
         playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         treeCounter = 0;
         tileManager = GameObject.FindGameObjectWithTag("TileManager");
+        mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        
     }
 
     // Update is called once per frame
@@ -29,27 +39,25 @@ public class TreeScript : MonoBehaviour
         TryDestroyTree();
     }
 
-
-    void OnMouseOver()
+    bool CheckIfMouseOnTree()
     {
-        // Debug.Log("Tree has been held over");
-        mouseOnTree = true;
-    }
 
-    void OnMouseExit()
-    {
-        // Debug.Log("Mouse has left tree");
-        mouseOnTree = false;
-    }
-
-
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 1 , treeMask);
+        if (hit.collider != null && hit.transform.name == this.name)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }    
     void CheckActiveItem()
     {
         if (playerInventory.currentItem)
         {
             currentItem = playerInventory.currentItem;
             possibleAxe = currentItem.id;
-
         }
         else
         {
@@ -59,9 +67,8 @@ public class TreeScript : MonoBehaviour
 
     void TryChopTree()
     {
-        Debug.Log(tileManager.GetComponent<MouseHoverScript>().isActiveArea);
-        Debug.Log(mouseOnTree + "Mpuse on tree");
-        if (mouseOnTree && Input.GetMouseButton(0) && currentItem && tileManager.GetComponent<MouseHoverScript>().isActiveArea)
+        Debug.Log(CheckIfMouseOnTree());
+        if (Input.GetMouseButton(0) && currentItem && tileManager.GetComponent<MouseHoverScript>().isActiveArea && CheckIfMouseOnTree())
         {
             switch (possibleAxe)
             {
