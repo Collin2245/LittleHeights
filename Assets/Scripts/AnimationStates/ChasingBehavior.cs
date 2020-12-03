@@ -16,6 +16,7 @@ public class ChasingBehavior : StateMachineBehaviour
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
     override public void OnStateUpdate(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
+        animator.SetBool("isChasing", animator.gameObject.GetComponent<EnemyAICollision>().isNearPlayer);
         animator.transform.position = Vector2.MoveTowards(animator.transform.position, new Vector2(Mathf.RoundToInt(playerPosition.position.x * 16), Mathf.RoundToInt(playerPosition.position.y * 16)) / 16 , speed * Time.deltaTime);
     }
 

@@ -67,7 +67,6 @@ public class TreeScript : MonoBehaviour
 
     void TryChopTree()
     {
-        Debug.Log(CheckIfMouseOnTree());
         if (Input.GetMouseButton(0) && currentItem && tileManager.GetComponent<MouseHoverScript>().isActiveArea && CheckIfMouseOnTree())
         {
             switch (possibleAxe)

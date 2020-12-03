@@ -31,10 +31,7 @@ public class IdleBehavior : StateMachineBehaviour
             randomCounter += Random.Range(1, 5);
         }
         rb.AddForce(forceToMovePixel * speed * Time.deltaTime);
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            animator.SetBool("isChasing", true);
-        }
+        animator.SetBool("isChasing", animator.gameObject.GetComponent<EnemyAICollision>().isNearPlayer);
     }
 
     //OnStateExit is called when a transition ends and the state machine finishes evaluating this state
