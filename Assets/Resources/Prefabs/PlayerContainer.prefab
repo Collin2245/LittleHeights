@@ -301,7 +301,7 @@ PrefabInstance:
       objectReference: {fileID: 3669461440052742982}
     - target: {fileID: 897324327, guid: 7eb068ad80aabc94c9388d228a120b2f, type: 3}
       propertyPath: m_Radius
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 897324327, guid: 7eb068ad80aabc94c9388d228a120b2f, type: 3}
       propertyPath: m_UsedByEffector
@@ -1456,7 +1456,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6683954465890030357, guid: e14e5e7787e673a499b6f582b7b2f08f, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -527
+      value: -470
       objectReference: {fileID: 0}
     - target: {fileID: 7186788738739960987, guid: e14e5e7787e673a499b6f582b7b2f08f, type: 3}
       propertyPath: m_AnchorMin.y

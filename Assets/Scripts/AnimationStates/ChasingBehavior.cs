@@ -11,6 +11,7 @@ public class ChasingBehavior : StateMachineBehaviour
     override public void OnStateEnter(Animator animator, AnimatorStateInfo stateInfo, int layerIndex)
     {
         playerPosition = GameObject.FindGameObjectWithTag("Player").transform;
+        animator.SetBool("isIdle", false);
     }
 
     //OnStateUpdate is called on each Update frame between OnStateEnter and OnStateExit callbacks
