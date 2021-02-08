@@ -19,8 +19,6 @@ public class Item : MonoBehaviour
     //public int currQuantity;
     public int currAmount;
     GameObject itemCountPrefab;
-    public float itemCountOffsetX;
-    public float itemCountOffsetY;
     private bool hasImage;
 
     

@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using System.Runtime.InteropServices;
 using UnityEngine;
@@ -39,7 +39,7 @@ public class InventorySlot : MonoBehaviour
             }
             else
             {
-                MouseInventorySlot.Instance.itemPrefabOnMouse.transform.position = new Vector3(Input.mousePosition.x + 60, Input.mousePosition.y - 60, Input.mousePosition.z);
+                MouseInventorySlot.Instance.itemPrefabOnMouse.transform.position = new Vector3(Input.mousePosition.x + 30, Input.mousePosition.y - 30, Input.mousePosition.z);
             }
 
         }

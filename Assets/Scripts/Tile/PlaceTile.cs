@@ -9,12 +9,13 @@ public class PlaceTile : MonoBehaviour
     // Start is called before the first frame update
     bool isActive;
     GameObject activeTileSelector;
+    Grid grid;
     PlayerInventory playerInventory;
     public Item currentItem;
-
     public Tilemap placeableItemTileMap;
     public Tile tileToPlace;
     GameObject ItemPrefabOnMouse;
+    GameObject placedItem;
     Vector3Int mousePosition;
     Vector3Int prevPos;
     Vector3Int currPos;
@@ -23,6 +24,7 @@ public class PlaceTile : MonoBehaviour
     {
         activeTileSelector = GameObject.FindGameObjectWithTag("TileManager");
         playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
+        grid = GameObject.FindObjectOfType<Grid>();
         currentItem = playerInventory.currentItem;
     }
 
@@ -32,7 +34,7 @@ public class PlaceTile : MonoBehaviour
         isActive = activeTileSelector.GetComponent<MouseHoverScript>().isActiveArea;
         currentItem = playerInventory.currentItem;
         mousePosition =  placeableItemTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-        if(currentItem)
+        if(currentItem && isActive && ItemProperties.itemIsPlaceable[currentItem.id])
         {
             tryToHoverTile(currentItem.id);
             if(Input.GetMouseButtonDown(1))
@@ -40,6 +42,17 @@ public class PlaceTile : MonoBehaviour
                 Debug.Log("tried to place " + currentItem.id);
                 // Debug.Log("tried to place on " + ItemProperties.itemsTilemap[currentItem.id]);
                 Debug.Log("tried to make prefab " + ItemProperties.itemPlaced[currentItem.id]);
+                try
+                {
+                    Debug.Log(currentItem.currAmount);
+                    placedItem = Instantiate(Resources.Load("PlaceableItem/" + currentItem.id),grid.GetCellCenterWorld(mousePosition) ,Quaternion.identity) as GameObject;
+                    playerInventory.TryToRemoveItemFromInventory();
+                    Debug.Log(currentItem.currAmount);
+                }
+                catch
+                {
+                    Debug.Log("error placing item");
+                }
             }
         }
         else

@@ -32,6 +32,14 @@ public class ItemProperties : MonoBehaviour
         { "woodenAxe", ""}
     };
 
+    public static Dictionary<string, bool> itemIsPlaceable = new Dictionary<string, bool>()
+    {
+        { "acorn", true },
+        { "wood", false},
+        { "woodenAxe", false}
+    };
+
+
     //public Dictionary<string, Tilemap> itemsTilemap = new Dictionary<string, Tilemap>()
     //{
     //    {"acorn", placeableSoil}
