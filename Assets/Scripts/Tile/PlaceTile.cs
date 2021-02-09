@@ -11,6 +11,7 @@ public class PlaceTile : MonoBehaviour
     GameObject activeTileSelector;
     Grid grid;
     PlayerInventory playerInventory;
+    public CurrentItem hotBarItem;
     public Item currentItem;
     public Tilemap placeableItemTileMap;
     public Tile tileToPlace;
@@ -20,12 +21,15 @@ public class PlaceTile : MonoBehaviour
     Vector3Int prevPos;
     Vector3Int currPos;
     Vector3 mousePos;
+    int placeableItemMask;
     void Start()
     {
         activeTileSelector = GameObject.FindGameObjectWithTag("TileManager");
         playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         grid = GameObject.FindObjectOfType<Grid>();
         currentItem = playerInventory.currentItem;
+        hotBarItem = GameObject.Find("CurrentItemSelector").GetComponentInChildren<CurrentItem>();
+        placeableItemMask = LayerMask.GetMask("PlaceableItem");
     }
 
     // Update is called once per frame
@@ -45,9 +49,17 @@ public class PlaceTile : MonoBehaviour
                 try
                 {
                     Debug.Log(currentItem.currAmount);
-                    placedItem = Instantiate(Resources.Load("PlaceableItem/" + currentItem.id),grid.GetCellCenterWorld(mousePosition) ,Quaternion.identity) as GameObject;
-                    playerInventory.TryToRemoveItemFromInventory();
-                    Debug.Log(currentItem.currAmount);
+                    if(!checkIfItemThere())
+                    {
+                        placedItem = Instantiate(Resources.Load("PlaceableItem/" + currentItem.id), grid.GetCellCenterWorld(mousePosition), Quaternion.identity) as GameObject;
+                        HotbarItemHolder hotbarItemHolder = hotBarItem.currentSlot;
+                        hotbarItemHolder.itemHolderOnInventory.GetComponentInChildren<Item>().subtractQuantity(1);
+                        Debug.Log(currentItem.currAmount);
+                    }
+                    else
+                    {
+                        Debug.Log("Item already there");
+                    }
                 }
                 catch
                 {
@@ -68,7 +80,7 @@ public class PlaceTile : MonoBehaviour
         if(isActive)
         {
             Tile tile = ScriptableObject.CreateInstance<Tile>();
-            tile.sprite = Resources.Load<Sprite>("Items/" + itemId); 
+            tile.sprite = Resources.Load<Sprite>("Items/" + itemId);
             // placeableItemTileMap.SetTile(mousePosition,tile);
             SetAndDestroyTile(tile);
             return true;
@@ -96,6 +108,18 @@ public class PlaceTile : MonoBehaviour
         if(prevPos != currPos)
         {
             SetMouseHoverTile(tile);
+        }
+    }
+    private bool checkIfItemThere()
+    {
+        RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 1, placeableItemMask);
+        if (hit.collider != null && hit.transform.name == this.name)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
         }
     }
 }

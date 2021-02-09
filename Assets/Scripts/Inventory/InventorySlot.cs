@@ -39,7 +39,7 @@ public class InventorySlot : MonoBehaviour
             }
             else
             {
-                MouseInventorySlot.Instance.itemPrefabOnMouse.transform.position = new Vector3(Input.mousePosition.x + 30, Input.mousePosition.y - 30, Input.mousePosition.z);
+                MouseInventorySlot.Instance.itemPrefabOnMouse.transform.position = new Vector3(Input.mousePosition.x + 45, Input.mousePosition.y - 45, Input.mousePosition.z);
             }
 
         }
@@ -64,6 +64,16 @@ public class InventorySlot : MonoBehaviour
                 item = GetComponentInChildren<Item>();
                 itemId = item.id;
                 currAmount = item.currAmount;
+            }
+        }
+        else
+        {
+            if (this.transform.childCount >= 0)
+            {
+                foreach (Transform child in transform)
+                {
+                    Destroy(child.gameObject);
+                }
             }
         }
     }

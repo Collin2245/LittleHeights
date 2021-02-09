@@ -48,10 +48,12 @@ public class Item : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        rectTransform = GetComponent<RectTransform>();
+        //rectTransform = GetComponent<RectTransform>();
         image = GetComponent<Image>();
         path = "Items/" + this.id;
         sprite = Resources.Load<Sprite>(path);
+        Debug.Log(id);
+        Debug.Log(currAmount);
         if(hasImage)
         {
             image.sprite = this.sprite;

@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerInventory : MonoBehaviour
 {
     // Start is called before the first frame update
-    public GameObject currentItemHolder;
+    public HotbarItemHolder currentItemHolder;
     public Item currentItem;
     public GameObject itemHolder1;
     public GameObject itemHolder2;
@@ -83,7 +83,7 @@ public class PlayerInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        currentItemHolder = GameObject.Find("CurrentItemSelector").GetComponent<currentItem>().currentSlot;
+        currentItemHolder = GameObject.Find("CurrentItemSelector").GetComponent<CurrentItem>().currentSlot;
         if(currentItemHolder.transform.childCount > 0)
         {
             currentItem = currentItemHolder.GetComponentInChildren<Item>();
@@ -167,10 +167,10 @@ public class PlayerInventory : MonoBehaviour
         Debug.Log("Current amount: " + currentItem.currAmount);
         Debug.Log("running subtraction");
         currentItem.currAmount -=1;
-        if(currentItem.currAmount <= 0)
-        {
-            currentItem.id = "";
-        }
+        //if(currentItem.currAmount <= 0)
+        //{
+        //    currentItem.id = "";
+        //}
         Debug.Log("Current item: " + currentItem.id);
         Debug.Log("Current amount: " + currentItem.currAmount);
     }

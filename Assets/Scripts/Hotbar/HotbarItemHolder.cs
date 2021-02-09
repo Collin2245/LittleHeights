@@ -45,8 +45,6 @@ public class HotbarItemHolder : MonoBehaviour
             {
                 itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, transform);
                 item = itemPrefab.GetComponent<Item>();
-                item.id = itemHolderOnInventory.GetComponent<InventorySlot>().itemId;
-                item.currAmount = itemHolderOnInventory.GetComponent<InventorySlot>().currAmount;
             }
             item.id = itemHolderOnInventory.GetComponent<InventorySlot>().itemId;
             item.currAmount = itemHolderOnInventory.GetComponent<InventorySlot>().currAmount;
@@ -57,6 +55,11 @@ public class HotbarItemHolder : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
+    }
+
+    public void subtractItemFromInventory(int amount)
+    {
+        itemHolderOnInventory.GetComponent<InventorySlot>().currAmount -= amount;
     }
 
     // Update is called once per frame

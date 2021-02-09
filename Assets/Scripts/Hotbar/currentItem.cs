@@ -3,17 +3,17 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class currentItem : MonoBehaviour
+public class CurrentItem : MonoBehaviour
 {
-    private GameObject hotbarSlot1;
-    private GameObject hotbarSlot2;
-    private GameObject hotbarSlot3;
-    private GameObject hotbarSlot4;
-    private GameObject hotbarSlot5;
-    private GameObject hotbarSlot6;
-    public GameObject currentSlot;
+    private HotbarItemHolder hotbarSlot1;
+    private HotbarItemHolder hotbarSlot2;
+    private HotbarItemHolder hotbarSlot3;
+    private HotbarItemHolder hotbarSlot4;
+    private HotbarItemHolder hotbarSlot5;
+    private HotbarItemHolder hotbarSlot6;
+    public HotbarItemHolder currentSlot;
     private Image gameSlotIdentifier;
-    public Dictionary<int, GameObject> hotBarSlotNum;
+    public Dictionary<int, HotbarItemHolder> hotBarSlotNum;
     public int currentSlotNum;
     public GameObject currentHotbarSlot;
 
@@ -21,16 +21,16 @@ public class currentItem : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        hotbarSlot1 = GameObject.Find("hotbarItem (1)");
-        hotbarSlot2 = GameObject.Find("hotbarItem (2)");
-        hotbarSlot3 = GameObject.Find("hotbarItem (3)");
-        hotbarSlot4 = GameObject.Find("hotbarItem (4)");
-        hotbarSlot5 = GameObject.Find("hotbarItem (5)");
-        hotbarSlot6 = GameObject.Find("hotbarItem (6)");
+        hotbarSlot1 = GameObject.Find("hotbarItem (1)").GetComponent<HotbarItemHolder>();
+        hotbarSlot2 = GameObject.Find("hotbarItem (2)").GetComponent<HotbarItemHolder>();
+        hotbarSlot3 = GameObject.Find("hotbarItem (3)").GetComponent<HotbarItemHolder>();
+        hotbarSlot4 = GameObject.Find("hotbarItem (4)").GetComponent<HotbarItemHolder>();
+        hotbarSlot5 = GameObject.Find("hotbarItem (5)").GetComponent<HotbarItemHolder>();
+        hotbarSlot6 = GameObject.Find("hotbarItem (6)").GetComponent<HotbarItemHolder>();
         currentSlotNum = 1;
         currentSlot = hotbarSlot1;
         gameSlotIdentifier = this.GetComponent<Image>();
-        hotBarSlotNum = new Dictionary<int, GameObject>()
+        hotBarSlotNum = new Dictionary<int, HotbarItemHolder>()
         {
             {1, hotbarSlot1 },
             {2, hotbarSlot2 },

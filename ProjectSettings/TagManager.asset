@@ -8,6 +8,8 @@ TagManager:
   - PlaceableSoil
   - TreeTag
   - EnemyTag
+  - PlaceableItem
+  - Undefined
   layers:
   - Default
   - TransparentFX
