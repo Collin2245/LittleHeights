@@ -586,6 +586,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMap: {fileID: 1273562819}
+  tile: {fileID: 11400000, guid: 089db37596e3b1148a4d4ce1d239626a, type: 2}
+  width: 0
+  height: 0
 --- !u!1001 &693774577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1177,7 +1180,9 @@ PrefabInstance:
       propertyPath: m_Name
       value: TileManager
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 2946190703244146378, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
+    - {fileID: 2946190703623136610, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
 --- !u!1001 &5228478063548015363
 PrefabInstance:
