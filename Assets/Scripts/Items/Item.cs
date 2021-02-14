@@ -52,8 +52,6 @@ public class Item : MonoBehaviour
         image = GetComponent<Image>();
         path = "Items/" + this.id;
         sprite = Resources.Load<Sprite>(path);
-        Debug.Log(id);
-        Debug.Log(currAmount);
         if(hasImage)
         {
             image.sprite = this.sprite;

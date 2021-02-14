@@ -48,13 +48,12 @@ public class PlaceTile : MonoBehaviour
                 Debug.Log("tried to make prefab " + ItemProperties.itemPlaced[currentItem.id]);
                 try
                 {
-                    Debug.Log(currentItem.currAmount);
                     if(!checkIfItemThere())
                     {
                         placedItem = Instantiate(Resources.Load("PlaceableItem/" + currentItem.id), grid.GetCellCenterWorld(mousePosition), Quaternion.identity) as GameObject;
                         HotbarItemHolder hotbarItemHolder = hotBarItem.currentSlot;
+                        Debug.Log("Position: " + grid.GetCellCenterWorld(mousePosition));
                         hotbarItemHolder.itemHolderOnInventory.GetComponentInChildren<Item>().subtractQuantity(1);
-                        Debug.Log(currentItem.currAmount);
                     }
                     else
                     {

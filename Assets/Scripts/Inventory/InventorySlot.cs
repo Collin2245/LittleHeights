@@ -123,7 +123,6 @@ public class InventorySlot : MonoBehaviour
             }
             else //first click with something in there
             {
-                Debug.Log("Clicked item with no item on mouse and valid item in slot");
                 //make this another function
                 MouseInventorySlot.Instance.itemIdOnMouse = itemId;
                 MouseInventorySlot.Instance.currAmount = currAmount;

@@ -163,15 +163,6 @@ public class PlayerInventory : MonoBehaviour
 
     public void TryToRemoveItemFromInventory()
     {
-        Debug.Log("Current item: " + currentItem.id);
-        Debug.Log("Current amount: " + currentItem.currAmount);
-        Debug.Log("running subtraction");
         currentItem.currAmount -=1;
-        //if(currentItem.currAmount <= 0)
-        //{
-        //    currentItem.id = "";
-        //}
-        Debug.Log("Current item: " + currentItem.id);
-        Debug.Log("Current amount: " + currentItem.currAmount);
     }
 }
