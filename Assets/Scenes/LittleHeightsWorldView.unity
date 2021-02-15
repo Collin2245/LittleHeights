@@ -285,33 +285,75 @@ Tilemap:
   m_TileSpriteArray:
   - m_RefCount: 0
     m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
+  - m_RefCount: 0
+    m_Data: {fileID: 0}
   m_TileMatrixArray:
   - m_RefCount: 0
     m_Data:
+      e00: 4e-45
+      e01: -2388160
+      e02: 0
+      e03: -1.4857008e+23
+      e10: 7.037e-42
+      e11: 5.7e-43
+      e12: 5.69e-43
+      e13: 1.05e-43
+      e20: NaN
+      e21: 0
+      e22: 0
+      e23: 7.95467
+      e30: NaN
+      e31: 0
+      e32: 0
+      e33: 5.69e-43
+  - m_RefCount: 0
+    m_Data:
       e00: 0
-      e01: 1.2286993e+28
-      e02: -1.59658e+29
-      e03: 0.0000000011759065
+      e01: -548068
+      e02: -1.6108937e+29
+      e03: 23.679092
       e10: NaN
       e11: 4.5904e-41
-      e12: 9.42e-43
-      e13: 9.4e-43
+      e12: 5.7e-43
+      e13: 5.69e-43
       e20: 1.04e-43
-      e21: -1.5966117e+29
-      e22: 11309.5625
-      e23: 11309.5625
-      e30: -6.188494e-31
-      e31: 9.42e-43
-      e32: 2.35e-43
-      e33: 2.35e-43
+      e21: -1.6109254e+29
+      e22: -1.4856359e+23
+      e23: -1.4856359e+23
+      e30: 0
+      e31: 5.7e-43
+      e32: 1.05e-43
+      e33: 1.05e-43
   m_TileColorArray:
   - m_RefCount: 0
-    m_Data: {r: -1.59658e+29, g: -1.59658e+29, b: -1.59658e+29, a: -1.59658e+29}
+    m_Data: {r: -1.6108937e+29, g: -1.6108937e+29, b: -1.6108937e+29, a: -1.6108937e+29}
   m_TileObjectToInstantiateArray: []
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Origin: {x: -10, y: -9, z: 0}
-  m_Size: {x: 10, y: 9, z: 1}
+  m_Size: {x: 5048, y: 5046, z: 1}
   m_TileAnchor: {x: 0.5, y: 0.5, z: 0}
   m_TileOrientation: 0
   m_TileOrientationMatrix:
@@ -453,6 +495,7 @@ MonoBehaviour:
   tile3: {fileID: 11400000, guid: 97567fa167091f34e83b84ed278d5748, type: 2}
   tile4: {fileID: 11400000, guid: 5c7bc180ce5c72f4384584870dc87b4c, type: 2}
   tile5: {fileID: 11400000, guid: e40b84159087abb49a469bec988d9e11, type: 2}
+  ruleTile: {fileID: 11400000, guid: c6d3ac70bea859d4fbe5071e4287c22f, type: 2}
   startMult: 0
   chunkSize: 0
   scale: 0
@@ -1350,11 +1393,23 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4873026373511321956, guid: fda415032683f254c9171c1f69baed53, type: 3}
       propertyPath: orthographic size
-      value: 50
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4873026373511322011, guid: fda415032683f254c9171c1f69baed53, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1
+      value: -5
+      objectReference: {fileID: 0}
+    - target: {fileID: 4873026373511322011, guid: fda415032683f254c9171c1f69baed53, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4873026373511322011, guid: fda415032683f254c9171c1f69baed53, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4873026373511322011, guid: fda415032683f254c9171c1f69baed53, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4951980099048160134, guid: fda415032683f254c9171c1f69baed53, type: 3}
       propertyPath: m_AnchorMin.y

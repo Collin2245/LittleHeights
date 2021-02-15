@@ -5,19 +5,23 @@ using UnityEngine.Tilemaps;
 
 public class TileManager : MonoBehaviour
 {
+    // for biokmes, make a bigger overarching perlin noise, have as input to chunk creation
     public Tilemap baseMap;
     public Tile tile;
     public Tile tile2;
     public Tile tile3;
     public Tile tile4;
     public Tile tile5;
+    public RuleTile ruleTile;
     public int startMult;
     public int chunkSize;
     public float scale;
     public float seed;
     int i;
+    public Dictionary<Vector3Int, TileInfo> tileInfo;
     void Start()
     {
+        tileInfo = new Dictionary<Vector3Int, TileInfo>();
         startMult = 100;
         seed = Random.Range(1f, 100000f);
         chunkSize = 50;
@@ -26,6 +30,8 @@ public class TileManager : MonoBehaviour
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = new Vector3(chunkSize * startMult +0.5f*chunkSize, chunkSize * startMult + 0.5f * chunkSize, 0);
         Debug.Log("seed: " + seed);
+        Debug.Log(tileInfo.Count);
+
     }
     // Update is called once per frame
     void Update()
@@ -67,23 +73,28 @@ public class TileManager : MonoBehaviour
     {
         if (perlin <= 0.35f)
         {
-            baseMap.SetTile(point, tile);
+            baseMap.SetTile(point, ruleTile);
+            tileInfo.Add(point, new TileInfo());
         }
         else if (perlin > 0.35f && perlin <= 0.4f)
         {
-            baseMap.SetTile(point, tile2);
+            baseMap.SetTile(point, ruleTile);
+            tileInfo.Add(point, new TileInfo());
         }
         else if (perlin > 0.4f && perlin <= 0.8f)
         {
             baseMap.SetTile(point, tile3);
+            tileInfo.Add(point, new TileInfo());
         }
         else if (perlin > 0.8f && perlin <= 0.9f)
         {
             baseMap.SetTile(point, tile4);
+            tileInfo.Add(point, new TileInfo());
         }
         else if (perlin > 0.9f)
         {
             baseMap.SetTile(point, tile5);
+            tileInfo.Add(point, new TileInfo());
         }
         else
         {
