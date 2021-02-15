@@ -448,10 +448,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseMap: {fileID: 1273562819}
-  tile: {fileID: 11400000, guid: 089db37596e3b1148a4d4ce1d239626a, type: 2}
-  tile2: {fileID: 11400000, guid: 49e31f9af1caeec4d9a8772db104a046, type: 2}
+  tile: {fileID: 11400000, guid: b0482c220b04180408dd34fb31d612a5, type: 2}
+  tile2: {fileID: 11400000, guid: f032f881d6f48094293be72591e20f1c, type: 2}
+  tile3: {fileID: 11400000, guid: 97567fa167091f34e83b84ed278d5748, type: 2}
+  tile4: {fileID: 11400000, guid: 5c7bc180ce5c72f4384584870dc87b4c, type: 2}
+  tile5: {fileID: 11400000, guid: fed427134aca0564fac0dc71cbee1610, type: 2}
   width: 0
   height: 0
+  scale: 0
+  seed: 0
 --- !u!1001 &693774577
 PrefabInstance:
   m_ObjectHideFlags: 0

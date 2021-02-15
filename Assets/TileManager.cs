@@ -8,46 +8,63 @@ public class TileManager : MonoBehaviour
     public Tilemap baseMap;
     public Tile tile;
     public Tile tile2;
+    public Tile tile3;
+    public Tile tile4;
+    public Tile tile5;
     public int width;
     public int height;
-    
+    public float scale;
+    public float seed;
+    Vector2 offset;
     void Start()
     {
+        offset = new Vector2(Random.Range(0.1f, 0.9f), Random.Range(0.1f, 0.9f));
+        seed = Random.Range(0.01f, 0.99f);
         width = 100;
         height = 100;
-        drawMap(width, height);
+        scale = 4500;
+        drawMap(width, height, scale);
     }
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.P))
         {
-            drawMap(width, height);
-        }
-        if (Input.GetMouseButton(0))
-        {
-            baseMap.SetTileFlags(baseMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)), TileFlags.None);
-            baseMap.SetColor(baseMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition)), Color.blue);
+            seed = Random.Range(0.01f, 0.99f);
+            drawMap(width, height, scale);
         }
     }
 
-    void drawMap(int width, int height)
+    void drawMap(int width, int height, float scale)
     {
         for(int y = 0; y<width; y++)
         {
             for (int x = 0; x < height; x++)
             {
                 Vector3Int point = new Vector3Int(x, y, 0);
-                float xF = (float)x/(float)width;
-                float yF = (float)y/(float)height;
+                float xF = ((float)x/(float)scale + offset.x);
+                float yF = ((float)y/(float)scale + offset.y);
                 float perlin = Mathf.PerlinNoise(xF, yF);
                 Debug.Log(perlin);
-                if(perlin <= 0.5f)
+                if(perlin <= 0.2f)
                 {
                     baseMap.SetTile(point, tile);
-                }else
+                }
+                else if(perlin > 0.2f && perlin <= 0.4f)
                 {
                     baseMap.SetTile(point, tile2);
+                }
+                else if (perlin > 0.4f && perlin <= 0.6f)
+                {
+                    baseMap.SetTile(point, tile3);
+                }
+                else if (perlin > 0.8f && perlin <= 0.9f)
+                {
+                    baseMap.SetTile(point, tile4);
+                }
+                else if (perlin > 0.9f && perlin <= 1.0f)
+                {
+                    baseMap.SetTile(point, tile5);
                 }
             }
         }
