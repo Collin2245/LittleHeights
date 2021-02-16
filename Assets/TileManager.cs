@@ -22,10 +22,10 @@ public class TileManager : MonoBehaviour
     void Start()
     {
         tileInfo = new Dictionary<Vector3Int, TileInfo>();
-        startMult = 100;
+        startMult = 500;
         seed = Random.Range(1f, 100000f);
-        chunkSize = 50;
-        scale = 2.5f;
+        chunkSize = 20;
+        scale = 0.5f;
         DrawChunk(chunkSize, scale, seed,new Vector2Int(chunkSize*startMult, chunkSize*startMult));
         GameObject player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = new Vector3(chunkSize * startMult +0.5f*chunkSize, chunkSize * startMult + 0.5f * chunkSize, 0);
@@ -63,10 +63,11 @@ public class TileManager : MonoBehaviour
                 float xF = (((float)x+seed)/(float)chunkSize * scale);
                 float yF = ((float)y/(float)chunkSize * scale);
                 float perlin = Mathf.PerlinNoise(xF, yF);
-                Debug.Log(perlin);
+                //Debug.Log(perlin);
                 PlaceTileWithPerlin(perlin, point);
             }
         }
+        Debug.Log("Chunk:" + chunk);
     }
 
     private void PlaceTileWithPerlin(float perlin, Vector3Int point)
@@ -74,27 +75,57 @@ public class TileManager : MonoBehaviour
         if (perlin <= 0.35f)
         {
             baseMap.SetTile(point, ruleTile);
-            tileInfo.Add(point, new TileInfo());
+            if(!tileInfo.ContainsKey(point))
+            {
+                TileInfo tI = new TileInfo();
+                tI.isGrass = false;
+                tI.isWater = true;
+                tileInfo.Add(point, tI);
+            }
         }
         else if (perlin > 0.35f && perlin <= 0.4f)
         {
             baseMap.SetTile(point, ruleTile);
-            tileInfo.Add(point, new TileInfo());
+            if(!tileInfo.ContainsKey(point))
+            {
+                TileInfo tI = new TileInfo();
+                tI.isGrass = false;
+                tI.isWater = true;
+                tileInfo.Add(point, tI);
+            }
         }
         else if (perlin > 0.4f && perlin <= 0.8f)
         {
             baseMap.SetTile(point, tile3);
-            tileInfo.Add(point, new TileInfo());
+            if (!tileInfo.ContainsKey(point))
+            {
+                TileInfo tI = new TileInfo();
+                tI.isGrass = false;
+                tI.isWater = true;
+                tileInfo.Add(point, tI);
+            }
         }
         else if (perlin > 0.8f && perlin <= 0.9f)
         {
             baseMap.SetTile(point, tile4);
-            tileInfo.Add(point, new TileInfo());
+            if (!tileInfo.ContainsKey(point))
+            {
+                TileInfo tI = new TileInfo();
+                tI.isGrass = false;
+                tI.isWater = true;
+                tileInfo.Add(point, tI);
+            }
         }
         else if (perlin > 0.9f)
         {
             baseMap.SetTile(point, tile5);
-            tileInfo.Add(point, new TileInfo());
+            if (!tileInfo.ContainsKey(point))
+            {
+                TileInfo tI = new TileInfo();
+                tI.isGrass = false;
+                tI.isWater = true;
+                tileInfo.Add(point, tI);
+            }
         }
         else
         {

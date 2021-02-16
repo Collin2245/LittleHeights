@@ -5,14 +5,9 @@ using UnityEngine;
 public class TileInfo : MonoBehaviour
 {
     // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    public bool isWater;
+    public bool isItemOn;
+    public bool isTreeOn;
+    public bool isGrass;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
 }
