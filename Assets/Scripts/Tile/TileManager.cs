@@ -7,13 +7,8 @@ public class TileManager : MonoBehaviour
 {
     // for biokmes, make a bigger overarching perlin noise, have as input to chunk creation
     public Tilemap baseMap;
-    public Tile tile;
-    public Tile tile2;
-    public Tile tile3;
-    public Tile tile4;
-    public Tile tile5;
-    public Tile[] tiles;
-    public RuleTile waterRuleTile;
+    public Tilemap extraMapNonCollide;
+    public Tiles tiles;
     public int startMult;
     public int chunkSize;
     public float scale;
@@ -22,6 +17,7 @@ public class TileManager : MonoBehaviour
     public Dictionary<Vector2Int, bool> drawnChunks;
     void Start()
     {
+        tiles = this.GetComponent<Tiles>();
         tileInfo = new Dictionary<Vector3Int, TileInfo>();
         drawnChunks = new Dictionary<Vector2Int, bool>();
         startMult = 500;
@@ -72,18 +68,11 @@ public class TileManager : MonoBehaviour
     {
         if (perlin <= 0.3f)
         {
-            baseMap.SetTile(point, waterRuleTile);
-            if(!tileInfo.ContainsKey(point))
-            {
-                TileInfo tI = new TileInfo();
-                tI.isGrass = false;
-                tI.isWater = true;
-                tileInfo.Add(point, tI);
-            }
+            GenerateDeepWaterTile(point);
         }
         else if (perlin > 0.3f && perlin <= 0.4f)
         {
-            baseMap.SetTile(point, waterRuleTile);
+            baseMap.SetTile(point, tiles.waterRuleTile);
             if(!tileInfo.ContainsKey(point))
             {
                 TileInfo tI = new TileInfo();
@@ -94,18 +83,11 @@ public class TileManager : MonoBehaviour
         }
         else if (perlin > 0.4f && perlin <= 0.8f)
         {
-            baseMap.SetTile(point, tile3);
-            if (!tileInfo.ContainsKey(point))
-            {
-                TileInfo tI = new TileInfo();
-                tI.isGrass = false;
-                tI.isWater = true;
-                tileInfo.Add(point, tI);
-            }
+            GenerateGrassTile(point);
         }
         else if (perlin > 0.8f && perlin <= 0.9f)
         {
-            baseMap.SetTile(point, tile4);
+            baseMap.SetTile(point, tiles.dirtTile);
             if (!tileInfo.ContainsKey(point))
             {
                 TileInfo tI = new TileInfo();
@@ -116,7 +98,7 @@ public class TileManager : MonoBehaviour
         }
         else if (perlin > 0.9f)
         {
-            baseMap.SetTile(point, tile5);
+            baseMap.SetTile(point, tiles.peakTile);
             if (!tileInfo.ContainsKey(point))
             {
                 TileInfo tI = new TileInfo();
@@ -149,5 +131,53 @@ public class TileManager : MonoBehaviour
         DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x + chunkSize, currChunk.y + chunkSize));
         DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x + chunkSize, currChunk.y - chunkSize));
         DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x - chunkSize, currChunk.y + chunkSize));
+    }
+
+    private void GenerateGrassTile(Vector3Int point)
+    {
+        baseMap.SetTile(point, tiles.grassTile);
+        if (!tileInfo.ContainsKey(point))
+        {
+            TileInfo tI = new TileInfo
+            {
+                isGrass = true,
+                isWater = false
+            };
+            int randomNum = Random.Range(0, 100);
+            if (randomNum == 0 || randomNum == 1|| randomNum == 2)
+            {
+                tI.isTreeOn = true;
+                extraMapNonCollide.SetTile(point, tiles.orangeTreeSmallTile);
+            }
+            else if (randomNum == 3)
+            {
+                tI.isTreeOn = true;
+                extraMapNonCollide.SetTile(point, tiles.deadTreeSmallTile);
+            }
+            tileInfo.Add(point, tI);
+        }
+    }
+
+    private void GenerateDeepWaterTile(Vector3Int point)
+    {
+        baseMap.SetTile(point, tiles.waterRuleTile);
+        if (!tileInfo.ContainsKey(point))
+        {
+            TileInfo tI = new TileInfo();
+            tI.isGrass = false;
+            tI.isWater = true;
+            int randomNum = Random.Range(0, 100);
+            if (randomNum == 0)
+            {
+                //add ti info here
+                extraMapNonCollide.SetTile(point, tiles.rockOnWaterGray1Tile);
+            }
+            else if (randomNum == 1 || randomNum == 2)
+            {
+                //add ti info here
+                extraMapNonCollide.SetTile(point, tiles.whiteLilyPadOnWaterTile);
+            }
+            tileInfo.Add(point, tI);
+        }
     }
 }

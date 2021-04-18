@@ -15,15 +15,17 @@ public class ItemProperties : MonoBehaviour
     }
     public static Dictionary<string, int> quantityForItem = new Dictionary<string, int>()
     {
-        { "Blank", 1 },
+        {"Blank", 1 },
         {"Square",2 },
         {"woodenSword",1 },
         {"tempHoe",5 },
         {"itemName",999 },
-        {"wood",99},
-        {"acorn",99},
-        {"woodenAxe",1}
+        {"wood",9},
+        {"acorn",9},
+        {"woodenAxe",10},
+        {"laser",55 }
     };
+
 
     public static Dictionary<string, string> itemPlaced = new Dictionary<string, string>()
     {
