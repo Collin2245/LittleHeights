@@ -8,7 +8,7 @@ public class PlayerController : MonoBehaviour
     int time;
     int day;
 
-
+    Camera camera;
     Animator animator;
     float horizontal;
     float vertical;
@@ -25,6 +25,7 @@ public class PlayerController : MonoBehaviour
 
     void Start()
     {
+        camera = GetComponentInChildren<Camera>();
         body = GetComponent<Rigidbody2D>();
         animator = this.GetComponent<Animator>();
     }
@@ -80,8 +81,21 @@ public class PlayerController : MonoBehaviour
         animator.SetBool("lastMoveRight", lastMoveRight);
         animator.SetBool("lastMoveDown", lastMoveDown);
         animator.SetBool("IsMoving", isMoving);
+        moveCamera();
+
     }
 
+    void moveCamera()
+    {
+        if(Input.GetKey(KeyCode.Z))
+        {
+            camera.orthographicSize  += 0.01f;
+        }
+        if (Input.GetKey(KeyCode.X))
+        {
+            camera.orthographicSize -= 0.01f;
+        }
+    }
     void FixedUpdate()
     {
 

@@ -8,7 +8,8 @@ public class TileManager : MonoBehaviour
     // for biokmes, make a bigger overarching perlin noise, have as input to chunk creation
     public Tilemap baseMap;
     public Tilemap extraMapNonCollide;
-    public Tiles tiles;
+    public Tilemap extraMapCollide;
+    private Tiles tiles;
     public int startMult;
     public int chunkSize;
     public float scale;
@@ -66,11 +67,11 @@ public class TileManager : MonoBehaviour
 
     private void PlaceTileWithPerlin(float perlin, Vector3Int point)
     {
-        if (perlin <= 0.3f)
+        if (perlin <= 0.36f)
         {
             GenerateDeepWaterTile(point);
         }
-        else if (perlin > 0.3f && perlin <= 0.4f)
+        else if (perlin > 0.36f && perlin <= 0.4f)
         {
             baseMap.SetTile(point, tiles.waterRuleTile);
             if(!tileInfo.ContainsKey(point))
@@ -135,7 +136,6 @@ public class TileManager : MonoBehaviour
 
     private void GenerateGrassTile(Vector3Int point)
     {
-        baseMap.SetTile(point, tiles.grassTile);
         if (!tileInfo.ContainsKey(point))
         {
             TileInfo tI = new TileInfo
@@ -143,16 +143,43 @@ public class TileManager : MonoBehaviour
                 isGrass = true,
                 isWater = false
             };
-            int randomNum = Random.Range(0, 100);
+            int randomNum = Random.Range(0, 200);
+            if( randomNum % 2 == 1)
+            {
+                baseMap.SetTile(point, tiles.grass1Tile);
+            }else
+            {
+                baseMap.SetTile(point, tiles.grass2Tile);
+            }
             if (randomNum == 0 || randomNum == 1|| randomNum == 2)
             {
                 tI.isTreeOn = true;
-                extraMapNonCollide.SetTile(point, tiles.orangeTreeSmallTile);
+                extraMapCollide.SetTile(point, tiles.orangeTreeSmallTile);
             }
             else if (randomNum == 3)
             {
                 tI.isTreeOn = true;
-                extraMapNonCollide.SetTile(point, tiles.deadTreeSmallTile);
+                extraMapCollide.SetTile(point, tiles.deadTreeSmallTile);
+            }
+            else if (randomNum == 4)
+            {
+                tI.isTreeOn = true;
+                extraMapNonCollide.SetTile(point, tiles.purpleFlowerTile);
+            }
+            else if (randomNum == 5 ||randomNum == 6)
+            {
+                tI.isTreeOn = true;
+                extraMapCollide.SetTile(point, tiles.tealSmallEvergreenTile);
+            }
+            else if (randomNum == 7)
+            {
+                tI.isTreeOn = true;
+                extraMapNonCollide.SetTile(point, tiles.tealSmallBushTile);
+            }
+            else if (randomNum == 8)
+            {
+                tI.isTreeOn = true;
+                extraMapNonCollide.SetTile(point, tiles.grassWithRocksTile);
             }
             tileInfo.Add(point, tI);
         }
@@ -161,6 +188,7 @@ public class TileManager : MonoBehaviour
     private void GenerateDeepWaterTile(Vector3Int point)
     {
         baseMap.SetTile(point, tiles.waterRuleTile);
+        extraMapCollide.SetTile(point, tiles.waterRuleTile);
         if (!tileInfo.ContainsKey(point))
         {
             TileInfo tI = new TileInfo();
@@ -170,12 +198,16 @@ public class TileManager : MonoBehaviour
             if (randomNum == 0)
             {
                 //add ti info here
-                extraMapNonCollide.SetTile(point, tiles.rockOnWaterGray1Tile);
+                extraMapCollide.SetTile(point, tiles.rockOnWaterGray1Tile);
             }
             else if (randomNum == 1 || randomNum == 2)
             {
                 //add ti info here
-                extraMapNonCollide.SetTile(point, tiles.whiteLilyPadOnWaterTile);
+                extraMapCollide.SetTile(point, tiles.lilyPadOnWaterTile);
+            }
+            else if(randomNum >=10)
+            {
+                extraMapCollide.SetTile(point, tiles.animatedWaterTile);
             }
             tileInfo.Add(point, tI);
         }
