@@ -89,11 +89,11 @@ public class PlayerController : MonoBehaviour
     {
         if(Input.GetKey(KeyCode.Z))
         {
-            camera.orthographicSize  += 0.01f;
+            camera.orthographicSize  += 0.04f;
         }
         if (Input.GetKey(KeyCode.X))
         {
-            camera.orthographicSize -= 0.01f;
+            camera.orthographicSize -= 0.04f;
         }
     }
     void FixedUpdate()
