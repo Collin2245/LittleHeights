@@ -179,7 +179,6 @@ public class TileManager : MonoBehaviour
         DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x + chunkSize, currChunk.y + chunkSize));
         DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x + chunkSize, currChunk.y - chunkSize));
         DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x - chunkSize, currChunk.y + chunkSize));
-        Debug.Log(tileInfo);
     }
 
     private void GenerateGrassTile(Vector3Int point)
@@ -242,40 +241,25 @@ public class TileManager : MonoBehaviour
                 playerPlaced = true;
         }
     }
-    private void CreateGrassTileInfo(Vector3Int point)
-    {
-
-    }
-
-    private void CreateWaterTileInfo(Vector3Int point)
-    {
-
-    }
     private void GenerateDeepWaterTile(Vector3Int point)
     {
+        Color color = new Color(0.1f, 0.7f, 0.8f);
         baseMap.SetTile(point, tiles.waterRuleTile);
-        extraMapCollide.SetTile(point, tiles.waterRuleTile);
-        //if (!tileInfo.ContainsKey(point))
-        //{
-        //    TileInfo tI = new TileInfo();
-        //    tI.isGrass = false;
-        //    tI.isWater = true;
-            int randomNum = Random.Range(0, 100);
-            if (randomNum == 0)
-            {
-                //add ti info here
-                extraMapCollide.SetTile(point, tiles.rockOnWaterGray1Tile);
-            }
-            else if (randomNum == 1 || randomNum == 2)
-            {
-                //add ti info here
-                extraMapCollide.SetTile(point, tiles.lilyPadOnWaterTile);
-            }
-            else if(randomNum >=10)
-            {
-                extraMapCollide.SetTile(point, tiles.animatedWaterTile);
-            }
-            //tileInfo.Add(point, tI);
-        //}
+        extraMapCollide.SetTile(point, tiles.animatedWaterTile);
+        baseMap.SetColor(point, color);
+        extraMapCollide.SetColor(point, color);
+        int randomNum = Random.Range(0, 100);
+        if (randomNum == 0)
+        {
+            //add ti info here
+            extraMapCollide.SetTile(point, tiles.rockOnWaterGray1Tile);
+            extraMapCollide.SetColor(point, color);
+        }
+        else if (randomNum == 1 || randomNum == 2)
+        {
+            //add ti info here
+            extraMapCollide.SetTile(point, tiles.lilyPadOnWaterTile);
+            
+        }
     }
 }
