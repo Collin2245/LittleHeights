@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 6177705860134683461}
   - component: {fileID: 505884713}
   - component: {fileID: 2072096190795201754}
+  - component: {fileID: 2241258034841772130}
+  - component: {fileID: 505884714}
   m_Layer: 0
   m_Name: TileManager
   m_TagString: TileManager
@@ -59,11 +61,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseMap: {fileID: 0}
   extraMapNonCollide: {fileID: 0}
-  tiles: {fileID: 0}
+  extraMapCollide: {fileID: 0}
   startMult: 0
   chunkSize: 0
   scale: 0
   seed: 0
+  Instance: {fileID: 0}
 --- !u!114 &2072096190795201754
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -79,8 +82,44 @@ MonoBehaviour:
   waterRuleTile: {fileID: 11400000, guid: c6d3ac70bea859d4fbe5071e4287c22f, type: 2}
   waterTile: {fileID: 11400000, guid: b0482c220b04180408dd34fb31d612a5, type: 2}
   sandTile: {fileID: 11400000, guid: f032f881d6f48094293be72591e20f1c, type: 2}
-  grassTile: {fileID: 11400000, guid: 97567fa167091f34e83b84ed278d5748, type: 2}
+  grass1Tile: {fileID: 11400000, guid: 97567fa167091f34e83b84ed278d5748, type: 2}
+  grass2Tile: {fileID: 11400000, guid: cb193c3935ffbf64a897c082642d6b73, type: 2}
   dirtTile: {fileID: 11400000, guid: 5c7bc180ce5c72f4384584870dc87b4c, type: 2}
   peakTile: {fileID: 11400000, guid: add2e7f461947344fb53c90c5a8ffeb7, type: 2}
   orangeTreeSmallTile: {fileID: 11400000, guid: 309d270e181dfe0458f204e0b0a99771, type: 2}
   deadTreeSmallTile: {fileID: 11400000, guid: 5ecf042c4ca544648a2d092f791ffffe, type: 2}
+  rockOnWaterGray1Tile: {fileID: 11400000, guid: d2b1d3466963a9c4496397effefb0bfd, type: 2}
+  lilyPadOnWaterTile: {fileID: 11400000, guid: b745bc144f60e294c962554a014e21cf, type: 2}
+  purpleFlowerTile: {fileID: 11400000, guid: ef9fea26fdfdc484a976e82efc78ae60, type: 2}
+  tealSmallEvergreenTile: {fileID: 11400000, guid: 2517c7f5c27c44f40a1dc117036048aa, type: 2}
+  tealSmallBushTile: {fileID: 11400000, guid: a7b1fa5003936ba47abc5228dc75f3b1, type: 2}
+  grassWithRocksTile: {fileID: 11400000, guid: d2f97217a44dd3e418a6465559add871, type: 2}
+  grassWithDirtTile: {fileID: 11400000, guid: c1155228c88b79147a6af0da34f4e168, type: 2}
+  animatedWaterTile: {fileID: 11400000, guid: 574b3bcb80a6c5043aef8868a1e2e65d, type: 2}
+--- !u!114 &2241258034841772130
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946190703623136613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3c8c993b998ba504097989e12e571345, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mouseHoverTile: {fileID: 11400000, guid: 0f17ebd1d15a7b9468715231698ae3b6, type: 2}
+  mouseHoverTileMap: {fileID: 0}
+  isActiveArea: 0
+--- !u!114 &505884714
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2946190703623136613}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd1a4b52bf8879f498054009b0644405, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

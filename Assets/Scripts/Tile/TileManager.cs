@@ -19,19 +19,32 @@ public class TileManager : MonoBehaviour
     private bool useDictionaryOnAllTilesFlag;
     private bool playerPlaced;
     private GameObject player;
+    public TileManager Instance;
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Debug.Log("creating Tile manager instance");
+            Instance = this;
+            DontDestroyOnLoad(gameObject);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+    }
     void Start()
     {
         playerPlaced = false;
-        useDictionaryOnAllTilesFlag = false;
         tiles = this.GetComponent<Tiles>();
-        tileInfo = new Dictionary<Vector3Int, TileInfo>();
+        tileInfo = GetComponent<TileDict>().tileInfo;
         drawnChunks = new Dictionary<Vector2Int, bool>();
         startMult = 500;
         seed = Random.Range(1f, 100000f);
-        chunkSize = 35;
-        scale = 0.6f;
+        chunkSize = 20;
+        scale = 0.5f;
         player = GameObject.FindGameObjectWithTag("Player");
-        player.transform.position = new Vector3(chunkSize * startMult + 0.5f * chunkSize, chunkSize * startMult + 0.5f * chunkSize, 0);
+        player.transform.position = new Vector3(chunkSize * startMult + 0.5f * chunkSize, chunkSize * startMult + 0.5f * chunkSize, -10);
         DrawChunk(chunkSize, scale, seed,new Vector2Int(chunkSize*startMult, chunkSize*startMult));
         DrawChunksAroundPlayer();
         Debug.Log("seed: " + seed);
@@ -39,11 +52,14 @@ public class TileManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DrawChunksAroundPlayer();
-        if (Input.GetMouseButtonDown(0))
+        if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") !=0)
         {
-            GetTileInfoAtPoint();
-        }
+            DrawChunksAroundPlayer();
+        }   
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    GetTileInfoAtPoint();
+        //}
     }
 
     public TileInfo GetTileInfoAtPoint()
@@ -53,7 +69,7 @@ public class TileManager : MonoBehaviour
         if (!tileInfo.ContainsKey(point))
         {
 
-            if (perlin < 0.36f)
+            if (perlin < 0.35f)
             {
                 TileInfo ti = new TileInfo
                 {
@@ -61,7 +77,7 @@ public class TileManager : MonoBehaviour
                 };
                 tileInfo.Add(point, ti);
             }
-            else if (perlin > 0.36f && perlin <= 0.4f)
+            else if (perlin > 0.35f && perlin <= 0.4f)
             {
                 TileInfo ti = new TileInfo
                 {
@@ -121,13 +137,6 @@ public class TileManager : MonoBehaviour
         else if (perlin > 0.36f && perlin <= 0.4f)
         {
             baseMap.SetTile(point, tiles.waterRuleTile);
-            if(!tileInfo.ContainsKey(point) && useDictionaryOnAllTilesFlag)
-            {
-                TileInfo tI = new TileInfo();
-                tI.isGrass = false;
-                tI.isWater = true;
-                tileInfo.Add(point, tI);
-            }
         }
         else if (perlin > 0.4f && perlin <= 0.8f)
         {
@@ -136,24 +145,10 @@ public class TileManager : MonoBehaviour
         else if (perlin > 0.8f && perlin <= 0.9f)
         {
             baseMap.SetTile(point, tiles.dirtTile);
-            if (!tileInfo.ContainsKey(point) && useDictionaryOnAllTilesFlag)
-            {
-                TileInfo tI = new TileInfo();
-                tI.isGrass = false;
-                tI.isWater = true;
-                tileInfo.Add(point, tI);
-            }
         }
         else if (perlin > 0.9f)
         {
             baseMap.SetTile(point, tiles.peakTile);
-            if (!tileInfo.ContainsKey(point) && useDictionaryOnAllTilesFlag)
-            {
-                TileInfo tI = new TileInfo();
-                tI.isGrass = false;
-                tI.isWater = true;
-                tileInfo.Add(point, tI);
-            }
         }
         else
         {
@@ -195,10 +190,12 @@ public class TileManager : MonoBehaviour
             {
                 //tI.isTreeOn = true;
                 extraMapCollide.SetTile(point, tiles.orangeTreeSmallTile);
-                TileInfo tI = new TileInfo();
-                tI.isGrass = true;
-                tI.isTreeOn = true;
-                tileInfo.Add(point, tI);
+            TileInfo tI = new TileInfo
+            {
+                isGrass = true,
+                isTreeOn = true
+            };
+            tileInfo.Add(point, tI);
         }
             else if (randomNum == 3)
             {
@@ -237,29 +234,34 @@ public class TileManager : MonoBehaviour
             }
             else if (randomNum >=15 && playerPlaced == false)
             {
-                player.transform.position = point;
+                player.transform.position = new Vector3Int(point.x,point.y,-10);
                 playerPlaced = true;
         }
     }
     private void GenerateDeepWaterTile(Vector3Int point)
     {
-        Color color = new Color(0.1f, 0.7f, 0.8f);
+        Color color = new Color(0.7f, 0.9f, 0.95f);
         baseMap.SetTile(point, tiles.waterRuleTile);
-        extraMapCollide.SetTile(point, tiles.animatedWaterTile);
         baseMap.SetColor(point, color);
-        extraMapCollide.SetColor(point, color);
+        
         int randomNum = Random.Range(0, 100);
         if (randomNum == 0)
         {
             //add ti info here
             extraMapCollide.SetTile(point, tiles.rockOnWaterGray1Tile);
-            extraMapCollide.SetColor(point, color);
+            extraMapNonCollide.SetTile(point, tiles.rockOnWaterGray1Tile);
+            extraMapNonCollide.SetColor(point, color);
         }
         else if (randomNum == 1 || randomNum == 2)
         {
             //add ti info here
             extraMapCollide.SetTile(point, tiles.lilyPadOnWaterTile);
             
+        }
+        else
+        {
+            extraMapCollide.SetTile(point, tiles.animatedWaterTile);
+            extraMapCollide.SetColor(point, color);
         }
     }
 }

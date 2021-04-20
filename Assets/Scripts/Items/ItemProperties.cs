@@ -20,8 +20,8 @@ public class ItemProperties : MonoBehaviour
         {"woodenSword",1 },
         {"tempHoe",5 },
         {"itemName",999 },
-        {"wood",9},
-        {"acorn",9},
+        {"wood",99},
+        {"acorn",99},
         {"woodenAxe",10},
         {"laser",55 }
     };

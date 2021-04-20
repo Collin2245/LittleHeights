@@ -30,13 +30,35 @@ SpriteAtlas:
       enableTightPacking: 1
     variantMultiplier: 1
     packables:
+    - {fileID: 2800000, guid: 147d631ec32f505489265b0ed8d592e5, type: 3}
     - {fileID: 2800000, guid: 843fce2a921200647b9223c1391a19aa, type: 3}
-    totalSpriteSurfaceArea: 436224
+    - {fileID: 2800000, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+    totalSpriteSurfaceArea: 444160
     bindAsDefault: 1
     isAtlasV2: 0
     cachedData: {fileID: 0}
   m_MasterAtlas: {fileID: 0}
   m_PackedSprites:
+  - {fileID: -8275566089424803666, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: -6582322039669157708, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: -1658440581356024965, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: 1730554172862654308, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: 4372973539500097351, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: 6898849238132416053, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: -4383928067805755786, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: 8719230153671177440, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: 4492976513352677165, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: -8958879417409491992, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: 5565275463807233565, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: -3521482123702549463, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: -5123291107773828630, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: -6605711300591298258, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: -6900690535457055103, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: -8647312620478929880, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: -2219813884653064100, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: -7542195189753314322, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: 8142671628132874921, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
+  - {fileID: 1629964785010692638, guid: e27c0ed27ac15224bb1c5d50f36ae9f0, type: 3}
   - {fileID: -4167334015192982960, guid: 843fce2a921200647b9223c1391a19aa, type: 3}
   - {fileID: -6932605525768524701, guid: 843fce2a921200647b9223c1391a19aa, type: 3}
   - {fileID: -1411147263529283506, guid: 843fce2a921200647b9223c1391a19aa, type: 3}
@@ -1741,7 +1763,28 @@ SpriteAtlas:
   - {fileID: 9206168993827973283, guid: 843fce2a921200647b9223c1391a19aa, type: 3}
   - {fileID: -3943198670515307069, guid: 843fce2a921200647b9223c1391a19aa, type: 3}
   - {fileID: -5092505601792518263, guid: 843fce2a921200647b9223c1391a19aa, type: 3}
+  - {fileID: 21300000, guid: 147d631ec32f505489265b0ed8d592e5, type: 3}
   m_PackedSpriteNamesToIndex:
+  - PlayerAnimated 18
+  - PlayerAnimated 19
+  - PlayerAnimated 16
+  - PlayerAnimated 17
+  - PlayerAnimated 14
+  - PlayerAnimated 15
+  - PlayerAnimated 12
+  - PlayerAnimated 13
+  - PlayerAnimated 10
+  - PlayerAnimated 11
+  - PlayerAnimated 9
+  - PlayerAnimated 8
+  - PlayerAnimated 3
+  - PlayerAnimated 2
+  - PlayerAnimated 1
+  - PlayerAnimated 0
+  - PlayerAnimated 7
+  - PlayerAnimated 6
+  - PlayerAnimated 5
+  - PlayerAnimated 4
   - roguelikeSheet_transparent_123
   - roguelikeSheet_transparent_173
   - roguelikeSheet_transparent_629
@@ -3446,5 +3489,6 @@ SpriteAtlas:
   - roguelikeSheet_transparent_170
   - roguelikeSheet_transparent_1043
   - roguelikeSheet_transparent_1053
+  - rockInWater
   m_Tag: SpriteAtlas
   m_IsVariant: 0

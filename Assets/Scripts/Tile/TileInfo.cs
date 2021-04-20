@@ -10,8 +10,12 @@ public class TileInfo
     public bool isItemOn;
     public bool isTreeOn;
     public bool isGrass;
+    
 
-    public TileInfo()
+
+
+
+        public TileInfo()
     {
         this.isWater = false;
         this.isWalkableWater = false;
@@ -19,4 +23,5 @@ public class TileInfo
         this.isTreeOn = false;
         this.isGrass = true;
     }
+
 }

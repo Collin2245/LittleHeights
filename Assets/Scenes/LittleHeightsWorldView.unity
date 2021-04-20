@@ -472,26 +472,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!1 &505884712 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2946190703623136613, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-  m_PrefabInstance: {fileID: 2946190703244146375}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &505884713
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 505884712}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3c8c993b998ba504097989e12e571345, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mouseHoverTile: {fileID: 11400000, guid: 0f17ebd1d15a7b9468715231698ae3b6, type: 2}
-  mouseHoverTileMap: {fileID: 189234612}
-  isActiveArea: 0
 --- !u!1001 &693774577
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -553,11 +533,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed016c6041356f54b8df9896f0cbdb04, type: 3}
---- !u!20 &723259942 stripped
-Camera:
-  m_CorrespondingSourceObject: {fileID: 4873026373511321956, guid: fda415032683f254c9171c1f69baed53, type: 3}
-  m_PrefabInstance: {fileID: 5228478063548015363}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &789623669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1087,62 +1062,10 @@ PrefabInstance:
       propertyPath: extraMapCollide
       value: 
       objectReference: {fileID: 1580033471}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: rockOnWaterGray1Tile
+    - target: {fileID: 2241258034841772130, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
+      propertyPath: mouseHoverTileMap
       value: 
-      objectReference: {fileID: 11400000, guid: 1a9a7c92310d18943a4a12b55ce84d35, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: lilyPadOnWaterTile
-      value: 
-      objectReference: {fileID: 11400000, guid: b745bc144f60e294c962554a014e21cf, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: whiteLilyPadOnWaterTile
-      value: 
-      objectReference: {fileID: 11400000, guid: 6503a1dc35521d94bbcda8f480f05650, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: purpleFlowerTile
-      value: 
-      objectReference: {fileID: 11400000, guid: ef9fea26fdfdc484a976e82efc78ae60, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: grass1Tile
-      value: 
-      objectReference: {fileID: 11400000, guid: 97567fa167091f34e83b84ed278d5748, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: grass2Tile
-      value: 
-      objectReference: {fileID: 11400000, guid: cb193c3935ffbf64a897c082642d6b73, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: tealSmallTree
-      value: 
-      objectReference: {fileID: 11400000, guid: ea879b26a38870c4f96976550dde8b17, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: tealSmallBush
-      value: 
-      objectReference: {fileID: 11400000, guid: a7b1fa5003936ba47abc5228dc75f3b1, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: tealSmallTreeTile
-      value: 
-      objectReference: {fileID: 11400000, guid: 2517c7f5c27c44f40a1dc117036048aa, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: tealSmallEvergreenTile
-      value: 
-      objectReference: {fileID: 11400000, guid: 2517c7f5c27c44f40a1dc117036048aa, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: tealSmallBushTile
-      value: 
-      objectReference: {fileID: 11400000, guid: a7b1fa5003936ba47abc5228dc75f3b1, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: grassWithRocksTile
-      value: 
-      objectReference: {fileID: 11400000, guid: d2f97217a44dd3e418a6465559add871, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: grassWithDirtTile
-      value: 
-      objectReference: {fileID: 11400000, guid: c1155228c88b79147a6af0da34f4e168, type: 2}
-    - target: {fileID: 2072096190795201754, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
-      propertyPath: animatedWaterTile
-      value: 
-      objectReference: {fileID: 11400000, guid: 574b3bcb80a6c5043aef8868a1e2e65d, type: 2}
+      objectReference: {fileID: 189234612}
     - target: {fileID: 2946190703623136612, guid: a9ce6e067ba965d42bbe251f514480c6, type: 3}
       propertyPath: m_LocalPosition.x
       value: -6.330843
@@ -1684,38 +1607,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerContainer
       objectReference: {fileID: 0}
-    - target: {fileID: 4873026373511321956, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: m_BackGroundColor.r
-      value: 0.3503026
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873026373511321956, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: m_BackGroundColor.g
-      value: 0.5849751
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873026373511321956, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: m_BackGroundColor.b
-      value: 0.6037736
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873026373511321956, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: orthographic size
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873026373511322011, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: -5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873026373511322011, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873026373511322011, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4873026373511322011, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4951980099048160134, guid: fda415032683f254c9171c1f69baed53, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -1904,14 +1795,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6938346591321987141, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6938346591321987141, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7035137102291204580, guid: fda415032683f254c9171c1f69baed53, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
@@ -2008,14 +1891,6 @@ PrefabInstance:
       propertyPath: m_SizeDelta.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 7853897935202218031, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: m_RenderMode
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7853897935202218031, guid: fda415032683f254c9171c1f69baed53, type: 3}
-      propertyPath: m_Camera
-      value: 
-      objectReference: {fileID: 723259942}
     - target: {fileID: 8273768836953833829, guid: fda415032683f254c9171c1f69baed53, type: 3}
       propertyPath: m_AnchorMin.y
       value: 0
