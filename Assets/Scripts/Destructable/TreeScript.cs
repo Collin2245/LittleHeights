@@ -28,7 +28,7 @@ public class TreeScript : MonoBehaviour
         treeCounter = 0;
         tileManager = GameObject.FindGameObjectWithTag("TileManager");
         //mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        
+
     }
 
     // Update is called once per frame
@@ -64,6 +64,10 @@ public class TreeScript : MonoBehaviour
     //        currentItem = null;
     //    }
     //}
+    public void resetCounter()
+    {
+        treeCounter = 0;
+    }
 
     public void TryChopTree(Vector3Int point, TileManager tileManager)
     {
@@ -86,7 +90,9 @@ public class TreeScript : MonoBehaviour
                 acorn.GetComponent<Item>().currAmount = 1;
                 Instantiate(acorn, new Vector3(point.x + Random.Range(-3f, 3f), point.y + Random.Range(-3f, 3f), point.z), Quaternion.identity);
             }
+            treeCounter = 0;
             tileManager.GetComponent<TileManager>().extraMapCollide.SetTile(point, null);
+            tileManager.GetComponent<TileManager>().GetTileInfoAtPoint(point).isTreeOn = false;
         }
         else
         {
@@ -96,24 +102,24 @@ public class TreeScript : MonoBehaviour
                 {
                     case "woodenAxe":
                         treeCounter += 2;
-                        //playAudio = true;
-                        //if (playAudio && this.GetComponent<AudioSource>().isPlaying == false)
-                        //{
-                        //    this.GetComponent<AudioSource>().PlayOneShot(this.GetComponent<AudioSource>().clip);
-                        //    new WaitForSeconds(this.GetComponent<AudioSource>().clip.length * 2);
-                        //    playAudio = false;
-                        //}
+                        playAudio = true;
+                        if (playAudio && this.GetComponent<AudioSource>().isPlaying == false)
+                        {
+                            this.GetComponent<AudioSource>().PlayOneShot(this.GetComponent<AudioSource>().clip);
+                            new WaitForSeconds(this.GetComponent<AudioSource>().clip.length * 2);
+                            playAudio = false;
+                        }
                         Debug.Log(treeCounter);
                         break;
                     default:
                         Debug.Log("Not an axe");
                         playAudio = true;
-                        //if (playAudio && this.GetComponent<AudioSource>().isPlaying == false)
-                        //{
-                        //    this.GetComponent<AudioSource>().PlayOneShot(this.GetComponent<AudioSource>().clip);
-                        //    new WaitForSeconds(this.GetComponent<AudioSource>().clip.length * 2);
-                        //    playAudio = false;
-                        //}
+                        if (playAudio && this.GetComponent<AudioSource>().isPlaying == false)
+                        {
+                            this.GetComponent<AudioSource>().PlayOneShot(this.GetComponent<AudioSource>().clip);
+                            new WaitForSeconds(this.GetComponent<AudioSource>().clip.length * 2);
+                            playAudio = false;
+                        }
                         treeCounter += 1;
                         break;
                 }
@@ -126,31 +132,6 @@ public class TreeScript : MonoBehaviour
             }
         }
 
-    }
-
-    void TryDestroyTree()
-    {
-        if(treeCounter >= 100)
-        {
-           int randomNumWoord = Random.Range(1,6);
-            for(int i = 0; i < randomNumWoord; i ++)
-            {
-            GameObject wood  = Resources.Load("Prefabs/DroppedItemPrefab") as GameObject;
-            wood.GetComponent<Item>().id = "wood";
-            wood.GetComponent<Item>().currAmount = Random.Range(1,4);
-            Instantiate(wood, new Vector3(transform.position.x + Random.Range(-3f,3f), transform.position.y + Random.Range(-3f,3f), transform.position.z), Quaternion.identity);
- 
-            }
-            int randomNumAcorn = Random.Range(1,3);
-            for(int i = 0; i < randomNumAcorn; i ++)
-            {
-            GameObject acorn = Resources.Load("Prefabs/DroppedItemPrefab") as GameObject;
-            acorn.GetComponent<Item>().id = "acorn";
-            acorn.GetComponent<Item>().currAmount = 1;
-            Instantiate(acorn, new Vector3(transform.position.x + Random.Range(-3f,3f), transform.position.y + Random.Range(-3f,3f), transform.position.z), Quaternion.identity);
-            }
-            Destroy(transform.gameObject);
-        }
     }
 }
 

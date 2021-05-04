@@ -8,10 +8,11 @@ public class TryDoAction : MonoBehaviour
     TileManager tileManager;
     TreeScript treeScript;
     Vector3Int point;
+    TileInfo tileInfo;
     void Start()
     {
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
-        treeScript = new TreeScript();
+        treeScript = GetComponent<TreeScript>();
     }
 
     // Update is called once per frame
@@ -21,17 +22,22 @@ public class TryDoAction : MonoBehaviour
         if (Input.GetMouseButton(0) && tileManager.GetComponent<MouseHoverScript>().isActiveArea)
         {
             point = tileManager.baseMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
-            TileInfo tileInfo = tileManager.GetTileInfoAtPoint();
-            if(tileInfo.isTreeOn)
-            {
-                Debug.Log("HitTree");
-                treeScript.TryChopTree(point, tileManager);
-            }
+            tileInfo = tileManager.GetTileInfoAtPoint();
+            TryChopTree();
+
+        }
+        else
+        {
+            treeScript.resetCounter();
         }
     }
 
-    void ChopTree()
+    void TryChopTree()
     {
-
+        if (tileInfo.isTreeOn)
+        {
+            Debug.Log("HitTree");
+            treeScript.TryChopTree(point, tileManager);
+        }
     }
 }

@@ -42,7 +42,7 @@ public class TileManager : MonoBehaviour
         startMult = 500;
         seed = Random.Range(1f, 100000f);
         chunkSize = 20;
-        scale = 0.5f;
+        scale = 0.9f;
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = new Vector3(chunkSize * startMult + 0.5f * chunkSize, chunkSize * startMult + 0.5f * chunkSize, -10);
         DrawChunk(chunkSize, scale, seed,new Vector2Int(chunkSize*startMult, chunkSize*startMult));
@@ -100,6 +100,42 @@ public class TileManager : MonoBehaviour
         Debug.Log("Is water?" + tileInfo[point].isWater);
         return tileInfo[point];
     }
+    public TileInfo GetTileInfoAtPoint(Vector3Int point)
+    {
+        float perlin = perlinAtPoint(point);
+        if (!tileInfo.ContainsKey(point))
+        {
+
+            if (perlin < 0.35f)
+            {
+                TileInfo ti = new TileInfo
+                {
+                    isWater = true
+                };
+                tileInfo.Add(point, ti);
+            }
+            else if (perlin > 0.35f && perlin <= 0.4f)
+            {
+                TileInfo ti = new TileInfo
+                {
+                    isWalkableWater = true
+                };
+                tileInfo.Add(point, ti);
+            }
+            else if (perlin > 0.4f && perlin <= 0.8f)
+            {
+                TileInfo ti = new TileInfo
+                {
+                    isGrass = true
+                };
+                tileInfo.Add(point, ti);
+            }
+
+
+
+        }
+        return tileInfo[point];
+    }
 
     void DrawChunk(int chunkSize, float scale, float seed, Vector2Int chunk)
     {
@@ -114,7 +150,6 @@ public class TileManager : MonoBehaviour
                     float xF = (((float)x + seed) / (float)chunkSize * scale);
                     float yF = ((float)y / (float)chunkSize * scale);
                     float perlin = Mathf.PerlinNoise(xF, yF);
-                    //Debug.Log(perlin);
                     PlaceTileWithPerlin(perlin, point);
                 }
             }

@@ -15,13 +15,13 @@ public class TileInfo
 
 
 
-        public TileInfo()
+    public TileInfo()
     {
         this.isWater = false;
         this.isWalkableWater = false;
         this.isItemOn = false;
         this.isTreeOn = false;
-        this.isGrass = true;
+        this.isGrass = false;
     }
 
 }
