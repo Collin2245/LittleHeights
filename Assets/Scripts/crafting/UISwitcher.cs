@@ -9,10 +9,12 @@ public class UISwitcher : MonoBehaviour
     Button btn;
     public Image currentPage;
     public Image destinationPage;
+    Vector3 offset;
     void Start()
     {
         btn = GetComponent<Button>();
         btn.onClick.AddListener(() => CraftingButtonClicked());
+        offset = new Vector3(9999999f, 9999999f, 999999f);
         //hotbarGameObject = GameObject.Find("HotbarCanvas");
         //inventoryGameObject = GameObject.Find("InventoryCanvas");
         //craftingGameObject = GameObject.Find("CraftingCanvas");
@@ -31,32 +33,23 @@ public class UISwitcher : MonoBehaviour
     void CraftingButtonClicked()
     {
         Debug.Log("Clicked!");
-        if (currentPage.enabled == true)
+            ShowAllChildren();
+            HideAllChildren();
+    }
+
+    void ShowAllChildren()
+    {
+        Transform destTransform = destinationPage.transform;
+        if(destTransform.position.x > 99999f)
         {
-            EnableAllChildren();
-            DisableAllChildren();
-        }
-        else
-        {
-            Debug.LogError("Already on page");
+            destTransform.position -= offset;
         }
     }
 
-    void EnableAllChildren()
+    void HideAllChildren()
     {
-        foreach (Image r in destinationPage.GetComponentsInChildren(typeof(Image)))
-        {
-            r.enabled = true;
-        }
-        destinationPage.enabled = true;
+        Transform currTransform = currentPage.transform;
+        currTransform.position += offset;
     }
 
-    void DisableAllChildren()
-    {
-        foreach (Image r in currentPage.GetComponentsInChildren(typeof(Image)))
-        {
-            r.enabled = false;
-        }
-        currentPage.enabled = false;
-    }
 }
