@@ -22,9 +22,15 @@ public class PlayerController : MonoBehaviour
     public float runSpeed;
     bool isMoving;
     string prevAnimation;
+    Canvas MainUI;
+    Canvas hotbarUI;
 
     void Start()
     {
+        hotbarUI = GameObject.Find("HotbarUI").GetComponent<Canvas>();
+        MainUI = GameObject.Find("MainUI").GetComponent<Canvas>();
+        hotbarUI.enabled = true;
+        MainUI.enabled = false;
         mainCamera = GetComponentInChildren<Camera>();
         body = GetComponent<Rigidbody2D>();
         animator = this.GetComponent<Animator>();
@@ -41,6 +47,9 @@ public class PlayerController : MonoBehaviour
 
     void Update()
     {
+
+        CheckUIInput();
+
         // Gives a value between -1 and 1
         horizontal = Input.GetAxisRaw("Horizontal"); // -1 is left
         vertical = Input.GetAxisRaw("Vertical"); // -1 is down
@@ -109,5 +118,22 @@ public class PlayerController : MonoBehaviour
         
 
         body.velocity = new Vector2(horizontal * runSpeed, vertical * runSpeed);
+    }
+
+    void CheckUIInput()
+    {
+        if (Input.GetKeyDown(KeyCode.E))
+        {
+            if (MainUI.isActiveAndEnabled)
+            {
+                hotbarUI.enabled = true;
+                MainUI.enabled = false;
+            }
+            else
+            {
+                hotbarUI.enabled = false;
+                MainUI.enabled = true;
+            }
+        }
     }
 }

@@ -10,6 +10,7 @@ TagManager:
   - EnemyTag
   - PlaceableItem
   - Undefined
+  - MainUI
   layers:
   - Default
   - TransparentFX

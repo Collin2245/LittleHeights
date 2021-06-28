@@ -8,7 +8,8 @@ public class MouseHoverScript : MonoBehaviour
     public Tile mouseHoverTile;
     public Tilemap mouseHoverTileMap; 
     public bool isActiveArea;
-    bool isInventoryOn;
+    bool isMainUIOn;
+    Canvas mainUI;
     Vector3 mousePos;
     Vector3Int prevPos;
     Vector3Int currPos;
@@ -16,12 +17,17 @@ public class MouseHoverScript : MonoBehaviour
     Vector3Int mousePosition;
     Vector3Int playerPosition;
 
+    void Awake()
+    {
+        mainUI = GameObject.Find("MainUI").GetComponent<Canvas>();
+    }
+
     void Update()
     {
-        isInventoryOn =  GameObject.Find("InventoryCanvas").GetComponent<Canvas>().isActiveAndEnabled;
+        isMainUIOn =  mainUI.isActiveAndEnabled;
         mousePosition =  mouseHoverTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         playerPosition = mouseHoverTileMap.WorldToCell(Camera.main.ScreenToWorldPoint(GameObject.FindGameObjectWithTag("Player").transform.position));
-        if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().activeArea &&  !isInventoryOn)
+        if(GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerController>().activeArea &&  !isMainUIOn)
         {
             SetAndDestroyTile();
             isActiveArea = true;

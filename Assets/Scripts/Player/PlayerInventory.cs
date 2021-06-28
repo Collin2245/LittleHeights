@@ -42,6 +42,10 @@ public class PlayerInventory : MonoBehaviour
     AudioSource audioSource;
     
     //GameObject hotbar;
+    void awake()
+    {
+        currentItemHolder = GameObject.Find("CurrentItemSelector").GetComponent<CurrentItem>().currentSlot;
+    }
     void Start()
     {
         itemHolders = new GameObject[]
@@ -121,7 +125,8 @@ public class PlayerInventory : MonoBehaviour
             if(itemHolders[i].GetComponent<InventorySlot>().itemId == "")
             {
                 continue;
-            }else if(itemHolders[i].GetComponent<InventorySlot>().itemId == item.id)
+            }
+            else if(itemHolders[i].GetComponent<InventorySlot>().itemId == item.id)
             {
                 if(itemHolders[i].GetComponent<InventorySlot>().currAmount + item.currAmount <= ItemProperties.quantityForItem[item.id])
                 {

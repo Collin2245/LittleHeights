@@ -42,7 +42,7 @@ public class TileManager : MonoBehaviour
         startMult = 500;
         seed = Random.Range(1f, 100000f);
         chunkSize = 20;
-        scale = 0.9f;
+        scale = 0.5f;
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = new Vector3(chunkSize * startMult + 0.5f * chunkSize, chunkSize * startMult + 0.5f * chunkSize, -10);
         DrawChunk(chunkSize, scale, seed,new Vector2Int(chunkSize*startMult, chunkSize*startMult));
