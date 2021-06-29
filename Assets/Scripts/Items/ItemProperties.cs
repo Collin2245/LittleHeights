@@ -23,7 +23,8 @@ public class ItemProperties : MonoBehaviour
         {"wood",99},
         {"acorn",99},
         {"woodenAxe",10},
-        {"laser",55 }
+        {"laser",55 },
+        {"craftingBench",99 }
     };
 
 
@@ -38,7 +39,8 @@ public class ItemProperties : MonoBehaviour
     {
         { "acorn", true },
         { "wood", false},
-        { "woodenAxe", false}
+        { "woodenAxe", false},
+        {"craftingBench", true }
     };
 
 

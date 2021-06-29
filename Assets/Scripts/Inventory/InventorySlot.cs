@@ -39,7 +39,7 @@ public class InventorySlot : MonoBehaviour
             }
             else
             {
-                MouseInventorySlot.Instance.itemPrefabOnMouse.transform.position = new Vector3(Input.mousePosition.x + 45, Input.mousePosition.y - 45, Input.mousePosition.z);
+                MouseInventorySlot.Instance.itemPrefabOnMouse.transform.position = new Vector3(Input.mousePosition.x + 100, Input.mousePosition.y - 100, Input.mousePosition.z);
             }
 
         }
