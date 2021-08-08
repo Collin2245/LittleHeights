@@ -16,7 +16,7 @@ public class DroppedItemScript : MonoBehaviour
         item = this.GetComponent<Item>();
         boxCollider = this.GetComponent<BoxCollider2D>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
-        spriteRenderer.sprite = item.sprite; 
+        spriteRenderer.sprite = item.sprite;
         
 
     }
@@ -33,6 +33,7 @@ public class DroppedItemScript : MonoBehaviour
         {
             Debug.Log("Hit player tag");
             collider.gameObject.GetComponent<PlayerInventory>().TryToAddItemToInventory(item);
+            CraftingUnlock.Instance.UpdateInventory();
         }
     }
 }

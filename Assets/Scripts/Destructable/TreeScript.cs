@@ -26,6 +26,7 @@ public class TreeScript : MonoBehaviour
     {
         playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         treeCounter = 0;
+        playAudio = true;
         tileManager = GameObject.FindGameObjectWithTag("TileManager");
         //mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
 
@@ -67,6 +68,8 @@ public class TreeScript : MonoBehaviour
     public void resetCounter()
     {
         treeCounter = 0;
+        playAudio = true;
+
     }
 
     public void TryChopTree(Vector3Int point, TileManager tileManager)
@@ -102,23 +105,26 @@ public class TreeScript : MonoBehaviour
                 {
                     case "woodenAxe":
                         treeCounter += 2;
-                        playAudio = true;
-                        if (playAudio && this.GetComponent<AudioSource>().isPlaying == false)
+                        if (playAudio)
                         {
                             this.GetComponent<AudioSource>().PlayOneShot(this.GetComponent<AudioSource>().clip);
-                            new WaitForSeconds(this.GetComponent<AudioSource>().clip.length * 2);
                             playAudio = false;
+                        }else if (this.GetComponent<AudioSource>().isPlaying == false)
+                        {
+                            StartCoroutine(Wait());
                         }
                         Debug.Log(treeCounter);
                         break;
                     default:
                         Debug.Log("Not an axe");
-                        playAudio = true;
-                        if (playAudio && this.GetComponent<AudioSource>().isPlaying == false)
+                        if (playAudio)
                         {
                             this.GetComponent<AudioSource>().PlayOneShot(this.GetComponent<AudioSource>().clip);
-                            new WaitForSeconds(this.GetComponent<AudioSource>().clip.length * 2);
                             playAudio = false;
+                        }
+                        else if (this.GetComponent<AudioSource>().isPlaying == false)
+                        {
+                            StartCoroutine(Wait());
                         }
                         treeCounter += 1;
                         break;
@@ -132,6 +138,13 @@ public class TreeScript : MonoBehaviour
             }
         }
 
+    }
+
+
+    IEnumerator Wait()
+    {
+        yield return new WaitForSeconds(2.0f);
+        playAudio = true;
     }
 }
 

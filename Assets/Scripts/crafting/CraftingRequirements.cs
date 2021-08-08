@@ -5,19 +5,16 @@ using UnityEngine;
 public class CraftingRequirements : MonoBehaviour
 {
     // Start is called before the first frame update
-    public Dictionary<string, ItemRequirements[]> recipeRequirements;
+    //public Dictionary<string, ItemRequirements[]> recipeRequirements;
 
-    private void Start()
+    public Dictionary<string, ItemRequirements[]>  GetRequirements()
     {
-        Dictionary<string, ItemRequirements[]> recipeRequirements = new Dictionary<string, ItemRequirements[]>()
+        return new Dictionary<string, ItemRequirements[]>()
         {
             { "craftingTable", new ItemRequirements[]{ ItemRequirement("acorn",2), ItemRequirement("wood",10)}},
             { "woodenAxe", new ItemRequirements[]{ ItemRequirement("wood",5)}}
         };
-
-
     }
-
 
     ItemRequirements ItemRequirement(string item, int amountToUse)
     {
