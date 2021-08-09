@@ -66,6 +66,13 @@ public class CraftingUnlock : MonoBehaviour
         {
             for(int p = 0; p < Instance.recipeRequirements.ElementAt(i).Value.Length; p++)
             {
+                for(int z = 0; z< Instance.recipeUnlocked.Count; z++)
+                {
+                    if(Instance.recipeUnlocked.ElementAt(z).Value == false)
+                    {
+                        Instance.recipeRequirements.ElementAt(i).;
+                    }
+                }
                 Debug.Log(Instance.recipeRequirements.ElementAt(i).Value[p].id);
             }
         }
@@ -77,10 +84,14 @@ public class CraftingUnlock : MonoBehaviour
         {
             UpdateInventory();
             CheckUnlocks();
-            GameObject popUp = Instantiate(Resources.Load("Prefabs/ItemNotification")) as GameObject;
-            ItemAddNotification itemNotification = popUp.GetComponentInChildren<ItemAddNotification>();
-            itemNotification.AddItem("woodenAxe");
         }
 
+    }
+
+    void ShowPopUp(string itemName)
+    {
+        GameObject popUp = Instantiate(Resources.Load("Prefabs/ItemNotification")) as GameObject;
+        ItemAddNotification itemNotification = popUp.GetComponentInChildren<ItemAddNotification>();
+        itemNotification.AddItem(itemName);
     }
 }

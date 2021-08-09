@@ -8,24 +8,18 @@ public class ItemAddNotification : MonoBehaviour
     // Start is called before the first frame update
     Transform itemAddtransform;
     int timer;
+    
+    Image image;
     void Start()
     {
-        itemAddtransform = this.GetComponent<Transform>();
-        itemAddtransform.position = new Vector3(956.067078f, 534, -56.8727722f);
-        timer = 200;
+        Destroy(transform.parent.parent.gameObject, 4f);
+        image = this.GetComponent<Image>();
+        timer = 240;
+        this.GetComponent<Animator>().Play("PopUp",0);
     }
 
     // Update is called once per frame
-    void Update()
-    {
-        if (timer > 0)
-        {
-            timer -= 1;
-        }else
-        {
-            Destroy(gameObject);
-        }
-    }
+
 
     public void AddItem(string ItemName)
     {
