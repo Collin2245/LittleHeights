@@ -150,9 +150,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1730422347}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 467b958a10030214ea4511c6c298b60f, type: 3}
+  m_Script: {fileID: 11500000, guid: c81288490a3764642ba3dbcaf27c005f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  treeClip: {fileID: 8300000, guid: db07764ca0fc2134c99e5a1beaf31a56, type: 3}
 --- !u!1 &147621011174060981
 GameObject:
   m_ObjectHideFlags: 0

@@ -70,7 +70,7 @@ public class CraftingUnlock : MonoBehaviour
                 {
                     if(Instance.recipeUnlocked.ElementAt(z).Value == false)
                     {
-                        Instance.recipeRequirements.ElementAt(i).;
+                        //Instance.recipeRequirements.ElementAt(i).;
                     }
                 }
                 Debug.Log(Instance.recipeRequirements.ElementAt(i).Value[p].id);
@@ -84,6 +84,7 @@ public class CraftingUnlock : MonoBehaviour
         {
             UpdateInventory();
             CheckUnlocks();
+            ShowPopUp("acorn");
         }
 
     }

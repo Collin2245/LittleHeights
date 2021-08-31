@@ -97,7 +97,7 @@ public class TileManager : MonoBehaviour
 
 
         }
-        Debug.Log("Is water?" + tileInfo[point].isWater);
+        //Debug.Log("Is water?" + tileInfo[point].isWater);
         return tileInfo[point];
     }
     public TileInfo GetTileInfoAtPoint(Vector3Int point)

@@ -2,80 +2,74 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TreeScript : MonoBehaviour
+public class DestroyObject : MonoBehaviour
 {
     //// Start is called before the first frame update
-    //bool mouseOnTree;
-    int treeCounter;
+    int itemCounter;
     PlayerInventory playerInventory;
-    //public Item currentItem;
     string possibleAxe;
     GameObject tileManager;
     bool playAudio = false;
-    //bool inLastCheck;
-    //Camera mainCamera;
-    //int treeMask;
+    public AudioClip treeClip;
+    AudioSource audioSource;
+    IEnumerator treeCoroutine;
 
-    //bool tempHoe;
-    //private void Awake()
-    //{
-    //    treeMask = LayerMask.GetMask("Tree");
-
-    //}
     void Start()
     {
+        treeCoroutine = loopAudio("tree", 0.5f);
         playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
-        treeCounter = 0;
-        playAudio = true;
+        itemCounter = 0;
         tileManager = GameObject.FindGameObjectWithTag("TileManager");
+        audioSource = GetComponent<AudioSource>();
         //mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
+        
 
     }
 
-    // Update is called once per frame
-    //void FixedUpdate()
-    //{
-    //    //CheckActiveItem();
-    //    //TryChopTree();
-    //    TryDestroyTree();
-    //}
-
-    //bool CheckIfMouseOnTree()
-    //{
-
-    //    RaycastHit2D hit = Physics2D.Raycast(Camera.main.ScreenToWorldPoint(Input.mousePosition), Vector2.zero, 1 , treeMask);
-    //    if (hit.collider != null && hit.transform.name == this.name)
-    //    {
-    //        return true;
-    //    }
-    //    else
-    //    {
-    //        return false;
-    //    }
-    //}    
-    //void CheckActiveItem()
-    //{
-    //    if (playerInventory.currentItem)
-    //    {
-    //        currentItem = playerInventory.currentItem;
-    //        possibleAxe = currentItem.id;
-    //    }
-    //    else
-    //    {
-    //        currentItem = null;
-    //    }
-    //}
     public void resetCounter()
     {
-        treeCounter = 0;
+        itemCounter = 0;
         playAudio = true;
 
     }
 
-    public void TryChopTree(Vector3Int point, TileManager tileManager)
+    IEnumerator loopAudio(string sourceName, float timeBetweenAudio)
     {
-        if (treeCounter >= 100)
+        switch(sourceName)
         {
+            case "tree":
+                audioSource.clip = treeClip;
+                break;
+        }    
+
+        while(playAudio)
+        {
+            
+            Debug.Log("In corutine" + itemCounter);
+            audioSource.Play();
+            yield return new WaitForSeconds(timeBetweenAudio);
+        }
+        audioSource.Stop();
+    }
+
+    public void TryDestroyObject(Vector3Int point, TileManager tileManager, string objectToDestroy)
+    {
+        switch (objectToDestroy)
+        {
+            case "tree":
+                destroyTree(point);
+                break;
+            default:
+                Debug.Log("Not destructable object");
+                break;
+        }
+    }
+
+    void destroyTree(Vector3Int point)
+    {
+        if (itemCounter >= 100)
+        {
+            playAudio = false;
             int randomNumWoord = Random.Range(1, 6);
             for (int i = 0; i < randomNumWoord; i++)
             {
@@ -93,58 +87,36 @@ public class TreeScript : MonoBehaviour
                 acorn.GetComponent<Item>().currAmount = 1;
                 Instantiate(acorn, new Vector3(point.x + Random.Range(-3f, 3f), point.y + Random.Range(-3f, 3f), point.z), Quaternion.identity);
             }
-            treeCounter = 0;
+            itemCounter = 0;
+            StopCoroutine(treeCoroutine);
             tileManager.GetComponent<TileManager>().extraMapCollide.SetTile(point, null);
             tileManager.GetComponent<TileManager>().GetTileInfoAtPoint(point).isTreeOn = false;
         }
         else
         {
             if (tileManager.GetComponent<MouseHoverScript>().isActiveArea)
-            {
+            { 
+                playAudio = true;
+                StartCoroutine(treeCoroutine);
                 switch (possibleAxe)
                 {
                     case "woodenAxe":
-                        treeCounter += 2;
-                        if (playAudio)
-                        {
-                            this.GetComponent<AudioSource>().PlayOneShot(this.GetComponent<AudioSource>().clip);
-                            playAudio = false;
-                        }else if (this.GetComponent<AudioSource>().isPlaying == false)
-                        {
-                            StartCoroutine(Wait());
-                        }
-                        Debug.Log(treeCounter);
+                        itemCounter += 2;
+                        Debug.Log(itemCounter);
                         break;
                     default:
                         Debug.Log("Not an axe");
-                        if (playAudio)
-                        {
-                            this.GetComponent<AudioSource>().PlayOneShot(this.GetComponent<AudioSource>().clip);
-                            playAudio = false;
-                        }
-                        else if (this.GetComponent<AudioSource>().isPlaying == false)
-                        {
-                            StartCoroutine(Wait());
-                        }
-                        treeCounter += 1;
+                        itemCounter += 1;
                         break;
                 }
             }
             else
             {
-                this.GetComponent<AudioSource>().Stop();
                 playAudio = false;
-                treeCounter = 0;
+                itemCounter = 0;
+                StopCoroutine(treeCoroutine);
             }
         }
-
-    }
-
-
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(2.0f);
-        playAudio = true;
     }
 }
 
