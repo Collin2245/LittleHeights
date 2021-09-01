@@ -7,7 +7,7 @@ public class DestroyObject : MonoBehaviour
     //// Start is called before the first frame update
     int itemCounter;
     PlayerInventory playerInventory;
-    string possibleAxe;
+    string possibleItem;
     GameObject tileManager;
     bool playAudio = false;
     public AudioClip treeClip;
@@ -21,21 +21,23 @@ public class DestroyObject : MonoBehaviour
         itemCounter = 0;
         tileManager = GameObject.FindGameObjectWithTag("TileManager");
         audioSource = GetComponent<AudioSource>();
+        possibleItem = "";
         //mainCamera = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<Camera>();
-        
+
 
     }
 
     public void resetCounter()
     {
         itemCounter = 0;
-        playAudio = true;
+        playAudio = false;
 
     }
 
     IEnumerator loopAudio(string sourceName, float timeBetweenAudio)
     {
-        switch(sourceName)
+        playAudio = true;
+        switch (sourceName)
         {
             case "tree":
                 audioSource.clip = treeClip;
@@ -44,9 +46,8 @@ public class DestroyObject : MonoBehaviour
 
         while(playAudio)
         {
-            
             Debug.Log("In corutine" + itemCounter);
-            audioSource.Play();
+            audioSource.PlayOneShot(audioSource.clip);
             yield return new WaitForSeconds(timeBetweenAudio);
         }
         audioSource.Stop();
@@ -95,10 +96,11 @@ public class DestroyObject : MonoBehaviour
         else
         {
             if (tileManager.GetComponent<MouseHoverScript>().isActiveArea)
-            { 
-                playAudio = true;
-                StartCoroutine(treeCoroutine);
-                switch (possibleAxe)
+            {
+                if (!playAudio)
+                    StartCoroutine(treeCoroutine);
+                SetCurrentItem();
+                switch (possibleItem)
                 {
                     case "woodenAxe":
                         itemCounter += 2;
@@ -116,6 +118,18 @@ public class DestroyObject : MonoBehaviour
                 itemCounter = 0;
                 StopCoroutine(treeCoroutine);
             }
+        }
+    }
+
+    private void SetCurrentItem()
+    {
+        if (playerInventory.currentItem != null)
+        {
+            possibleItem = playerInventory.currentItem.id;
+        }
+        else
+        {
+            possibleItem = "";
         }
     }
 }
