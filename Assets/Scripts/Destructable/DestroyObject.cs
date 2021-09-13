@@ -12,11 +12,13 @@ public class DestroyObject : MonoBehaviour
     bool playAudio = false;
     public AudioClip treeClip;
     AudioSource audioSource;
-    IEnumerator treeCoroutine;
+    IEnumerator treeEnumerator;
+    Coroutine treeCoroutine;
 
     void Start()
     {
-        treeCoroutine = loopAudio("tree", 0.5f);
+        treeEnumerator = loopAudio("tree", 0.5f);
+        StopCoroutine(treeCoroutine);
         playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         itemCounter = 0;
         tileManager = GameObject.FindGameObjectWithTag("TileManager");
@@ -98,7 +100,7 @@ public class DestroyObject : MonoBehaviour
             if (tileManager.GetComponent<MouseHoverScript>().isActiveArea)
             {
                 if (!playAudio)
-                    StartCoroutine(treeCoroutine);
+                    StartCoroutine(treeEnumerator);
                 SetCurrentItem();
                 switch (possibleItem)
                 {
@@ -116,7 +118,7 @@ public class DestroyObject : MonoBehaviour
             {
                 playAudio = false;
                 itemCounter = 0;
-                StopCoroutine(treeCoroutine);
+                StopCoroutine(treeEnumerator);
             }
         }
     }
