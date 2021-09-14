@@ -105,6 +105,7 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log("Picked up existing item and added to count");
             Destroy(item.transform.gameObject);
+            audioSource.pitch = Random.Range(0.9f, 1.5f);
             audioSource.PlayOneShot(audioSource.clip);
             return;
         }
@@ -112,6 +113,7 @@ public class PlayerInventory : MonoBehaviour
         {
             Debug.Log("Added new item to inventory");
             Destroy(item.transform.gameObject);
+            audioSource.pitch = Random.Range(0.9f, 1.5f);
             audioSource.PlayOneShot(audioSource.clip);
             return;
         }

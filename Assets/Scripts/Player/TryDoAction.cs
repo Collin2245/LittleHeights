@@ -26,7 +26,7 @@ public class TryDoAction : MonoBehaviour
         }
         else
         {
-            destroyObject.resetCounter();
+            StopDestroyingObject();
         }
     }
 
@@ -34,8 +34,19 @@ public class TryDoAction : MonoBehaviour
     {
         if (tileInfo.isTreeOn)
         {
-            Debug.Log("HitDestructableOb");
-            destroyObject.TryDestroyObject(point, tileManager, "tree");
+            //Debug.Log("HitDestructableOb");
+            destroyObject.TryDestroyObject(point, "tree");
+        }else
+        {
+            StopDestroyingObject();
         }
+    }
+
+
+    void StopDestroyingObject()
+    {
+        destroyObject.stopAllCoroutinesPlease();
+        destroyObject.playAudio = false;
+        destroyObject.resetCounter();
     }
 }

@@ -9,16 +9,15 @@ public class DestroyObject : MonoBehaviour
     PlayerInventory playerInventory;
     string possibleItem;
     GameObject tileManager;
-    bool playAudio = false;
+    public bool playAudio = false;
     public AudioClip treeClip;
     AudioSource audioSource;
     IEnumerator treeEnumerator;
-    Coroutine treeCoroutine;
 
     void Start()
     {
-        treeEnumerator = loopAudio("tree", 0.5f);
-        StopCoroutine(treeCoroutine);
+        playAudio = false;
+        treeEnumerator = loopAudio("tree", 0.4f);
         playerInventory = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerInventory>();
         itemCounter = 0;
         tileManager = GameObject.FindGameObjectWithTag("TileManager");
@@ -36,26 +35,39 @@ public class DestroyObject : MonoBehaviour
 
     }
 
+    public void stopAllCoroutinesPlease()
+    {
+        StopAllCoroutines();
+    }
+
     IEnumerator loopAudio(string sourceName, float timeBetweenAudio)
     {
-        playAudio = true;
+        float pitchFloor;
+        float pitchCeiling;
         switch (sourceName)
         {
             case "tree":
                 audioSource.clip = treeClip;
+                pitchFloor = 0.3f;
+                pitchCeiling = 2f;
+                break;
+            default:
+                audioSource.clip = null;
+                pitchFloor = 0f;
+                pitchCeiling = 0f;
                 break;
         }    
 
         while(playAudio)
         {
-            Debug.Log("In corutine" + itemCounter);
+            audioSource.pitch = Random.Range(pitchFloor, pitchCeiling);
             audioSource.PlayOneShot(audioSource.clip);
             yield return new WaitForSeconds(timeBetweenAudio);
         }
         audioSource.Stop();
     }
 
-    public void TryDestroyObject(Vector3Int point, TileManager tileManager, string objectToDestroy)
+    public void TryDestroyObject(Vector3Int point, string objectToDestroy)
     {
         switch (objectToDestroy)
         {
@@ -91,37 +103,34 @@ public class DestroyObject : MonoBehaviour
                 Instantiate(acorn, new Vector3(point.x + Random.Range(-3f, 3f), point.y + Random.Range(-3f, 3f), point.z), Quaternion.identity);
             }
             itemCounter = 0;
-            StopCoroutine(treeCoroutine);
+            StopCoroutine(treeEnumerator);
             tileManager.GetComponent<TileManager>().extraMapCollide.SetTile(point, null);
             tileManager.GetComponent<TileManager>().GetTileInfoAtPoint(point).isTreeOn = false;
         }
         else
         {
-            if (tileManager.GetComponent<MouseHoverScript>().isActiveArea)
+            if(playAudio == false)
             {
-                if (!playAudio)
-                    StartCoroutine(treeEnumerator);
-                SetCurrentItem();
-                switch (possibleItem)
-                {
-                    case "woodenAxe":
-                        itemCounter += 2;
-                        Debug.Log(itemCounter);
-                        break;
-                    default:
-                        Debug.Log("Not an axe");
-                        itemCounter += 1;
-                        break;
-                }
+                playAudio = true;
+                StartCoroutine(treeEnumerator);
             }
-            else
+            playAudio = true;
+            switch (possibleItem)
             {
-                playAudio = false;
-                itemCounter = 0;
-                StopCoroutine(treeEnumerator);
+                case "woodenAxe":
+                    itemCounter += 2;
+                    //Debug.Log(itemCounter);
+                    break;
+                default:
+                    //Debug.Log("Not an axe");
+                    itemCounter += 1;
+                    break;
             }
         }
+        
     }
+
+
 
     private void SetCurrentItem()
     {
