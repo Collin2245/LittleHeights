@@ -40,8 +40,9 @@ public class ItemProperties : MonoBehaviour
         { "acorn", true },
         { "wood", false},
         { "woodenAxe", false},
-        {"craftingBench", true }
+        { "craftingBench", true }
     };
+
 
 
     //public Dictionary<string, Tilemap> itemsTilemap = new Dictionary<string, Tilemap>()

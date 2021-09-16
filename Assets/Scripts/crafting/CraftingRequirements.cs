@@ -7,7 +7,7 @@ public class CraftingRequirements : MonoBehaviour
     // Start is called before the first frame update
     //public Dictionary<string, ItemRequirements[]> recipeRequirements;
 
-    public Dictionary<string, ItemRequirements[]>  GetRequirements()
+    public static Dictionary<string, ItemRequirements[]>  GetRequirements()
     {
         return new Dictionary<string, ItemRequirements[]>()
         {
@@ -16,10 +16,16 @@ public class CraftingRequirements : MonoBehaviour
         };
     }
 
-    ItemRequirements ItemRequirement(string item, int amountToUse)
+    static ItemRequirements ItemRequirement(string item, int amountToUse)
     {
         return new ItemRequirements { id = item, amount = amountToUse };
     }
+
+    public static Dictionary<string, List<string>> categoyItems = new Dictionary<string, List<string>>()
+    {
+        { "tools", new List<string> {"woodenAxe"} }
+    };
+
 
 }
 

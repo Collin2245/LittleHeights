@@ -4179,6 +4179,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   itemHolders: []
+  CategoryBoxes:
+  - {fileID: 2105925085620796066}
+  - {fileID: 9139696262015971652}
+  - {fileID: 6447069526765825854}
+  - {fileID: 850315208014831716}
+  IngredientBoxes:
+  - {fileID: 4616923017211655396}
+  - {fileID: 1378510508518733625}
+  - {fileID: 3065682950426130940}
+  - {fileID: 6448385408562341779}
+  ItemDesc: {fileID: 3052928990389716346}
+  ItemToCraft: {fileID: 2391749279724736696}
+  CraftButton: {fileID: 3820872685884240777}
+  ItemName: {fileID: 5429340193987358145}
 --- !u!1 &4142226581730824563
 GameObject:
   m_ObjectHideFlags: 0

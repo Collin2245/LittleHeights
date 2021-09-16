@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class CraftingUnlock : MonoBehaviour
 {
@@ -10,6 +11,12 @@ public class CraftingUnlock : MonoBehaviour
     public Dictionary<string, int> numItemsTotal;
     public GameObject[] itemHolders;
     Dictionary<string, ItemRequirements[]> recipeRequirements;
+    public GameObject[] CategoryBoxes;
+    public GameObject[] IngredientBoxes;
+    public GameObject ItemDesc;
+    public GameObject ItemToCraft;
+    public GameObject CraftButton;
+    public GameObject ItemName;
     public static CraftingUnlock Instance { get; private set; }
 
     private void Awake()
@@ -30,7 +37,7 @@ public class CraftingUnlock : MonoBehaviour
 
     private void Start()
     {
-        Instance.recipeRequirements = new CraftingRequirements().GetRequirements();
+        Instance.recipeRequirements = CraftingRequirements.GetRequirements();
         recipeUnlocked = new Dictionary<string, bool>()
         {
             {"craftingTable", false},
@@ -85,6 +92,11 @@ public class CraftingUnlock : MonoBehaviour
             UpdateInventory();
             CheckUnlocks();
             ShowPopUp("acorn");
+        }
+
+        if (Input.GetKeyDown(KeyCode.C))
+        {
+            
         }
 
     }
