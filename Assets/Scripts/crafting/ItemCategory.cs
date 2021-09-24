@@ -6,19 +6,22 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace Assets.Scripts.crafting
+public class ItemCategory : MonoBehaviour
 {
-    class ItemCategory : MonoBehaviour
+    public Image ItemCategoryImage;
+    public List<string> Items;
+    public string CategoryName;
+
+    private void Start()
     {
-        public Image ItemCategoryImage;
-        public List<string> Items;
-        public string CategoryName;
-
-        private void Start()
-        {
-            Items = CraftingRequirements.categoyItems[CategoryName];
-        }
-
-
+        Items = CraftingRequirements.categoyItems[CategoryName];
+        ItemCategoryImage = this.GetComponent<Image>();
     }
+
+    public void GenerateImage()
+    {
+        ItemCategoryImage.sprite = Resources.Load<Sprite>("Categories/" + CategoryName);
+    }
+
+
 }

@@ -26,7 +26,7 @@ public class CraftingRequirements : MonoBehaviour
         { "tools", new List<string> {"woodenAxe"} }
     };
 
-
+    public static string[] categoryNames = new string[] { "tools", "weapons", "buildings", "magic", "processing" };
 }
 
 public class ItemRequirements

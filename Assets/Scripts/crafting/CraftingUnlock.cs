@@ -17,6 +17,7 @@ public class CraftingUnlock : MonoBehaviour
     public GameObject ItemToCraft;
     public GameObject CraftButton;
     public GameObject ItemName;
+    public string[] CategoryArrayName;
     public static CraftingUnlock Instance { get; private set; }
 
     private void Awake()
@@ -38,6 +39,7 @@ public class CraftingUnlock : MonoBehaviour
     private void Start()
     {
         Instance.recipeRequirements = CraftingRequirements.GetRequirements();
+        Instance.CategoryArrayName = CraftingRequirements.categoryNames;
         recipeUnlocked = new Dictionary<string, bool>()
         {
             {"craftingTable", false},
@@ -99,6 +101,15 @@ public class CraftingUnlock : MonoBehaviour
             
         }
 
+    }
+
+    void initializeCategoryBoxes()
+    {
+        for(int i = 0; i < CategoryBoxes.Length; i++)
+        {
+            ItemCategory iC = CategoryBoxes[i].GetComponent<ItemCategory>();
+            iC.CategoryName = CategoryArrayName[i];
+        }
     }
 
     void ShowPopUp(string itemName)
