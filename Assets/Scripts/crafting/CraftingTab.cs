@@ -4,7 +4,7 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class CraftingUnlock : MonoBehaviour
+public class CraftingTab : MonoBehaviour
 {
     // Start is called before the first frame update
     public Dictionary<string, bool> recipeUnlocked;
@@ -12,13 +12,13 @@ public class CraftingUnlock : MonoBehaviour
     public GameObject[] itemHolders;
     Dictionary<string, ItemRequirements[]> recipeRequirements;
     public GameObject[] CategoryBoxes;
-    public GameObject[] IngredientBoxes;
+    public GameObject[] ItemToCraftBoxes;
     public GameObject ItemDesc;
     public GameObject ItemToCraft;
     public GameObject CraftButton;
     public GameObject ItemName;
     public string[] CategoryArrayName;
-    public static CraftingUnlock Instance { get; private set; }
+    public static CraftingTab Instance { get; private set; }
 
     private void Awake()
     {
@@ -38,13 +38,14 @@ public class CraftingUnlock : MonoBehaviour
 
     private void Start()
     {
-        Instance.recipeRequirements = CraftingRequirements.GetRequirements();
-        Instance.CategoryArrayName = CraftingRequirements.categoryNames;
+        Instance.recipeRequirements = CraftingProperties.GetRequirements();
+        Instance.CategoryArrayName = CraftingProperties.categoryNames;
         recipeUnlocked = new Dictionary<string, bool>()
         {
             {"craftingTable", false},
             {"woodenAxe", false }
         };
+        InitializeCategoryBoxes();
     }
 
     public void UpdateInventory()
@@ -103,12 +104,41 @@ public class CraftingUnlock : MonoBehaviour
 
     }
 
-    void initializeCategoryBoxes()
+    void InitializeCategoryBoxes()
     {
         for(int i = 0; i < CategoryBoxes.Length; i++)
         {
-            ItemCategory iC = CategoryBoxes[i].GetComponent<ItemCategory>();
-            iC.CategoryName = CategoryArrayName[i];
+            try
+            {
+                ItemCategory iC = CategoryBoxes[i].GetComponent<ItemCategory>();
+                iC.CategoryName = CategoryArrayName[i];
+                iC.GenerateImage();
+                if(i == 0)
+                {
+                    InitializeItemsToCraft(iC.CategoryName);
+                }
+            }
+            catch
+            {
+                Debug.LogException(new System.Exception("No category available for this name"));
+            }
+        }
+    }
+
+    void InitializeItemsToCraft(string categoryName)
+    {
+        for (int i = 0; i < ItemToCraftBoxes.Length; i++)
+        {
+            try
+            {
+                ItemToCraft iC = ItemToCraftBoxes[i].GetComponent<ItemToCraft>();
+                iC.ItemName = CraftingProperties.categoyItems[categoryName][i];
+                iC.GenerateImage();
+            }
+            catch
+            {
+                Debug.LogException(new System.Exception("No category available for this name"));
+            }
         }
     }
 

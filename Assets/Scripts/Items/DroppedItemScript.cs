@@ -33,7 +33,7 @@ public class DroppedItemScript : MonoBehaviour
         {
             Debug.Log("Hit player tag");
             collider.gameObject.GetComponent<PlayerInventory>().TryToAddItemToInventory(item);
-            CraftingUnlock.Instance.UpdateInventory();
+            CraftingTab.Instance.UpdateInventory();
         }
     }
 }

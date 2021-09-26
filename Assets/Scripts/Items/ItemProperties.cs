@@ -24,7 +24,8 @@ public class ItemProperties : MonoBehaviour
         {"acorn",99},
         {"woodenAxe",10},
         {"laser",55 },
-        {"craftingBench",99 }
+        {"craftingBench",99 },
+        {"sapling",99 }
     };
 
 
@@ -32,7 +33,8 @@ public class ItemProperties : MonoBehaviour
     {
         { "acorn", "sapplingPrefab" },
         { "wood", "woodPrefab"},
-        { "woodenAxe", ""}
+        { "woodenAxe", ""},
+        {"sapling","saplingPrefab"}
     };
 
     public static Dictionary<string, bool> itemIsPlaceable = new Dictionary<string, bool>()
@@ -40,7 +42,8 @@ public class ItemProperties : MonoBehaviour
         { "acorn", true },
         { "wood", false},
         { "woodenAxe", false},
-        { "craftingBench", true }
+        { "craftingBench", true },
+        {"sapling", true }
     };
 
 

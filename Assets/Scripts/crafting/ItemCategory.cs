@@ -14,7 +14,6 @@ public class ItemCategory : MonoBehaviour
 
     private void Start()
     {
-        Items = CraftingRequirements.categoyItems[CategoryName];
         ItemCategoryImage = this.GetComponent<Image>();
     }
 
@@ -23,5 +22,9 @@ public class ItemCategory : MonoBehaviour
         ItemCategoryImage.sprite = Resources.Load<Sprite>("Categories/" + CategoryName);
     }
 
+    public List<string> GetItems()
+    {
+        return CraftingProperties.categoyItems[CategoryName];
+    }
 
 }

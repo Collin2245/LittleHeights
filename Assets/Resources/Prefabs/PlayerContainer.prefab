@@ -1575,6 +1575,7 @@ GameObject:
   - component: {fileID: 1080786463079916892}
   - component: {fileID: 8554950927996038113}
   - component: {fileID: 962299638548469150}
+  - component: {fileID: 1988122563192299342}
   m_Layer: 5
   m_Name: ItemSlot3
   m_TagString: Untagged
@@ -1639,6 +1640,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1988122563192299342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2055453034066773240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7995fc2b4f14804b90c740b00dbe45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemImage: {fileID: 0}
+  Items: []
+  ItemName: 
 --- !u!1 &2081859102695674551
 GameObject:
   m_ObjectHideFlags: 0
@@ -1835,6 +1851,7 @@ GameObject:
   - component: {fileID: 6563761712277807644}
   - component: {fileID: 4251074333313645368}
   - component: {fileID: 6688361444437945544}
+  - component: {fileID: 1800382610289045049}
   m_Layer: 5
   m_Name: ItemSlot2
   m_TagString: Untagged
@@ -1899,6 +1916,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &1800382610289045049
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2165340026344478477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7995fc2b4f14804b90c740b00dbe45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemImage: {fileID: 0}
+  Items: []
+  ItemName: 
 --- !u!1 &2256548563389851675
 GameObject:
   m_ObjectHideFlags: 0
@@ -4216,11 +4248,11 @@ MonoBehaviour:
   - {fileID: 9139696262015971652}
   - {fileID: 6447069526765825854}
   - {fileID: 850315208014831716}
-  IngredientBoxes:
-  - {fileID: 4616923017211655396}
-  - {fileID: 1378510508518733625}
-  - {fileID: 3065682950426130940}
-  - {fileID: 6448385408562341779}
+  ItemToCraftBoxes:
+  - {fileID: 5234677160836697343}
+  - {fileID: 2165340026344478477}
+  - {fileID: 2055453034066773240}
+  - {fileID: 4142226581730824563}
   ItemDesc: {fileID: 3052928990389716346}
   ItemToCraft: {fileID: 2391749279724736696}
   CraftButton: {fileID: 3820872685884240777}
@@ -4237,6 +4269,7 @@ GameObject:
   - component: {fileID: 1532744564749645103}
   - component: {fileID: 5322514829544418248}
   - component: {fileID: 2377084833002470002}
+  - component: {fileID: 2022567688416723192}
   m_Layer: 5
   m_Name: ItemSlot4
   m_TagString: Untagged
@@ -4301,6 +4334,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &2022567688416723192
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4142226581730824563}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7995fc2b4f14804b90c740b00dbe45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemImage: {fileID: 0}
+  Items: []
+  ItemName: 
 --- !u!1 &4147418532215147323
 GameObject:
   m_ObjectHideFlags: 0
@@ -5546,6 +5594,7 @@ GameObject:
   - component: {fileID: 8889602622619328757}
   - component: {fileID: 1271595973877307762}
   - component: {fileID: 1918850926057564137}
+  - component: {fileID: 506501164315523191}
   m_Layer: 5
   m_Name: ItemSlot1
   m_TagString: Untagged
@@ -5610,6 +5659,21 @@ MonoBehaviour:
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
   m_PixelsPerUnitMultiplier: 1
+--- !u!114 &506501164315523191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5234677160836697343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7995fc2b4f14804b90c740b00dbe45b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ItemImage: {fileID: 0}
+  Items: []
+  ItemName: 
 --- !u!1 &5429340193987358145
 GameObject:
   m_ObjectHideFlags: 0

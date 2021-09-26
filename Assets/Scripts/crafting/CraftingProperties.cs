@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CraftingRequirements : MonoBehaviour
+public class CraftingProperties : MonoBehaviour
 {
     // Start is called before the first frame update
     //public Dictionary<string, ItemRequirements[]> recipeRequirements;
@@ -23,10 +23,11 @@ public class CraftingRequirements : MonoBehaviour
 
     public static Dictionary<string, List<string>> categoyItems = new Dictionary<string, List<string>>()
     {
-        { "tools", new List<string> {"woodenAxe"} }
+        { "tools", new List<string> {"woodenAxe"} },
+        {"farming", new List<string> {"sapling"} }
     };
 
-    public static string[] categoryNames = new string[] { "tools", "weapons", "buildings", "magic", "processing" };
+    public static string[] categoryNames = new string[] { "farming","testCategory","tools", "weapons", "buildings", "magic", "processing" };
 }
 
 public class ItemRequirements
