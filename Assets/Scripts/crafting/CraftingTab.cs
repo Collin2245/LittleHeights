@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,6 +19,7 @@ public class CraftingTab : MonoBehaviour
     public GameObject CraftButton;
     public GameObject ItemName;
     public string[] CategoryArrayName;
+    public string CurrentItem;
     public static CraftingTab Instance { get; private set; }
 
     private void Awake()
@@ -46,6 +48,7 @@ public class CraftingTab : MonoBehaviour
             {"woodenAxe", false }
         };
         InitializeCategoryBoxes();
+        SetItemInfo(CurrentItem);
     }
 
     public void UpdateInventory()
@@ -134,12 +137,23 @@ public class CraftingTab : MonoBehaviour
                 ItemToCraft iC = ItemToCraftBoxes[i].GetComponent<ItemToCraft>();
                 iC.ItemName = CraftingProperties.categoyItems[categoryName][i];
                 iC.GenerateImage();
+                if( i == 0)
+                {
+                    CurrentItem = iC.ItemName;
+                }
             }
             catch
             {
                 Debug.LogException(new System.Exception("No category available for this name"));
             }
         }
+    }
+
+    void SetItemInfo(string CurrentItemName)
+    {
+        ItemDesc.GetComponent<TextMeshProUGUI>().text = ItemProperties.itemDescription[CurrentItemName];
+        ItemName.GetComponent<TextMeshProUGUI>().text = CurrentItemName;
+        ItemToCraft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Items/" + CurrentItemName);
     }
 
     void ShowPopUp(string itemName)

@@ -46,6 +46,10 @@ public class ItemProperties : MonoBehaviour
         {"sapling", true }
     };
 
+    public static Dictionary<string, string> itemDescription = new Dictionary<string, string>()
+    {
+        {"sapling","A simple sapling, use this to grow a tree."}
+    };
 
 
     //public Dictionary<string, Tilemap> itemsTilemap = new Dictionary<string, Tilemap>()
