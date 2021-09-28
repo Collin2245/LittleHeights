@@ -9,7 +9,6 @@ using UnityEngine.UI;
 public class ItemToCraft : MonoBehaviour
 {
     public Image ItemImage;
-    public List<string> Items;
     public string ItemName;
 
     private void Start()
@@ -20,5 +19,10 @@ public class ItemToCraft : MonoBehaviour
     public void GenerateImage()
     {
         ItemImage.sprite = Resources.Load<Sprite>("Items/" + ItemName);
+    }
+
+    public void HideSprite()
+    {
+        ItemImage.color = Color.clear;
     }
 }

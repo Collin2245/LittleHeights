@@ -19,12 +19,25 @@ public class ItemCategory : MonoBehaviour
 
     public void GenerateImage()
     {
-        ItemCategoryImage.sprite = Resources.Load<Sprite>("Categories/" + CategoryName);
+        if (Resources.Load<Sprite>("Categories/" + CategoryName) != null)
+        {
+            ItemCategoryImage.sprite = Resources.Load<Sprite>("Categories/" + CategoryName);
+        }
+        else
+        {
+            HideSprite();
+        }
+
     }
 
     public List<string> GetItems()
     {
         return CraftingProperties.categoyItems[CategoryName];
+    }
+
+    public void HideSprite()
+    {
+        ItemCategoryImage.color = Color.clear;
     }
 
 }

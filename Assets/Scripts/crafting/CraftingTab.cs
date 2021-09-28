@@ -14,6 +14,7 @@ public class CraftingTab : MonoBehaviour
     Dictionary<string, ItemRequirements[]> recipeRequirements;
     public GameObject[] CategoryBoxes;
     public GameObject[] ItemToCraftBoxes;
+    public GameObject[] IngredientBoxes;
     public GameObject ItemDesc;
     public GameObject ItemToCraft;
     public GameObject CraftButton;
@@ -49,6 +50,7 @@ public class CraftingTab : MonoBehaviour
         };
         InitializeCategoryBoxes();
         SetItemInfo(CurrentItem);
+        InitializeIngredients();
     }
 
     public void UpdateInventory()
@@ -111,21 +113,22 @@ public class CraftingTab : MonoBehaviour
     {
         for(int i = 0; i < CategoryBoxes.Length; i++)
         {
-            try
+            ItemCategory iC = CategoryBoxes[i].GetComponent<ItemCategory>();
+            if(CategoryArrayName.ElementAtOrDefault(i) != null)
             {
-                ItemCategory iC = CategoryBoxes[i].GetComponent<ItemCategory>();
                 iC.CategoryName = CategoryArrayName[i];
                 iC.GenerateImage();
-                if(i == 0)
+                if (i == 0)
                 {
                     InitializeItemsToCraft(iC.CategoryName);
                 }
             }
-            catch
+            else
             {
-                Debug.LogException(new System.Exception("No category available for this name"));
+                iC.HideSprite();
             }
-        }
+
+            }
     }
 
     void InitializeItemsToCraft(string categoryName)
@@ -135,12 +138,21 @@ public class CraftingTab : MonoBehaviour
             try
             {
                 ItemToCraft iC = ItemToCraftBoxes[i].GetComponent<ItemToCraft>();
-                iC.ItemName = CraftingProperties.categoyItems[categoryName][i];
-                iC.GenerateImage();
-                if( i == 0)
+                if(CraftingProperties.categoyItems[categoryName].ElementAtOrDefault(i) != null)
                 {
-                    CurrentItem = iC.ItemName;
+                    iC.ItemName = CraftingProperties.categoyItems[categoryName][i];
+                    iC.GenerateImage();
+                    //to be removed
+                    if (i == 0)
+                    {
+                        CurrentItem = iC.ItemName;
+                    }
                 }
+                else
+                {
+                    iC.HideSprite();
+                }
+
             }
             catch
             {
@@ -148,6 +160,24 @@ public class CraftingTab : MonoBehaviour
             }
         }
     }
+    void InitializeIngredients()
+    {
+        for (int i = 0; i < IngredientBoxes.Length; i++)
+        {
+            IngredientBox iC = IngredientBoxes[i].GetComponent<IngredientBox>();
+            if (Instance.recipeRequirements.ContainsKey(CurrentItem) && Instance.recipeRequirements[CurrentItem].ElementAtOrDefault(i) != null)
+            {
+                iC.name = Instance.recipeRequirements[CurrentItem][i].id;
+                iC.GenerateImage(iC.name);
+                iC.GenerateQuantity(Instance.recipeRequirements[CurrentItem][i].amount);
+            }
+            else
+            {
+                iC.HideSprite();
+            }
+        }
+    }
+
 
     void SetItemInfo(string CurrentItemName)
     {
