@@ -13,7 +13,7 @@ public class CraftingProperties : MonoBehaviour
         {
             { "craftingTable", new ItemRequirements[]{ ItemRequirement("acorn",2), ItemRequirement("wood",10)}},
             { "woodenAxe", new ItemRequirements[]{ ItemRequirement("wood",5)}},
-            { "sapling", new ItemRequirements[]{ ItemRequirement("acorn",1)} }
+            { "sapling", new ItemRequirements[]{ ItemRequirement("acorn",1) , ItemRequirement("wood", 5) } }
         };
     }
 
