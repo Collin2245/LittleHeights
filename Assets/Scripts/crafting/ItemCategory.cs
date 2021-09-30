@@ -13,10 +13,12 @@ public class ItemCategory : MonoBehaviour  , IPointerDownHandler
     public List<string> Items;
     public string CategoryName;
     public int CategoryBoxId;
+    CurrentCategorySelector CurrentCategorySelector;
 
     private void Start()
     {
         ItemCategoryImage = this.GetComponent<Image>();
+        CurrentCategorySelector = GameObject.Find("CurrentCategory").GetComponent<CurrentCategorySelector>();
     }
 
     public void GenerateImage()
@@ -41,29 +43,9 @@ public class ItemCategory : MonoBehaviour  , IPointerDownHandler
     {
         ItemCategoryImage.color = Color.clear;
     }
-
-    public void OnPointerClick(PointerEventData eventData)
-    {
-        Debug.Log("Clicked: " + eventData.pointerCurrentRaycast.gameObject.name);
-    }
-
     public void OnPointerDown(PointerEventData eventData)
     {
-        Debug.Log("Mouse Down: " + eventData.pointerCurrentRaycast.gameObject.GetComponent<ItemCategory>().CategoryBoxId);
-    }
-    public void OnPointerEnter(PointerEventData eventData)
-    {
-        Debug.Log("Mouse Enter");
-    }
-
-    public void OnPointerExit(PointerEventData eventData)
-    {
-        Debug.Log("Mouse Exit");
-    }
-
-    public void OnPointerUp(PointerEventData eventData)
-    {
-        Debug.Log("Mouse Up");
+        CurrentCategorySelector.UpdatePosition(eventData.pointerCurrentRaycast.gameObject.GetComponent<ItemCategory>().CategoryBoxId);
     }
 
 }

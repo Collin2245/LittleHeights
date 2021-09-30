@@ -85,8 +85,8 @@ public class DestroyObject : MonoBehaviour
         if (itemCounter >= 100)
         {
             playAudio = false;
-            int randomNumWoord = Random.Range(1, 6);
-            for (int i = 0; i < randomNumWoord; i++)
+            int randomNumWood = Random.Range(1, 6);
+            for (int i = 0; i < randomNumWood; i++)
             {
                 GameObject wood = Resources.Load("Prefabs/DroppedItemPrefab") as GameObject;
                 wood.GetComponent<Item>().id = "wood";

@@ -48,5 +48,9 @@ public class CurrentCraftingItem : MonoBehaviour
             currentSlotNum = holders.Count -1;
         }
     }
+    public void UpdatePosition(int pos)
+    {
+        currentSlotNum = pos;
+    }
 
 }
