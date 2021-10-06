@@ -6,7 +6,7 @@ public class CurrentCraftingItem : MonoBehaviour
 {
 
     public List<GameObject> holders;
-    int currentSlotNum;
+    public int currentSlotNum;
     private void Start()
     {
         currentSlotNum = 0;
@@ -52,5 +52,6 @@ public class CurrentCraftingItem : MonoBehaviour
     {
         currentSlotNum = pos;
     }
+    
 
 }
