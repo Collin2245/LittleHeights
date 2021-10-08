@@ -19,6 +19,7 @@ public class CraftingTab : MonoBehaviour
     public GameObject ItemToCraft;
     public GameObject CraftButton;
     public GameObject ItemName;
+    public GameObject CraftingAmount;
     public string[] CategoryArrayName;
     public string CurrentItem;
     public static CraftingTab Instance { get; private set; }
@@ -165,6 +166,7 @@ public class CraftingTab : MonoBehaviour
         for (int i = 0; i < IngredientBoxes.Length; i++)
         {
             IngredientBox iC = IngredientBoxes[i].GetComponent<IngredientBox>();
+            iC.ClearQuantity();
             if (Instance.recipeRequirements.ContainsKey(CurrentItem) && Instance.recipeRequirements[CurrentItem].ElementAtOrDefault(i) != null)
             {
                 iC.name = Instance.recipeRequirements[CurrentItem][i].id;
@@ -178,12 +180,28 @@ public class CraftingTab : MonoBehaviour
         }
     }
 
+    public void UpdateItem(int index)
+    {
+        Instance.CurrentItem = Instance.ItemToCraftBoxes[index].GetComponent<ItemToCraft>().ItemName;
+        Instance.SetItemInfo(Instance.CurrentItem);
+        Instance.InitializeIngredients();
+    }
 
     void SetItemInfo(string CurrentItemName)
     {
-        ItemDesc.GetComponent<TextMeshProUGUI>().text = ItemProperties.itemDescription[CurrentItemName];
-        ItemName.GetComponent<TextMeshProUGUI>().text = CurrentItemName;
-        ItemToCraft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Items/" + CurrentItemName);
+        Instance.ItemDesc.GetComponent<TextMeshProUGUI>().text = ItemProperties.itemDescription[CurrentItemName];
+        Instance.ItemName.GetComponent<TextMeshProUGUI>().text = CurrentItemName;
+        Instance.ItemToCraft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Items/" + CurrentItemName);
+        Instance.CraftingAmount.GetComponent<TextMeshProUGUI>().text = "x " + GetCraftingItemAmount();
+    }
+
+    int GetCraftingItemAmount()
+    {
+        if(CraftingProperties.craftingItemAmount.ContainsKey(CurrentItem))
+        {
+            return CraftingProperties.craftingItemAmount[CurrentItem];
+        }
+        return 1;
     }
 
     void ShowPopUp(string itemName)

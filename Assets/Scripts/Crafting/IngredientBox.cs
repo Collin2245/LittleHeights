@@ -16,7 +16,7 @@ public class IngredientBox : MonoBehaviour
 
     public void GenerateImage(string ItemName)
     {
-        IngredientImage.enabled = true;
+        IngredientImage.color = Color.white;
         try
         {
             IngredientImage.sprite = Resources.Load<Sprite>("Items/" + ItemName);
@@ -35,5 +35,9 @@ public class IngredientBox : MonoBehaviour
     public void GenerateQuantity(int count)
     {
         GetComponentInChildren<TextMeshProUGUI>().text = "x " + count.ToString();
+    }
+    public void ClearQuantity()
+    {
+        GetComponentInChildren<TextMeshProUGUI>().text = "";
     }
 }

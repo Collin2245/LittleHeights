@@ -80,28 +80,25 @@ public class DestroyObject : MonoBehaviour
         }
     }
 
+    void SpawnItem(int amountToSpawn,string name, Vector3Int point)
+    {
+        for (int i = 0; i < amountToSpawn; i++)
+        {
+            GameObject item = Resources.Load("Prefabs/DroppedItemPrefab") as GameObject;
+            item.GetComponent<Item>().id = name;
+            Instantiate(item, new Vector3(point.x + Random.Range(-4, 4f), point.y + Random.Range(-4f, 4f), point.z), Quaternion.identity);
+        }
+    }
+
     void destroyTree(Vector3Int point)
     {
         if (itemCounter >= 100)
         {
             playAudio = false;
-            int randomNumWood = Random.Range(1, 6);
-            for (int i = 0; i < randomNumWood; i++)
-            {
-                GameObject wood = Resources.Load("Prefabs/DroppedItemPrefab") as GameObject;
-                wood.GetComponent<Item>().id = "wood";
-                wood.GetComponent<Item>().currAmount = Random.Range(1, 4);
-                Instantiate(wood, new Vector3(point.x + Random.Range(-3f, 3f), point.y + Random.Range(-3f, 3f), point.z), Quaternion.identity);
-
-            }
+            int randomNumWood = Random.Range(8, 12);
+            SpawnItem(randomNumWood, "wood", point);
             int randomNumAcorn = Random.Range(1, 3);
-            for (int i = 0; i < randomNumAcorn; i++)
-            {
-                GameObject acorn = Resources.Load("Prefabs/DroppedItemPrefab") as GameObject;
-                acorn.GetComponent<Item>().id = "acorn";
-                acorn.GetComponent<Item>().currAmount = 1;
-                Instantiate(acorn, new Vector3(point.x + Random.Range(-3f, 3f), point.y + Random.Range(-3f, 3f), point.z), Quaternion.identity);
-            }
+            SpawnItem(randomNumAcorn, "acorn", point);
             itemCounter = 0;
             StopCoroutine(treeEnumerator);
             tileManager.GetComponent<TileManager>().extraMapCollide.SetTile(point, null);

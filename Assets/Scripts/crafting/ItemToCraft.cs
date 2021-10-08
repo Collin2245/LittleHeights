@@ -31,6 +31,8 @@ public class ItemToCraft : MonoBehaviour, IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
-        currentCraftingItem.UpdatePosition(eventData.pointerCurrentRaycast.gameObject.GetComponent<ItemToCraft>().ItemBoxId);
+        int index = eventData.pointerCurrentRaycast.gameObject.GetComponent<ItemToCraft>().ItemBoxId;
+        currentCraftingItem.UpdatePosition(index);
+        CraftingTab.Instance.UpdateItem(index);
     }
 }

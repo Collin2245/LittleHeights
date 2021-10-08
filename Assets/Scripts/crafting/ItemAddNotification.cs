@@ -6,15 +6,12 @@ using UnityEngine.UI;
 public class ItemAddNotification : MonoBehaviour
 {
     // Start is called before the first frame update
-    Transform itemAddtransform;
-    int timer;
-    
+
     Image image;
     void Start()
     {
         Destroy(transform.parent.parent.gameObject, 4f);
         image = this.GetComponent<Image>();
-        timer = 240;
         this.GetComponent<Animator>().Play("PopUp",0);
     }
 

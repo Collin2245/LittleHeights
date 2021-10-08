@@ -48,7 +48,8 @@ public class ItemProperties : MonoBehaviour
 
     public static Dictionary<string, string> itemDescription = new Dictionary<string, string>()
     {
-        {"sapling","A simple sapling, use this to grow a tree."}
+        {"sapling","A simple sapling, use this to grow a tree."},
+        {"twine", "A simple means to make basic tools." }
     };
 
 
