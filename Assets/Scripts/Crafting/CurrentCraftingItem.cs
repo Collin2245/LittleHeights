@@ -35,6 +35,7 @@ public class CurrentCraftingItem : MonoBehaviour
         {
             currentSlotNum = 0;
         }
+        CraftingTab.Instance.UpdateItem(currentSlotNum);
     }
 
     private void scrollDown()
@@ -47,10 +48,12 @@ public class CurrentCraftingItem : MonoBehaviour
         {
             currentSlotNum = holders.Count -1;
         }
+        CraftingTab.Instance.UpdateItem(currentSlotNum);
     }
     public void UpdatePosition(int pos)
     {
         currentSlotNum = pos;
+        CraftingTab.Instance.UpdateItem(pos);
     }
     
 

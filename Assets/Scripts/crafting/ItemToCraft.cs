@@ -33,6 +33,5 @@ public class ItemToCraft : MonoBehaviour, IPointerDownHandler
     {
         int index = eventData.pointerCurrentRaycast.gameObject.GetComponent<ItemToCraft>().ItemBoxId;
         currentCraftingItem.UpdatePosition(index);
-        CraftingTab.Instance.UpdateItem(index);
     }
 }
