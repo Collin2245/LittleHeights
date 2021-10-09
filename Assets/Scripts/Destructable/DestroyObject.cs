@@ -99,6 +99,10 @@ public class DestroyObject : MonoBehaviour
             SpawnItem(randomNumWood, "wood", point);
             int randomNumAcorn = Random.Range(1, 3);
             SpawnItem(randomNumAcorn, "acorn", point);
+            int randomNumLeaves = Random.Range(8, 20);
+            SpawnItem(randomNumLeaves, "leaves", point);
+            int randomNumSticks = Random.Range(1, 3);
+            SpawnItem(randomNumSticks, "stick", point);
             itemCounter = 0;
             StopCoroutine(treeEnumerator);
             tileManager.GetComponent<TileManager>().extraMapCollide.SetTile(point, null);

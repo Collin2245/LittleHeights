@@ -25,7 +25,9 @@ public class ItemProperties : MonoBehaviour
         {"woodenAxe",10},
         {"laser",55 },
         {"craftingBench",99 },
-        {"sapling",99 }
+        {"sapling",99 },
+        {"leaves", 999 },
+        {"stick",99 }
     };
 
 
