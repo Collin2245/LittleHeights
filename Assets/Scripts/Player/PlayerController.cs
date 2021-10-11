@@ -96,11 +96,11 @@ public class PlayerController : MonoBehaviour
 
     void moveCamera()
     {
-        if(Input.GetKey(KeyCode.Z))
+        if(Input.GetKey(KeyCode.Z) && GetComponentInChildren<Camera>().orthographicSize <= 17)
         {
             GetComponentInChildren<Camera>().orthographicSize  += 0.04f;
         }
-        if (Input.GetKey(KeyCode.X))
+        if (Input.GetKey(KeyCode.X) && GetComponentInChildren<Camera>().orthographicSize >= 0)
         {
             GetComponentInChildren<Camera>().orthographicSize -= 0.04f;
         }
