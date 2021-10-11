@@ -157,7 +157,7 @@ public class CraftingTab : MonoBehaviour
             }
             catch
             {
-                Debug.LogException(new System.Exception("No category available for this name"));
+                Debug.Log(new System.Exception("No category available for this name"));
             }
         }
     }
