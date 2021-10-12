@@ -63,7 +63,7 @@ public class HotbarItemHolder : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         generateHotbarItem();
     }

@@ -17,10 +17,12 @@ public class CraftingTab : MonoBehaviour
     public GameObject[] IngredientBoxes;
     public GameObject ItemDesc;
     public GameObject ItemToCraft;
-    public GameObject CraftButton;
+    public GameObject CraftButtonObj;
+    Button button;
     public GameObject ItemName;
     public GameObject CraftingAmount;
     public GameObject CanCraft;
+    AudioSource audioSource;
     public string[] CategoryArrayName;
     public string CurrentItem;
     public static CraftingTab Instance { get; private set; }
@@ -45,10 +47,24 @@ public class CraftingTab : MonoBehaviour
     {
         Instance.recipeRequirements = CraftingProperties.GetRequirements();
         Instance.CategoryArrayName = CraftingProperties.categoryNames;
-        recipeUnlocked = CraftingProperties.RecipeUnlocked;
+        Instance.audioSource = GetComponent<AudioSource>();
+        Instance.recipeUnlocked = CraftingProperties.RecipeUnlocked;
+        button = CraftButtonObj.GetComponent<Button>();
         InitializeCategoryBoxes();
         SetItemInfo(CurrentItem);
         InitializeIngredients();
+        button.onClick.AddListener(TryCrafting);
+    }
+
+    void TryCrafting()
+    {
+        if(CanCraftItem(CurrentItem))
+        {
+
+
+            audioSource.pitch = Random.Range(0.7f, 1.5f);
+            audioSource.PlayOneShot(audioSource.clip);
+        }
     }
 
     public void UpdateInventory()
@@ -71,6 +87,30 @@ public class CraftingTab : MonoBehaviour
                 }
             }
         }
+    }
+
+    public bool TryRemoveFromInventory(string itemId, int itemAmount)
+    {
+        itemHolders = GameObject.Find("Player").GetComponent<PlayerInventory>().itemHolders;
+        foreach (GameObject item in itemHolders)
+        {
+            InventorySlot inventorySlot = item.GetComponent<InventorySlot>();
+            if (inventorySlot.itemId == itemId)
+            {
+                if(inventorySlot.currAmount >= itemAmount)
+                {
+                    inventorySlot.GetComponentInChildren<Item>().subtractQuantity(itemAmount);
+                    inventorySlot.generateInventory();
+                    return true;
+                }else
+                {
+                    inventorySlot.GetComponentInChildren<Item>().subtractQuantity(inventorySlot.GetComponentInChildren<Item>().currAmount);
+                    inventorySlot.generateInventory();
+                    itemAmount -= inventorySlot.GetComponentInChildren<Item>().currAmount;
+                }
+            }
+        }
+        return false;
     }
 
 
@@ -134,6 +174,7 @@ public class CraftingTab : MonoBehaviour
             Debug.Log("Can craft acorn? " + CanCraftItem("woodenAxe"));
             Debug.Log("Can craft stick? " + CanCraftItem("stick"));
             ShowPopUp("acorn");
+            TryRemoveFromInventory("acorn", 3);
         }
         if (Input.GetKeyDown(KeyCode.E))
         {
@@ -229,6 +270,7 @@ public class CraftingTab : MonoBehaviour
         Instance.ItemName.GetComponent<TextMeshProUGUI>().text = CurrentItemName;
         Instance.ItemToCraft.GetComponent<Image>().sprite = Resources.Load<Sprite>("Items/" + CurrentItemName);
         Instance.CraftingAmount.GetComponent<TextMeshProUGUI>().text = "x " + GetCraftingItemAmount();
+        CanCraftToggle(CanCraftItem(CurrentItem));
     }
 
     int GetCraftingItemAmount()

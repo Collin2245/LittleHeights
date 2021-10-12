@@ -17,23 +17,23 @@ public class DroppedItemScript : MonoBehaviour
         boxCollider = this.GetComponent<BoxCollider2D>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = item.sprite;
-        
+        spriteRenderer.sprite = item.sprite;
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        spriteRenderer.sprite = item.sprite;
+        //spriteRenderer.sprite = item.sprite;
     }
 
     void OnTriggerStay2D(Collider2D collider)
     {
         if(collider.gameObject.CompareTag("Player") && !collider.isTrigger)
         {
-            Debug.Log("Hit player tag");
+            //Debug.Log("Hit player tag");
             collider.gameObject.GetComponent<PlayerInventory>().TryToAddItemToInventory(item);
-            CraftingTab.Instance.UpdateInventory();
+            //CraftingTab.Instance.UpdateInventory();
         }
     }
 }

@@ -43,11 +43,22 @@ public class InventorySlot : MonoBehaviour
             }
 
         }
-        generateInventory();
+        //generateInventory();
+    }
+    public void DeleteItem()
+    {
+        this.itemId = "";
     }
 
     public void generateInventory()
     {
+        if (this.transform.childCount == 0)
+        {
+            itemId = "";
+        }else
+        {
+            itemId = this.GetComponentInChildren<Item>().id;
+        }
         if (itemId != "")
         {
             if (this.transform.childCount == 0)
@@ -60,7 +71,7 @@ public class InventorySlot : MonoBehaviour
             else
             {
                 path = "Items/" + this.itemId;
-                transform.GetChild(0).GetComponent<UnityEngine.UI.Image>().sprite = Resources.Load<Sprite>(path);
+                transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(path);
                 item = GetComponentInChildren<Item>();
                 itemId = item.id;
                 currAmount = item.currAmount;
@@ -80,7 +91,8 @@ public class InventorySlot : MonoBehaviour
 
     void InventoryButtonClicked()
     {
-        if(MouseInventorySlot.Instance.itemOnMouse)//clicked when item is on mouse
+        generateInventory();
+        if (MouseInventorySlot.Instance.itemOnMouse)//clicked when item is on mouse
         {
             if(itemId == "")
             {

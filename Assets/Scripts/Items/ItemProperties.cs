@@ -21,7 +21,7 @@ public class ItemProperties : MonoBehaviour
         {"tempHoe",5 },
         {"itemName",999 },
         {"wood",99},
-        {"acorn",99},
+        {"acorn",2},
         {"woodenAxe",10},
         {"laser",55 },
         {"craftingBench",99 },

@@ -103,7 +103,7 @@ public class PlayerInventory : MonoBehaviour
     {
         if(TryToAddItemToExistingItem(item))
         {
-            Debug.Log("Picked up existing item and added to count");
+            //Debug.Log("Picked up existing item and added to count");
             Destroy(item.transform.gameObject);
             audioSource.pitch = Random.Range(0.9f, 1.5f);
             audioSource.PlayOneShot(audioSource.clip);
@@ -111,7 +111,7 @@ public class PlayerInventory : MonoBehaviour
         }
         if(TryToAddItemToEmptySlot(item))
         {
-            Debug.Log("Added new item to inventory");
+            //Debug.Log("Added new item to inventory");
             Destroy(item.transform.gameObject);
             audioSource.pitch = Random.Range(0.9f, 1.5f);
             audioSource.PlayOneShot(audioSource.clip);
@@ -133,6 +133,7 @@ public class PlayerInventory : MonoBehaviour
                 if(itemHolders[i].GetComponent<InventorySlot>().currAmount + item.currAmount <= ItemProperties.quantityForItem[item.id])
                 {
                     itemHolders[i].GetComponent<InventorySlot>().GetComponentInChildren<Item>().currAmount += item.currAmount;
+                    itemHolders[i].GetComponent<InventorySlot>().generateInventory();
                     return true;
                 }
                 Debug.Log("Found matching, but max quantity has been reached");
