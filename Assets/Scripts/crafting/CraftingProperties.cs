@@ -19,10 +19,14 @@ public class CraftingProperties : MonoBehaviour
         };
     }
 
-    static ItemRequirements ItemRequirement(string item, int amountToUse)
-    {
-        return new ItemRequirements { id = item, amount = amountToUse };
-    }
+    public static Dictionary<string, bool> RecipeUnlocked = new Dictionary<string, bool>()
+        {
+            { "craftingTable", false },
+            { "woodenAxe", false },
+            { "sapling", false },
+            { "twine", false },
+            { "stick", false }
+        };
 
     public static Dictionary<string, int> craftingItemAmount = new Dictionary<string, int>()
     {
@@ -36,7 +40,14 @@ public class CraftingProperties : MonoBehaviour
         {"farmingCategory", new List<string> {"sapling","twine","stick"} }
     };
 
-    public static string[] categoryNames = new string[] { "farmingCategory","toolsCategory" };
+    public static string[] categoryNames = new string[] { "farmingCategory", "toolsCategory" };
+
+    static ItemRequirements ItemRequirement(string item, int amountToUse)
+    {
+        return new ItemRequirements { id = item, amount = amountToUse };
+    }
+
+
 }
 
 public class ItemRequirements

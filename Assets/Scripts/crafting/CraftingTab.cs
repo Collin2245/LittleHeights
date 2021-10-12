@@ -20,6 +20,7 @@ public class CraftingTab : MonoBehaviour
     public GameObject CraftButton;
     public GameObject ItemName;
     public GameObject CraftingAmount;
+    public GameObject CanCraft;
     public string[] CategoryArrayName;
     public string CurrentItem;
     public static CraftingTab Instance { get; private set; }
@@ -44,11 +45,7 @@ public class CraftingTab : MonoBehaviour
     {
         Instance.recipeRequirements = CraftingProperties.GetRequirements();
         Instance.CategoryArrayName = CraftingProperties.categoryNames;
-        recipeUnlocked = new Dictionary<string, bool>()
-        {
-            {"craftingTable", false},
-            {"woodenAxe", false }
-        };
+        recipeUnlocked = CraftingProperties.RecipeUnlocked;
         InitializeCategoryBoxes();
         SetItemInfo(CurrentItem);
         InitializeIngredients();
@@ -76,21 +73,55 @@ public class CraftingTab : MonoBehaviour
         }
     }
 
+
+    bool CanCraftItem(string ItemName)
+    {
+        bool canCraft = true;
+        for (int i = 0; i < Instance.recipeRequirements[ItemName].Length; i++)
+        {
+            if (!(canCraft
+                && (numItemsTotal.ContainsKey(Instance.recipeRequirements[ItemName].ElementAt(i).id)
+                && (numItemsTotal[Instance.recipeRequirements[ItemName].ElementAt(i).id] >= Instance.recipeRequirements[ItemName].ElementAt(i).amount)
+                )))
+            {
+                canCraft = false;
+            }   
+        }
+        return canCraft;
+    }
+
+    //add more func with this in future, for now implement a crafting method that just takes in a string and returns a bool.
     public void CheckUnlocks()
     {
         for(int i = 0; i < Instance.recipeRequirements.Count; i ++)
         {
+            bool canCraft = true;
+            //for every item in the game that a recipe can be unlocked...
             for(int p = 0; p < Instance.recipeRequirements.ElementAt(i).Value.Length; p++)
             {
-                for(int z = 0; z< Instance.recipeUnlocked.Count; z++)
+                //for every ingredient needed for said item
+                if(Instance.recipeUnlocked.ElementAt(p).Value == false)
                 {
-                    if(Instance.recipeUnlocked.ElementAt(z).Value == false)
+                    //if this has not been unlocked yet...   do math with 1 and 0
+
+                    Debug.Log("");
+                    if( canCraft 
+                        && (numItemsTotal.ContainsKey(Instance.recipeRequirements.ElementAt(i).Value.ElementAt(p).id)
+                        && (numItemsTotal[Instance.recipeRequirements.ElementAt(i).Value.ElementAt(p).id] >= Instance.recipeRequirements.ElementAt(i).Value.ElementAt(p).amount)
+                        ))
                     {
-                        //Instance.recipeRequirements.ElementAt(i).;
+                        //Debug.Log("you have enough for: " + Instance.recipeRequirements.ElementAt(i).Value.ElementAt(p).id + " This much: " + numItemsTotal[Instance.recipeRequirements.ElementAt(i).Value.ElementAt(p).id]);
+                    }else
+                    {
+                        canCraft = false;
                     }
+                    //Debug.Log(recipeRequirements);
                 }
-                Debug.Log(Instance.recipeRequirements.ElementAt(i).Value[p].id);
+                //Debug.Log(Instance.recipeRequirements.ElementAt(i).Value[p].id);
             }
+            Debug.Log("CAN CRAFT STATUS: " + canCraft + " " + Instance.recipeRequirements.ElementAt(i).Key);
+            
+
         }
     }
     //// Update is called once per frame
@@ -99,13 +130,18 @@ public class CraftingTab : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.P))
         {
             UpdateInventory();
-            CheckUnlocks();
+            //CheckUnlocks();
+            Debug.Log("Can craft acorn? " + CanCraftItem("woodenAxe"));
+            Debug.Log("Can craft stick? " + CanCraftItem("stick"));
             ShowPopUp("acorn");
         }
-
-        if (Input.GetKeyDown(KeyCode.C))
+        if (Input.GetKeyDown(KeyCode.E))
         {
-            
+            UpdateInventory();
+            //CheckUnlocks();
+            Debug.Log("Can craft currentItem? " + CanCraftItem(CurrentItem));
+            CanCraftToggle(CanCraftItem(CurrentItem));
+            //ShowPopUp("acorn");
         }
 
     }
@@ -129,7 +165,7 @@ public class CraftingTab : MonoBehaviour
                 iC.HideSprite();
             }
 
-            }
+        }
     }
 
     void InitializeItemsToCraft(string categoryName)
@@ -209,5 +245,9 @@ public class CraftingTab : MonoBehaviour
         GameObject popUp = Instantiate(Resources.Load("Prefabs/ItemNotification")) as GameObject;
         ItemAddNotification itemNotification = popUp.GetComponentInChildren<ItemAddNotification>();
         itemNotification.AddItem(itemName);
+    }
+    private void CanCraftToggle(bool canCraft)
+    {
+        CanCraft.SetActive(!canCraft);
     }
 }
