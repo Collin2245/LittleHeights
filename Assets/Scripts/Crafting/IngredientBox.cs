@@ -8,15 +8,14 @@ public class IngredientBox : MonoBehaviour
 {
     public Image IngredientImage;
 
-    private void Start()
-    {
-        IngredientImage = this.GetComponent<Image>();
-        IngredientImage.sprite = null;
-    }
 
     public void GenerateImage(string ItemName)
     {
-        IngredientImage.color = Color.white;
+        IngredientImage = this.GetComponent<Image>();
+        if (IngredientImage.color == Color.clear)
+        {
+            IngredientImage.color = Color.white;
+        }
         try
         {
             IngredientImage.sprite = Resources.Load<Sprite>("Items/" + ItemName);
@@ -29,6 +28,7 @@ public class IngredientBox : MonoBehaviour
 
     public void HideSprite()
     {
+        IngredientImage = this.GetComponent<Image>();
         IngredientImage.color = Color.clear;
     }
 

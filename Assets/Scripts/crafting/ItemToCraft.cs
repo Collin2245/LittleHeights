@@ -22,11 +22,13 @@ public class ItemToCraft : MonoBehaviour, IPointerDownHandler
 
     public void GenerateImage()
     {
+        ItemImage = this.GetComponent<Image>();
         ItemImage.sprite = Resources.Load<Sprite>("Items/" + ItemName);
     }
 
     public void HideSprite()
     {
+        ItemImage = this.GetComponent<Image>();
         ItemImage.color = Color.clear;
     }
     public void OnPointerDown(PointerEventData eventData)

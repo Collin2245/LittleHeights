@@ -17,12 +17,13 @@ public class ItemCategory : MonoBehaviour  , IPointerDownHandler
 
     private void Start()
     {
-        ItemCategoryImage = this.GetComponent<Image>();
+        //ItemCategoryImage = this.GetComponent<Image>();
         CurrentCategorySelector = GameObject.Find("CurrentCategory").GetComponent<CurrentCategorySelector>();
     }
 
     public void GenerateImage()
     {
+        ItemCategoryImage = this.GetComponent<Image>();
         if (Resources.Load<Sprite>("Categories/" + CategoryName) != null)
         {
             ItemCategoryImage.sprite = Resources.Load<Sprite>("Categories/" + CategoryName);
@@ -41,6 +42,7 @@ public class ItemCategory : MonoBehaviour  , IPointerDownHandler
 
     public void HideSprite()
     {
+        ItemCategoryImage = this.GetComponent<Image>();
         ItemCategoryImage.color = Color.clear;
     }
     public void OnPointerDown(PointerEventData eventData)
