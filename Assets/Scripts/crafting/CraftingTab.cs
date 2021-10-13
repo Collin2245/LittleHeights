@@ -22,6 +22,7 @@ public class CraftingTab : MonoBehaviour
     public GameObject ItemName;
     public GameObject CraftingAmount;
     public GameObject CanCraft;
+    public GameObject Player;
     AudioSource audioSource;
     public string[] CategoryArrayName;
     public string CurrentItem;
@@ -58,12 +59,14 @@ public class CraftingTab : MonoBehaviour
 
     void TryCrafting()
     {
-        if(CanCraftItem(CurrentItem))
+        UpdateInventory();
+        bool canCraft = CanCraftItem(CurrentItem);
+        CanCraftToggle(canCraft);
+        if(canCraft)
         {
-
-
             audioSource.pitch = Random.Range(0.7f, 1.5f);
             audioSource.PlayOneShot(audioSource.clip);
+            CraftItem(CurrentItem);
         }
     }
 
@@ -89,8 +92,36 @@ public class CraftingTab : MonoBehaviour
         }
     }
 
+    public void CraftItem(string itemId)
+    {
+        if(!Instance.recipeRequirements.ContainsKey(itemId))
+        {
+            Debug.LogError("No crafting info found for: " + itemId);
+            return;
+        }
+
+        for(int i = 0; i < Instance.recipeRequirements[itemId].Length; i++)
+        {
+            if(TryRemoveFromInventory(Instance.recipeRequirements[itemId].ElementAt(i).id, Instance.recipeRequirements[itemId].ElementAt(i).amount))
+            {
+                continue;
+            }else
+            {
+                Debug.LogError("Error happened removing item from inventory, able to craft when you should not be able to.");
+                return;
+            }
+        }
+
+        this.transform.parent.GetComponentInChildren<PlayerInventory>().TryToAddItemToInventoryNonDroppedItem(new Item { id = itemId, currAmount = GetCraftingItemAmount() });
+    }
     public bool TryRemoveFromInventory(string itemId, int itemAmount)
     {
+
+        if((! numItemsTotal.ContainsKey(itemId)) || numItemsTotal[itemId] < itemAmount)
+        {
+            return false;
+        }
+
         itemHolders = GameObject.Find("Player").GetComponent<PlayerInventory>().itemHolders;
         foreach (GameObject item in itemHolders)
         {
@@ -104,9 +135,10 @@ public class CraftingTab : MonoBehaviour
                     return true;
                 }else
                 {
+                    int itemOnSlot = inventorySlot.GetComponentInChildren<Item>().currAmount;
                     inventorySlot.GetComponentInChildren<Item>().subtractQuantity(inventorySlot.GetComponentInChildren<Item>().currAmount);
                     inventorySlot.generateInventory();
-                    itemAmount -= inventorySlot.GetComponentInChildren<Item>().currAmount;
+                    itemAmount -= itemOnSlot;
                 }
             }
         }
@@ -155,9 +187,7 @@ public class CraftingTab : MonoBehaviour
                     {
                         canCraft = false;
                     }
-                    //Debug.Log(recipeRequirements);
                 }
-                //Debug.Log(Instance.recipeRequirements.ElementAt(i).Value[p].id);
             }
             Debug.Log("CAN CRAFT STATUS: " + canCraft + " " + Instance.recipeRequirements.ElementAt(i).Key);
             
@@ -167,15 +197,15 @@ public class CraftingTab : MonoBehaviour
     //// Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            UpdateInventory();
-            //CheckUnlocks();
-            Debug.Log("Can craft acorn? " + CanCraftItem("woodenAxe"));
-            Debug.Log("Can craft stick? " + CanCraftItem("stick"));
-            ShowPopUp("acorn");
-            TryRemoveFromInventory("acorn", 3);
-        }
+        //if(Input.GetKeyDown(KeyCode.P))
+        //{
+        //    UpdateInventory();
+        //    //CheckUnlocks();
+        //    Debug.Log("Can craft acorn? " + CanCraftItem("woodenAxe"));
+        //    Debug.Log("Can craft stick? " + CanCraftItem("stick"));
+        //    ShowPopUp("acorn");
+        //    TryRemoveFromInventory("acorn", 3);
+        //}
         if (Input.GetKeyDown(KeyCode.E))
         {
             UpdateInventory();

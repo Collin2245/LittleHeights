@@ -27,7 +27,8 @@ public class ItemProperties : MonoBehaviour
         {"craftingBench",99 },
         {"sapling",99 },
         {"leaves", 999 },
-        {"stick",99 }
+        {"stick",99 },
+        {"twine",99 }
     };
 
 

@@ -120,6 +120,21 @@ public class PlayerInventory : MonoBehaviour
         Debug.Log("Inventory is full");
     }
 
+    public void TryToAddItemToInventoryNonDroppedItem(Item item)
+    {
+        if (TryToAddItemToExistingItem(item))
+        {
+            //Debug.Log("Picked up existing item and added to count");
+            return;
+        }
+        if (TryToAddItemToEmptySlot(item))
+        {
+            //Debug.Log("Added new item to inventory");
+            return;
+        }
+        Debug.Log("Inventory is full");
+    }
+
     private bool TryToAddItemToExistingItem(Item item)
     {
         for(int i = 0; i < this.itemHolders.Length; i++)
