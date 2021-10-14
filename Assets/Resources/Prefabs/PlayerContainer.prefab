@@ -1467,6 +1467,41 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!1 &1819211233016232591
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2737806230085765284}
+  m_Layer: 5
+  m_Name: JunkHolder
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2737806230085765284
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1819211233016232591}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 5876028347058174815}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 100, y: 100}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &1867647215874611873
 GameObject:
   m_ObjectHideFlags: 0
@@ -4575,6 +4610,7 @@ RectTransform:
   - {fileID: 7163894904782515747}
   - {fileID: 4323586946992730951}
   - {fileID: 172266866724989797}
+  - {fileID: 2737806230085765284}
   m_Father: {fileID: 6436318319705805456}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4687,8 +4723,10 @@ MonoBehaviour:
   ItemName: {fileID: 5429340193987358145}
   CraftingAmount: {fileID: 5838186616045150246}
   CanCraft: {fileID: 2428882787727368091}
+  Player: {fileID: 0}
   CategoryArrayName: []
   CurrentItem: 
+  junk: {fileID: 1819211233016232591}
 --- !u!82 &155243005380483586
 AudioSource:
   m_ObjectHideFlags: 0

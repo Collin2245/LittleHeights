@@ -20,7 +20,6 @@ public class Item : MonoBehaviour
     public int currAmount;
     GameObject itemCountPrefab;
     private bool hasImage;
-
     
 
 

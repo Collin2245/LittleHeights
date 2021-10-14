@@ -26,6 +26,7 @@ public class CraftingTab : MonoBehaviour
     AudioSource audioSource;
     public string[] CategoryArrayName;
     public string CurrentItem;
+    public GameObject junk;
     public static CraftingTab Instance { get; private set; }
 
     private void Awake()
@@ -51,6 +52,7 @@ public class CraftingTab : MonoBehaviour
         Instance.audioSource = GetComponent<AudioSource>();
         Instance.recipeUnlocked = CraftingProperties.RecipeUnlocked;
         button = CraftButtonObj.GetComponent<Button>();
+        Instance.junk.transform.localScale = new Vector3(0f, 0f);
         InitializeCategoryBoxes();
         SetItemInfo(CurrentItem);
         InitializeIngredients();
@@ -111,8 +113,10 @@ public class CraftingTab : MonoBehaviour
                 return;
             }
         }
-
-        this.transform.parent.GetComponentInChildren<PlayerInventory>().TryToAddItemToInventoryNonDroppedItem(new Item { id = itemId, currAmount = GetCraftingItemAmount() });
+        Item item = junk.AddComponent<Item>();
+        item.id = itemId;
+        item.currAmount = GetCraftingItemAmount();
+        this.transform.parent.GetComponentInChildren<PlayerInventory>().TryToAddItemToInventoryNonDroppedItem(item);
     }
     public bool TryRemoveFromInventory(string itemId, int itemAmount)
     {
