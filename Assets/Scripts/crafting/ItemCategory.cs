@@ -47,7 +47,9 @@ public class ItemCategory : MonoBehaviour  , IPointerDownHandler
     }
     public void OnPointerDown(PointerEventData eventData)
     {
+        int currentSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<ItemCategory>().CategoryBoxId;
         CurrentCategorySelector.UpdatePosition(eventData.pointerCurrentRaycast.gameObject.GetComponent<ItemCategory>().CategoryBoxId);
+        CraftingTab.Instance.InitializeCategoryBoxes(currentSlot);
     }
 
 }

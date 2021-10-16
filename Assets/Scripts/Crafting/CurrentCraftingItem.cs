@@ -55,6 +55,4 @@ public class CurrentCraftingItem : MonoBehaviour
         currentSlotNum = pos;
         CraftingTab.Instance.UpdateItem(pos);
     }
-    
-
 }

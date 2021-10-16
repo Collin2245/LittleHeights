@@ -15,7 +15,8 @@ public class CraftingProperties : MonoBehaviour
             { "woodenAxe", new ItemRequirements[]{ ItemRequirement("wood",5)}},
             { "sapling", new ItemRequirements[]{ ItemRequirement("acorn",1) , ItemRequirement("wood", 5) } },
             { "twine", new ItemRequirements[]{ ItemRequirement("leaves",3)} },
-            { "stick", new ItemRequirements[]{ ItemRequirement("wood",1) } }
+            { "stick", new ItemRequirements[]{ ItemRequirement("wood",1) } },
+            { "woodenSword", new ItemRequirements[]{ ItemRequirement("twine",2), ItemRequirement("wood",10),ItemRequirement("stick",3)}}
         };
     }
 
@@ -36,7 +37,7 @@ public class CraftingProperties : MonoBehaviour
 
     public static Dictionary<string, List<string>> categoyItems = new Dictionary<string, List<string>>()
     {
-        { "tools", new List<string> {"woodenAxe"} },
+        { "toolsCategory", new List<string> {"woodenAxe", "woodenSword","woodenHoe"} },
         {"farmingCategory", new List<string> {"sapling","twine","stick"} }
     };
 

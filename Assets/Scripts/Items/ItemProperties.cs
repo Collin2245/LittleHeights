@@ -18,11 +18,11 @@ public class ItemProperties : MonoBehaviour
         {"Blank", 1 },
         {"Square",2 },
         {"woodenSword",1 },
-        {"tempHoe",5 },
+        {"woodenHoe",5 },
         {"itemName",999 },
         {"wood",99},
         {"acorn",2},
-        {"woodenAxe",10},
+        {"woodenAxe",1},
         {"laser",55 },
         {"craftingBench",99 },
         {"sapling",99 },
@@ -46,13 +46,15 @@ public class ItemProperties : MonoBehaviour
         { "wood", false},
         { "woodenAxe", false},
         { "craftingBench", true },
-        {"sapling", true }
+        { "sapling", true }
     };
 
     public static Dictionary<string, string> itemDescription = new Dictionary<string, string>()
     {
         {"sapling","A simple sapling, use this to grow a tree."},
-        {"twine", "A simple means to make basic tools." }
+        {"twine", "A simple means to make basic tools." },
+        {"woodenAxe", "Use this to chop down trees much faster than with your hands" },
+        {"woodenSword", "The most basic sword, you need this to attempt to do any damage to your enemies"}
     };
 
 

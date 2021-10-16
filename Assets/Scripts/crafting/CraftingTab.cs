@@ -53,7 +53,7 @@ public class CraftingTab : MonoBehaviour
         Instance.recipeUnlocked = CraftingProperties.RecipeUnlocked;
         button = CraftButtonObj.GetComponent<Button>();
         Instance.junk.transform.localScale = new Vector3(0f, 0f);
-        InitializeCategoryBoxes();
+        InitializeCategoryBoxes(0);
         SetItemInfo(CurrentItem);
         InitializeIngredients();
         button.onClick.AddListener(TryCrafting);
@@ -116,6 +116,13 @@ public class CraftingTab : MonoBehaviour
         Item item = junk.AddComponent<Item>();
         item.id = itemId;
         item.currAmount = GetCraftingItemAmount();
+        foreach (var comp in junk.GetComponents<Component>())
+        {
+            if (!(comp is Transform))
+            {
+                Destroy(comp);
+            }
+        }
         this.transform.parent.GetComponentInChildren<PlayerInventory>().TryToAddItemToInventoryNonDroppedItem(item);
     }
     public bool TryRemoveFromInventory(string itemId, int itemAmount)
@@ -221,7 +228,7 @@ public class CraftingTab : MonoBehaviour
 
     }
 
-    void InitializeCategoryBoxes()
+    public void InitializeCategoryBoxes(int categorySlot)
     {
         for(int i = 0; i < CategoryBoxes.Length; i++)
         {
@@ -230,9 +237,10 @@ public class CraftingTab : MonoBehaviour
             {
                 iC.CategoryName = CategoryArrayName[i];
                 iC.GenerateImage();
-                if (i == 0)
+                if (i == categorySlot)
                 {
                     InitializeItemsToCraft(iC.CategoryName);
+                    SetItemInfo(Instance.CurrentItem);
                 }
             }
             else
@@ -258,6 +266,8 @@ public class CraftingTab : MonoBehaviour
                     if (i == 0)
                     {
                         CurrentItem = iC.ItemName;
+                        CurrentCraftingItem currentCraftingItem = GameObject.Find("CurrentItemToCraft").GetComponent<CurrentCraftingItem>();
+                        currentCraftingItem.UpdatePosition(0);
                     }
                 }
                 else
