@@ -22,11 +22,14 @@ public class CraftingTab : MonoBehaviour
     public GameObject ItemName;
     public GameObject CraftingAmount;
     public GameObject CanCraft;
-    public GameObject Player;
+    //public GameObject Player
+    public GameObject CategorySelector;
     AudioSource audioSource;
     public string[] CategoryArrayName;
     public string CurrentItem;
     public GameObject junk;
+    public int itemsInCategory;
+    int itemNumberForCurrItems;
     public static CraftingTab Instance { get; private set; }
 
     private void Awake()
@@ -70,6 +73,9 @@ public class CraftingTab : MonoBehaviour
             audioSource.PlayOneShot(audioSource.clip);
             CraftItem(CurrentItem);
         }
+        UpdateInventory();
+        canCraft = CanCraftItem(CurrentItem);
+        CanCraftToggle(canCraft);
     }
 
     public void UpdateInventory()
@@ -253,6 +259,8 @@ public class CraftingTab : MonoBehaviour
 
     void InitializeItemsToCraft(string categoryName)
     {
+        itemsInCategory = CraftingProperties.categoyItems[categoryName].Count;
+        Debug.Log("Amount of items in caregory " + categoryName + ": " + itemsInCategory);
         for (int i = 0; i < ItemToCraftBoxes.Length; i++)
         {
             try
@@ -282,6 +290,7 @@ public class CraftingTab : MonoBehaviour
             }
         }
     }
+
     void InitializeIngredients()
     {
         for (int i = 0; i < IngredientBoxes.Length; i++)
@@ -324,6 +333,46 @@ public class CraftingTab : MonoBehaviour
             return CraftingProperties.craftingItemAmount[CurrentItem];
         }
         return 1;
+    }
+
+
+    public void ShiftItems(int offSet)
+    {
+        int counter = 0;
+        string categoryName = CategorySelector.GetComponent<CurrentCategorySelector>().GetCurrentCategoryName();
+        itemsInCategory = CraftingProperties.categoyItems[categoryName].Count;
+        Debug.Log("Amount of items in caregory " + categoryName + ": " + itemsInCategory);
+        int startingPos = offSet - (ItemToCraftBoxes.Length - 1);
+        // add a check to end of for loop if 4 is more then the count of item categories
+        for (int i = startingPos; i < (startingPos + (ItemToCraftBoxes.Length)); i++)
+        {
+
+            try
+            {
+                ItemToCraft iC = ItemToCraftBoxes[counter].GetComponent<ItemToCraft>();
+                if (CraftingProperties.categoyItems[categoryName].ElementAtOrDefault(i) != null)
+                {
+                    iC.ItemName = CraftingProperties.categoyItems[categoryName][i];
+                    iC.GenerateImage();
+                    //to be removed
+                    if (i == 0)
+                    {
+                        CurrentItem = iC.ItemName;
+                        CurrentCraftingItem currentCraftingItem = GameObject.Find("CurrentItemToCraft").GetComponent<CurrentCraftingItem>();
+                        currentCraftingItem.UpdatePosition(0);
+                    }
+                }
+                else
+                {
+                    iC.HideSprite();
+                }
+                counter++;
+            }
+            catch
+            {
+                Debug.Log(new System.Exception("No category available for this name"));
+            }
+        }
     }
 
     void ShowPopUp(string itemName)

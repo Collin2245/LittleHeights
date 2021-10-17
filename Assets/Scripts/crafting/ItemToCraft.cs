@@ -23,7 +23,18 @@ public class ItemToCraft : MonoBehaviour, IPointerDownHandler
     public void GenerateImage()
     {
         ItemImage = this.GetComponent<Image>();
-        ItemImage.sprite = Resources.Load<Sprite>("Items/" + ItemName);
+        if (ItemImage.color == Color.clear)
+        {
+            ItemImage.color = Color.white;
+        }
+        try
+        {
+            ItemImage.sprite = Resources.Load<Sprite>("Items/" + ItemName);
+        }
+        catch
+        {
+            ItemImage.sprite = null;
+        }
     }
 
     public void HideSprite()

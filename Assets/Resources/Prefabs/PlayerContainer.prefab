@@ -2677,6 +2677,7 @@ MonoBehaviour:
   - {fileID: 2055453034066773240}
   - {fileID: 4142226581730824563}
   currentSlotNum: 0
+  currentArrayNum: 0
 --- !u!1 &2614701044203873597
 GameObject:
   m_ObjectHideFlags: 0
@@ -4723,10 +4724,11 @@ MonoBehaviour:
   ItemName: {fileID: 5429340193987358145}
   CraftingAmount: {fileID: 5838186616045150246}
   CanCraft: {fileID: 2428882787727368091}
-  Player: {fileID: 0}
+  CategorySelector: {fileID: 702705309339044738}
   CategoryArrayName: []
   CurrentItem: 
   junk: {fileID: 1819211233016232591}
+  itemsInCategory: 0
 --- !u!82 &155243005380483586
 AudioSource:
   m_ObjectHideFlags: 0

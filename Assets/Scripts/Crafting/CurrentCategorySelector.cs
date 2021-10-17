@@ -21,4 +21,9 @@ public class CurrentCategorySelector : MonoBehaviour
     {
         currentSlotNum = pos;
     }
+
+    public string GetCurrentCategoryName()
+    {
+        return CraftingProperties.categoryNames[currentSlotNum];
+    }
 }

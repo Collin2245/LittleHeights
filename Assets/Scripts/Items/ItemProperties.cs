@@ -54,7 +54,10 @@ public class ItemProperties : MonoBehaviour
         {"sapling","A simple sapling, use this to grow a tree."},
         {"twine", "A simple means to make basic tools." },
         {"woodenAxe", "Use this to chop down trees much faster than with your hands" },
-        {"woodenSword", "The most basic sword, you need this to attempt to do any damage to your enemies"}
+        {"woodenSword", "The most basic sword, you need this to attempt to do any damage to your enemies"},
+        {"stick", "Temp description" },
+        {"fertilizer", "Temp description" },
+        {"flowerSeeds", "Temp description" },
     };
 
 
