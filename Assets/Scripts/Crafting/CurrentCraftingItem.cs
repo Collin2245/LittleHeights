@@ -36,8 +36,11 @@ public class CurrentCraftingItem : MonoBehaviour
     {
         if (currentSlotNum < holders.Count -1)
         {
-            currentSlotNum += 1;
-            CraftingTab.Instance.UpdateItem(currentSlotNum);
+            if(currentSlotNum < CraftingTab.Instance.itemsInCategory -1)
+            {
+                currentSlotNum += 1;
+                CraftingTab.Instance.UpdateItem(currentSlotNum);
+            }
         }
         else if(currentArrayNum < CraftingTab.Instance.itemsInCategory - 1)
         {
@@ -51,18 +54,6 @@ public class CurrentCraftingItem : MonoBehaviour
 
     private void scrollUp()
     {
-        //if (currentSlotNum > 0)
-        //{
-        //    currentSlotNum -= 1;
-        //}
-        //else
-        //{
-        //    currentSlotNum = holders.Count -1;
-        //}
-        //CraftingTab.Instance.UpdateItem(currentSlotNum);
-
-
-
         if (currentSlotNum > 0)
         {
             currentSlotNum -= 1;
@@ -80,5 +71,11 @@ public class CurrentCraftingItem : MonoBehaviour
     {
         currentSlotNum = pos;
         CraftingTab.Instance.UpdateItem(pos);
+    }
+
+    public void UpdateItemTotalPosition(int pos)
+    {
+        currentArrayNum = pos;
+        //CraftingTab.Instance.UpdateItem(pos);
     }
 }

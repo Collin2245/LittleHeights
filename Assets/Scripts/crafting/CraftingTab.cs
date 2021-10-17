@@ -236,10 +236,10 @@ public class CraftingTab : MonoBehaviour
 
     public void InitializeCategoryBoxes(int categorySlot)
     {
-        for(int i = 0; i < CategoryBoxes.Length; i++)
+        for (int i = 0; i < CategoryBoxes.Length; i++)
         {
             ItemCategory iC = CategoryBoxes[i].GetComponent<ItemCategory>();
-            if(CategoryArrayName.ElementAtOrDefault(i) != null)
+            if (CategoryArrayName.ElementAtOrDefault(i) != null)
             {
                 iC.CategoryName = CategoryArrayName[i];
                 iC.GenerateImage();
@@ -276,10 +276,12 @@ public class CraftingTab : MonoBehaviour
                         CurrentItem = iC.ItemName;
                         CurrentCraftingItem currentCraftingItem = GameObject.Find("CurrentItemToCraft").GetComponent<CurrentCraftingItem>();
                         currentCraftingItem.UpdatePosition(0);
+                        currentCraftingItem.UpdateItemTotalPosition(ItemToCraftBoxes.Length - 1);
                     }
                 }
                 else
                 {
+                    iC.ItemName = "";
                     iC.HideSprite();
                 }
 
@@ -360,6 +362,7 @@ public class CraftingTab : MonoBehaviour
                         CurrentItem = iC.ItemName;
                         CurrentCraftingItem currentCraftingItem = GameObject.Find("CurrentItemToCraft").GetComponent<CurrentCraftingItem>();
                         currentCraftingItem.UpdatePosition(0);
+                        currentCraftingItem.UpdateItemTotalPosition(ItemToCraftBoxes.Length - 1);
                     }
                 }
                 else

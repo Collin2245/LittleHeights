@@ -18,10 +18,10 @@ public class ItemProperties : MonoBehaviour
         {"Blank", 1 },
         {"Square",2 },
         {"woodenSword",1 },
-        {"woodenHoe",5 },
+        {"woodenHoe",1 },
         {"itemName",999 },
         {"wood",99},
-        {"acorn",2},
+        {"acorn",99},
         {"woodenAxe",1},
         {"laser",55 },
         {"craftingBench",99 },
@@ -58,6 +58,7 @@ public class ItemProperties : MonoBehaviour
         {"stick", "Temp description" },
         {"fertilizer", "Temp description" },
         {"flowerSeeds", "Temp description" },
+        {"woodenHoe", "Temp description" },
     };
 
 

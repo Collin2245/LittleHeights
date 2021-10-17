@@ -18,7 +18,8 @@ public class CraftingProperties : MonoBehaviour
             { "stick", new ItemRequirements[]{ ItemRequirement("wood",1) } },
             { "woodenSword", new ItemRequirements[]{ ItemRequirement("twine",2), ItemRequirement("wood",10),ItemRequirement("stick",3)}},
             { "fertilizer", new ItemRequirements[]{ ItemRequirement("leaves", 40)}},
-            { "flowerSeeds", new ItemRequirements[]{ ItemRequirement("leaves", 20),ItemRequirement("stick",3)}}
+            { "flowerSeeds", new ItemRequirements[]{ ItemRequirement("leaves", 20),ItemRequirement("stick",3)}},
+            { "woodenHoe", new ItemRequirements[]{ ItemRequirement("twine", 2),ItemRequirement("stick",3), ItemRequirement("wood",1)}}
         };
     }
 
