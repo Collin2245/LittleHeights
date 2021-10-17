@@ -144,6 +144,7 @@ TextureImporter:
   streamingMipmaps: 0
   streamingMipmapsPriority: 0
   vTOnly: 0
+  ignoreMasterTextureLimit: 0
   grayScaleToAlpha: 0
   generateCubemap: 6
   cubemapConvolution: 0
@@ -153,8 +154,8 @@ TextureImporter:
   textureSettings:
     serializedVersion: 2
     filterMode: 0
-    aniso: -1
-    mipBias: -100
+    aniso: 1
+    mipBias: 0
     wrapU: 1
     wrapV: 1
     wrapW: 1
@@ -175,6 +176,8 @@ TextureImporter:
   textureType: 8
   textureShape: 1
   singleChannelComponent: 0
+  flipbookRows: 1
+  flipbookColumns: 1
   maxTextureSizeSet: 0
   compressionQualitySet: 0
   textureFormatSet: 0
@@ -1058,6 +1061,47 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
+    nameFileIdTable:
+      tileMapForest_8: -2778097934922086471
+      tileMapForest_30: -8503802956866525933
+      tileMapForest_35: 2389671836782636993
+      tileMapForest_5: 5407323727614030033
+      tileMapForest_29: 2360636524197578539
+      tileMapForest_32: -7466879585894854994
+      tileMapForest_33: -5145417341936096892
+      tileMapForest_7: -337093935973458545
+      tileMapForest_3: 6202614290014242212
+      tileMapForest_28: -3948817154890540227
+      tileMapForest_2: -8814838093891554615
+      tileMapForest_15: -1030519421029385367
+      tileMapForest_26: -794312708548819443
+      tileMapForest_36: -4905357869354715208
+      tileMapForest_4: -4486106790730675107
+      tileMapForest_24: -7407887954597101392
+      tileMapForest_10: -6278197670377313790
+      tileMapForest_12: -3869148315402824581
+      tileMapForest_39: -7799410377464293803
+      tileMapForest_11: -6663217962193284997
+      tileMapForest_22: 9049143125697641509
+      tileMapForest_19: 3725826359813209720
+      tileMapForest_9: -184080558073348825
+      tileMapForest_13: -716048808293516134
+      tileMapForest_1: 5925680571269146001
+      tileMapForest_18: 2289937816644628193
+      tileMapForest_0: -4136620366180347444
+      tileMapForest_20: -1920301013047508929
+      tileMapForest_27: 4537758030945140165
+      tileMapForest_34: -8706234482716351243
+      tileMapForest_37: -4254999393295356422
+      tileMapForest_16: 2310894116263757023
+      tileMapForest_31: -2335141840806912746
+      tileMapForest_38: 3690506487258229158
+      tileMapForest_14: -5768023780365659860
+      tileMapForest_21: -1031196160905024918
+      tileMapForest_17: 3135066253734916520
+      tileMapForest_6: 4861179194542393918
+      tileMapForest_23: -5178960202743384851
+      tileMapForest_25: 7512882106473921924
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
