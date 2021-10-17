@@ -23,16 +23,16 @@ public class CurrentCraftingItem : MonoBehaviour
         {
             if (Input.GetAxis("Mouse ScrollWheel") > 0f)
             {
-                scrollDown();
+                scrollUp();
             }
             else if (Input.GetAxis("Mouse ScrollWheel") < 0f)
             {
-                scrollUp();
+                scrollDown();
             }
             this.transform.position = new Vector3(holders[currentSlotNum].transform.position.x, holders[currentSlotNum].transform.position.y, holders[currentSlotNum].transform.position.z);
         }
     }
-    private void scrollUp()
+    private void scrollDown()
     {
         if (currentSlotNum < holders.Count -1)
         {
@@ -45,24 +45,36 @@ public class CurrentCraftingItem : MonoBehaviour
             currentArrayNum += 1;
             CraftingTab.Instance.ShiftItems(currentArrayNum);
             CraftingTab.Instance.UpdateItem(currentSlotNum);
-        }else
-        {
-            Debug.LogError("Something happened in CurrentCraftingItem");
         }
         //CraftingTab.Instance.UpdateItem(currentSlotNum);
     }
 
-    private void scrollDown()
+    private void scrollUp()
     {
+        //if (currentSlotNum > 0)
+        //{
+        //    currentSlotNum -= 1;
+        //}
+        //else
+        //{
+        //    currentSlotNum = holders.Count -1;
+        //}
+        //CraftingTab.Instance.UpdateItem(currentSlotNum);
+
+
+
         if (currentSlotNum > 0)
         {
             currentSlotNum -= 1;
+            CraftingTab.Instance.UpdateItem(currentSlotNum);
         }
-        else
+        else if (currentArrayNum > 3)
         {
-            currentSlotNum = holders.Count -1;
+            currentSlotNum = 0;
+            currentArrayNum -= 1;
+            CraftingTab.Instance.ShiftItems(currentArrayNum);
+            CraftingTab.Instance.UpdateItem(currentSlotNum);
         }
-        CraftingTab.Instance.UpdateItem(currentSlotNum);
     }
     public void UpdatePosition(int pos)
     {
