@@ -20,6 +20,7 @@ public class MouseHoverScript : MonoBehaviour
     void Awake()
     {
         mainUI = GameObject.Find("MainUI").GetComponent<Canvas>();
+        mouseHoverTile.color = Color.white;
     }
 
     void Update()
