@@ -439,6 +439,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dcf9c8c87ae7b744bf779d80d3f13d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dayTime: 2
+  dayToNightTime: 3
+  nightTime: 4
+  nightToDayTime: 12
+  dayColor: {r: 1, g: 1, b: 1, a: 0}
+  nightColor: {r: 0.3267947, g: 0.18062477, b: 0.9339623, a: 0}
+  timeInDay: 0
+  currentTime: 0
+  currentDay: 0
+  dayTimeTransition: {x: 0, y: 0, z: 0}
+  nightTimeTransition: {x: 0, y: 0, z: 0}
 --- !u!1 &189234609
 GameObject:
   m_ObjectHideFlags: 0
