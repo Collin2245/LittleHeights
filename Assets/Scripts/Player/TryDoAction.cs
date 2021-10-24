@@ -22,7 +22,7 @@ public class TryDoAction : MonoBehaviour
         {
             point = tileManager.baseMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             tileInfo = tileManager.GetTileInfoAtPoint();
-            TryDestroyObject();
+            TryDestroyOrAttackObject();
         }
         else
         {
@@ -30,7 +30,7 @@ public class TryDoAction : MonoBehaviour
         }
     }
 
-    void TryDestroyObject()
+    void TryDestroyOrAttackObject()
     {
         if (tileInfo.isTreeOn)
         {

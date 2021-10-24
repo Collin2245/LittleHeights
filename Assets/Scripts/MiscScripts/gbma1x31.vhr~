@@ -24,7 +24,6 @@ public class DayNighCycle : MonoBehaviour
     public float timeInDay;
     public float currentTime;
     public float currentDay;
-    public bool isNight;
 
     TextMeshProUGUI tmp;
     Light2D globalLight;
@@ -33,7 +32,7 @@ public class DayNighCycle : MonoBehaviour
 
     void Start()
     {
-        timeInDay = nightToDayTime;
+        timeInDay = dayTime + dayToNightTime + nightTime + nightToDayTime;
         tmp = GetComponent<TextMeshProUGUI>();
         globalLight = GetComponent<Light2D>();
         dayTimeTransition = DayToNightColor(dayTime, dayToNightTime, dayColor, nightColor);
@@ -46,33 +45,28 @@ public class DayNighCycle : MonoBehaviour
     {
         if(currentTime <= dayTime)
         {
-            isNight = false;
             return;
         }
         else if (currentTime <= dayToNightTime)
         {
             //move color from dayTimeTonightTime
             Vector3 temp = new Vector3(globalLight.color.r, globalLight.color.g, globalLight.color.b);
-            globalLight.color =  new Color(temp.x - dayTimeTransition.x, temp.y - dayTimeTransition.y, temp.z - dayTimeTransition.z);
-            isNight = false;
+            globalLight.color =  new Color(temp.x + dayTimeTransition.x, temp.y + dayTimeTransition.y, temp.z + dayTimeTransition.z);
             return;
         }
         else if (currentTime <= nightTime)
         {
-            isNight = true;
             return;
         }
         else if (currentTime <= nightToDayTime)
         {
             Vector3 temp = new Vector3(globalLight.color.r, globalLight.color.g, globalLight.color.b);
             globalLight.color = new Color(temp.x - nightTimeTransition.x, temp.y - nightTimeTransition.y, temp.z - nightTimeTransition.z);
-            isNight = true;
             return;
         }
         else
         {
             currentTime = 0;
-            currentDay += 1;
         }
     }
        
@@ -90,8 +84,13 @@ public class DayNighCycle : MonoBehaviour
     {
         //tmp.text = globalLight.color.ToString();
         currentTime += Time.deltaTime;
-        tmp.text = "Day: " + currentDay + " Time: " + Mathf.Round(currentTime).ToString();
+        tmp.text = currentTime.ToString();
         
         //globalLight.color = new Color(r,g,b);
+    }
+
+    private void FixedUpdate()
+    {
+        //updateLighting();
     }
 }

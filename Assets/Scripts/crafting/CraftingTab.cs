@@ -343,7 +343,7 @@ public class CraftingTab : MonoBehaviour
         int counter = 0;
         string categoryName = CategorySelector.GetComponent<CurrentCategorySelector>().GetCurrentCategoryName();
         itemsInCategory = CraftingProperties.categoyItems[categoryName].Count;
-        Debug.Log("Amount of items in caregory " + categoryName + ": " + itemsInCategory);
+        //Debug.Log("Amount of items in caregory " + categoryName + ": " + itemsInCategory);
         int startingPos = offSet - (ItemToCraftBoxes.Length - 1);
         // add a check to end of for loop if 4 is more then the count of item categories
         for (int i = startingPos; i < (startingPos + (ItemToCraftBoxes.Length)); i++)
