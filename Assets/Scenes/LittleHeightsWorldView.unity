@@ -439,15 +439,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0dcf9c8c87ae7b744bf779d80d3f13d4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dayTime: 4
-  dayToNightTime: 8
-  nightTime: 12
-  nightToDayTime: 16
+  dayTime: 500
+  dayToNightTime: 600
+  nightTime: 900
+  nightToDayTime: 1000
   dayColor: {r: 1, g: 1, b: 1, a: 0}
   nightColor: {r: 0.3267947, g: 0.18062477, b: 0.9339623, a: 0}
   timeInDay: 0
   currentTime: 0
   currentDay: 0
+  isNight: 0
   dayTimeTransition: {x: 0, y: 0, z: 0}
   nightTimeTransition: {x: 0, y: 0, z: 0}
 --- !u!1 &189234609

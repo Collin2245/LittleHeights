@@ -38,6 +38,7 @@ public class TryDoAction : MonoBehaviour
             destroyObject.TryDestroyObject(point, "tree");
         }else
         {
+            //add logic here for melee combat
             StopDestroyingObject();
         }
     }
