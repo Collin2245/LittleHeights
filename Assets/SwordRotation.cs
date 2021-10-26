@@ -13,6 +13,14 @@ public class SwordRotation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetMouseButton(0))
+        {
+            MoveWeaponTowardsMouse();
+        }
+    }
+    
+    void MoveWeaponTowardsMouse()
+    {
         //rotation
         Vector3 mousePos = Input.mousePosition;
         mousePos.z = 5.23f;
