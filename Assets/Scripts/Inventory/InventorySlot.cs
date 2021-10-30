@@ -39,7 +39,7 @@ public class InventorySlot : MonoBehaviour
             }
             else
             {
-                MouseInventorySlot.Instance.itemPrefabOnMouse.transform.position = new Vector3(Input.mousePosition.x + 100, Input.mousePosition.y - 100, Input.mousePosition.z);
+                MouseInventorySlot.Instance.itemPrefabOnMouse.transform.position = new Vector3(Input.mousePosition.x + 25, Input.mousePosition.y - 25, Input.mousePosition.z);
             }
 
         }
@@ -143,6 +143,8 @@ public class InventorySlot : MonoBehaviour
                 item.id = "";   //something weird here
                 MouseInventorySlot.Instance.itemPrefabOnMouse = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, MouseInventorySlot.Instance.transform);
                 Item tempItem = MouseInventorySlot.Instance.GetComponentInChildren<Item>();
+                tempItem.GetComponent<Image>().raycastTarget = false;
+                tempItem.transform.localScale = new Vector3(0.8f, 0.8f);
                 tempItem.id = itemId;
                 tempItem.currAmount = currAmount;
                 foreach (Transform child in transform)
