@@ -85,7 +85,7 @@ public class DestroyObject : MonoBehaviour
         for (int i = 0; i < amountToSpawn; i++)
         {
             GameObject item = Resources.Load("Prefabs/DroppedItemPrefab") as GameObject;
-            item.GetComponent<Item>().id = name;
+            item.GetComponent<LittleHeightsItem>().id = name;
             Instantiate(item, new Vector3(point.x + Random.Range(-4, 4f), point.y + Random.Range(-4f, 4f), point.z), Quaternion.identity);
         }
     }

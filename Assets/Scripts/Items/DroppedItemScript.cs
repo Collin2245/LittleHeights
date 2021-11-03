@@ -7,13 +7,13 @@ using UnityEngine;
 public class DroppedItemScript : MonoBehaviour
 {
     // Start is called before the first frame update
-    Item item;
+    LittleHeightsItem item;
     BoxCollider2D boxCollider;
     SpriteRenderer spriteRenderer;
 
     void Start()
     {
-        item = this.GetComponent<Item>();
+        item = this.GetComponent<LittleHeightsItem>();
         boxCollider = this.GetComponent<BoxCollider2D>();
         spriteRenderer = this.GetComponent<SpriteRenderer>();
         spriteRenderer.sprite = item.sprite;

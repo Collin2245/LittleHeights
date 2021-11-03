@@ -119,7 +119,7 @@ public class CraftingTab : MonoBehaviour
                 return;
             }
         }
-        Item item = junk.AddComponent<Item>();
+        LittleHeightsItem item = junk.AddComponent<LittleHeightsItem>();
         item.id = itemId;
         item.currAmount = GetCraftingItemAmount();
         foreach (var comp in junk.GetComponents<Component>())
@@ -147,13 +147,13 @@ public class CraftingTab : MonoBehaviour
             {
                 if(inventorySlot.currAmount >= itemAmount)
                 {
-                    inventorySlot.GetComponentInChildren<Item>().subtractQuantity(itemAmount);
+                    inventorySlot.GetComponentInChildren<LittleHeightsItem>().subtractQuantity(itemAmount);
                     inventorySlot.generateInventory();
                     return true;
                 }else
                 {
-                    int itemOnSlot = inventorySlot.GetComponentInChildren<Item>().currAmount;
-                    inventorySlot.GetComponentInChildren<Item>().subtractQuantity(inventorySlot.GetComponentInChildren<Item>().currAmount);
+                    int itemOnSlot = inventorySlot.GetComponentInChildren<LittleHeightsItem>().currAmount;
+                    inventorySlot.GetComponentInChildren<LittleHeightsItem>().subtractQuantity(inventorySlot.GetComponentInChildren<LittleHeightsItem>().currAmount);
                     inventorySlot.generateInventory();
                     itemAmount -= itemOnSlot;
                 }

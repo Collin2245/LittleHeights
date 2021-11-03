@@ -6,7 +6,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Item : MonoBehaviour
+public class LittleHeightsItem : MonoBehaviour
 {
     // Start is called before the first frame update
     public string id;

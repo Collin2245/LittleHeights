@@ -6,7 +6,7 @@ public class PlayerInventory : MonoBehaviour
 {
     // Start is called before the first frame update
     public HotbarItemHolder currentItemHolder;
-    public Item currentItem;
+    public LittleHeightsItem currentItem;
     public GameObject itemHolder1;
     public GameObject itemHolder2;
     public GameObject itemHolder3;
@@ -90,7 +90,7 @@ public class PlayerInventory : MonoBehaviour
         currentItemHolder = GameObject.Find("CurrentItemSelector").GetComponent<CurrentItem>().currentSlot;
         if(currentItemHolder.transform.childCount > 0)
         {
-            currentItem = currentItemHolder.GetComponentInChildren<Item>();
+            currentItem = currentItemHolder.GetComponentInChildren<LittleHeightsItem>();
         }
         else
         {
@@ -99,7 +99,7 @@ public class PlayerInventory : MonoBehaviour
         
     }
 
-    public void TryToAddItemToInventory(Item item)
+    public void TryToAddItemToInventory(LittleHeightsItem item)
     {
         if(TryToAddItemToExistingItem(item))
         {
@@ -120,7 +120,7 @@ public class PlayerInventory : MonoBehaviour
         Debug.Log("Inventory is full");
     }
 
-    public void TryToAddItemToInventoryNonDroppedItem(Item item)
+    public void TryToAddItemToInventoryNonDroppedItem(LittleHeightsItem item)
     {
         if (TryToAddItemToExistingItem(item))
         {
@@ -135,7 +135,7 @@ public class PlayerInventory : MonoBehaviour
         Debug.Log("Inventory is full");
     }
 
-    private bool TryToAddItemToExistingItem(Item item)
+    private bool TryToAddItemToExistingItem(LittleHeightsItem item)
     {
         for(int i = 0; i < this.itemHolders.Length; i++)
         {
@@ -147,7 +147,7 @@ public class PlayerInventory : MonoBehaviour
             {
                 if(itemHolders[i].GetComponent<InventorySlot>().currAmount + item.currAmount <= ItemProperties.quantityForItem[item.id])
                 {
-                    itemHolders[i].GetComponent<InventorySlot>().GetComponentInChildren<Item>().currAmount += item.currAmount;
+                    itemHolders[i].GetComponent<InventorySlot>().GetComponentInChildren<LittleHeightsItem>().currAmount += item.currAmount;
                     itemHolders[i].GetComponent<InventorySlot>().generateInventory();
                     return true;
                 }
@@ -162,7 +162,7 @@ public class PlayerInventory : MonoBehaviour
         return false;
     }
 
-    private bool TryToAddItemToEmptySlot(Item item)
+    private bool TryToAddItemToEmptySlot(LittleHeightsItem item)
     {
         for (int i = 0; i < this.itemHolders.Length; i++) 
         {
@@ -172,7 +172,7 @@ public class PlayerInventory : MonoBehaviour
                 //itemHolders[i].gameObject.GetComponentInChildren<Item>().id = item.id;
                 //itemHolders[i].gameObject.GetComponent<InventorySlot>().GetComponentInChildren<Item>().currAmount = item.currAmount;
                 GameObject temp = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, itemHolders[i].transform);
-                Item tempItem = temp.GetComponent<Item>();
+                LittleHeightsItem tempItem = temp.GetComponent<LittleHeightsItem>();
                 tempItem.id = item.id;
                 tempItem.currAmount = item.currAmount;
                 //need to set inventoryslot stuff

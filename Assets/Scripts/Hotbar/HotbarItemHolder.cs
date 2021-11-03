@@ -7,7 +7,7 @@ public class HotbarItemHolder : MonoBehaviour
     // Start is called before the first frame update
     public GameObject itemHolderOnInventory;
     public GameObject itemPrefab;
-    public Item item;
+    public LittleHeightsItem item;
     public int slotNum;
     public int currAmount;
     public string itemId;
@@ -44,7 +44,7 @@ public class HotbarItemHolder : MonoBehaviour
             if(this.transform.childCount == 0)
             {
                 itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, transform);
-                item = itemPrefab.GetComponent<Item>();
+                item = itemPrefab.GetComponent<LittleHeightsItem>();
             }
             item.id = itemHolderOnInventory.GetComponent<InventorySlot>().itemId;
             item.currAmount = itemHolderOnInventory.GetComponent<InventorySlot>().currAmount;

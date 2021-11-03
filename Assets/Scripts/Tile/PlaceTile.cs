@@ -12,7 +12,7 @@ public class PlaceTile : MonoBehaviour
     Grid grid;
     PlayerInventory playerInventory;
     public CurrentItem hotBarItem;
-    public Item currentItem;
+    public LittleHeightsItem currentItem;
     public Tilemap placeableItemTileMap;
     public Tile tileToPlace;
     GameObject ItemPrefabOnMouse;
@@ -53,7 +53,7 @@ public class PlaceTile : MonoBehaviour
                         placedItem = Instantiate(Resources.Load("PlaceableItem/" + currentItem.id), grid.GetCellCenterWorld(mousePosition), Quaternion.identity) as GameObject;
                         HotbarItemHolder hotbarItemHolder = hotBarItem.currentSlot;
                         Debug.Log("Position: " + grid.GetCellCenterWorld(mousePosition));
-                        hotbarItemHolder.itemHolderOnInventory.GetComponentInChildren<Item>().subtractQuantity(1);
+                        hotbarItemHolder.itemHolderOnInventory.GetComponentInChildren<LittleHeightsItem>().subtractQuantity(1);
                     }
                     else
                     {

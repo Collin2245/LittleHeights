@@ -13,7 +13,7 @@ public class InventorySlot : MonoBehaviour
     //public GameObject MouseInventorySlot.Instance.itemPrefabOnMouse;
     private RectTransform rectTransform;
     private Button btn;
-    public Item item;
+    public LittleHeightsItem item;
     public string itemMovement;
     public GameObject mouseInventory;
     public int currAmount;
@@ -34,7 +34,7 @@ public class InventorySlot : MonoBehaviour
             if (MouseInventorySlot.Instance.transform.childCount == 0)
             {
                 MouseInventorySlot.Instance.itemPrefabOnMouse = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, MouseInventorySlot.Instance.transform);
-                MouseInventorySlot.Instance.itemPrefabOnMouse.GetComponent<Item>().id = MouseInventorySlot.Instance.itemIdOnMouse;
+                MouseInventorySlot.Instance.itemPrefabOnMouse.GetComponent<LittleHeightsItem>().id = MouseInventorySlot.Instance.itemIdOnMouse;
                 //MouseInventorySlot.Instance.itemPrefabOnMouse.transform.localScale = new Vector3(0.5f, 0.5f, 0.5f);
             }
             else
@@ -57,14 +57,14 @@ public class InventorySlot : MonoBehaviour
             itemId = "";
         }else
         {
-            itemId = this.GetComponentInChildren<Item>().id;
+            itemId = this.GetComponentInChildren<LittleHeightsItem>().id;
         }
         if (itemId != "")
         {
             if (this.transform.childCount == 0)
             {
                 itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, rectTransform);
-                item = itemPrefab.GetComponent<Item>();
+                item = itemPrefab.GetComponent<LittleHeightsItem>();
                 itemId = item.id;
                 currAmount = item.currAmount;
             }
@@ -72,7 +72,7 @@ public class InventorySlot : MonoBehaviour
             {
                 path = "Items/" + this.itemId;
                 transform.GetChild(0).GetComponent<Image>().sprite = Resources.Load<Sprite>(path);
-                item = GetComponentInChildren<Item>();
+                item = GetComponentInChildren<LittleHeightsItem>();
                 itemId = item.id;
                 currAmount = item.currAmount;
             }
@@ -99,7 +99,7 @@ public class InventorySlot : MonoBehaviour
                 itemId = MouseInventorySlot.Instance.itemIdOnMouse;
                 currAmount = MouseInventorySlot.Instance.currAmount;
                 itemPrefab = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, rectTransform);
-                item = itemPrefab.GetComponent<Item>();
+                item = itemPrefab.GetComponent<LittleHeightsItem>();
                 item.id = itemId;
                 item.currAmount = currAmount;
                 DestroyMousePrefab();
@@ -114,12 +114,12 @@ public class InventorySlot : MonoBehaviour
                 }
                 else
                 {
-                    item = this.GetComponentInChildren<Item>();
+                    item = this.GetComponentInChildren<LittleHeightsItem>();
                     string tempItemId = item.id;
                     int tempQuantity = item.currAmount;
                     item.id = MouseInventorySlot.Instance.itemIdOnMouse;
                     item.currAmount = MouseInventorySlot.Instance.currAmount;
-                    Item tempItem = MouseInventorySlot.Instance.GetComponentInChildren<Item>();
+                    LittleHeightsItem tempItem = MouseInventorySlot.Instance.GetComponentInChildren<LittleHeightsItem>();
                     tempItem.id = tempItemId;
                     tempItem.currAmount = tempQuantity;
                     MouseInventorySlot.Instance.itemIdOnMouse = tempItemId;
@@ -142,7 +142,7 @@ public class InventorySlot : MonoBehaviour
                 itemId = "";
                 item.id = "";   //something weird here
                 MouseInventorySlot.Instance.itemPrefabOnMouse = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, MouseInventorySlot.Instance.transform);
-                Item tempItem = MouseInventorySlot.Instance.GetComponentInChildren<Item>();
+                LittleHeightsItem tempItem = MouseInventorySlot.Instance.GetComponentInChildren<LittleHeightsItem>();
                 tempItem.GetComponent<Image>().raycastTarget = false;
                 tempItem.transform.localScale = new Vector3(0.8f, 0.8f);
                 tempItem.id = itemId;
