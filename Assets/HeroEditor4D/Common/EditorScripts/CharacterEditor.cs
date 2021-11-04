@@ -12,6 +12,7 @@ using HeroEditor4D.Common.Enums;
 using Newtonsoft.Json;
 using UnityEngine;
 using UnityEngine.UI;
+using System.IO;
 
 namespace Assets.HeroEditor4D.Common.EditorScripts
 {
@@ -294,7 +295,23 @@ namespace Assets.HeroEditor4D.Common.EditorScripts
 	    /// </summary>
 	    public void SaveToJson()
 	    {
-            StartCoroutine(StandaloneFilePicker.SaveFile("Save as JSON", "", "New character", "json", Encoding.Default.GetBytes(Character.ToJson()), (success, path) => { Debug.Log(success ? $"Saved as {path}" : "Error saving."); }));
+            //string name = GameObject.Find("CharacterName").GetComponent<Text>().text;
+            //string saveFile = Application.persistentDataPath + "/" + name + ".data";
+
+            //// Does it exist?
+            //if (File.Exists(saveFile))
+            //{
+            //    // File exists!
+            //}
+            //else
+            //{
+            //    // File does not exist.
+            //    //
+            //    // This could mean it was deleted or has not been created yet.
+            //}
+
+            
+            StartCoroutine(StandaloneFilePicker.SaveFile("Save as JSON", "", name, "json", Encoding.Default.GetBytes(Character.ToJson()), (success, path) => { Debug.Log(success ? $"Saved as {path}" : "Error saving."); }));
 		}
 
 		/// <summary>
