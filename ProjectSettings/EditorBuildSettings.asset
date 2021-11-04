@@ -6,6 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/LandingScreen.unity
+    guid: bf7699f4fba0f80459c83b5dd7d9acb1
+  - enabled: 1
     path: Assets/Scenes/LittleHeightsWorldView.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/CreateLoad.unity
+    guid: 707e3b1e517e58741a96ef0f6ad60dd7
+  - enabled: 1
+    path: Assets/Scenes/CharacterCreation.unity
+    guid: a59e1349a962f6747ada1b503012a582
   m_configObjects: {}

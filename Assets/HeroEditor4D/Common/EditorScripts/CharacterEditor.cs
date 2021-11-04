@@ -49,9 +49,10 @@ namespace Assets.HeroEditor4D.Common.EditorScripts
         {
             base.Start();
             OnSelectTab(true);
+            Reset();
         }
 
-        /// <summary>
+        /// <summary> 
         /// This can be used as an example for building your own inventory UI.
         /// </summary>
         public void OnSelectTab(bool value)
