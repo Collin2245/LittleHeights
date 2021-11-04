@@ -32,7 +32,7 @@ public class SaveHelper : MonoBehaviour
             if(File.Exists(UpdateCharacterSavePathFile("test")))
             {
                 Debug.Log("File exists here");
-                Debug.Log(File.ReadAllText(saveFilePath));
+                Debug.Log(File.ReadAllText(saveFilePath)); 
             }else
             {
                 Debug.Log("File does not exist here");
