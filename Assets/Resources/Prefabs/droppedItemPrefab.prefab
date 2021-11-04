@@ -96,16 +96,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 134600214015547758}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 758797643fefd0540b93f48d158f79dc, type: 3}
+  m_Script: {fileID: 11500000, guid: 46d1c0016d550cd41b905ed999f192d2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: tempHoe
+  id: 
   type: 
   sprite: {fileID: 0}
   rectTransform: {fileID: 0}
   image: {fileID: 0}
   maxQuantity: 0
-  currAmount: 1
+  currAmount: 0
 --- !u!114 &4761467133621906129
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -86,6 +86,7 @@ public class DestroyObject : MonoBehaviour
         {
             GameObject item = Resources.Load("Prefabs/DroppedItemPrefab") as GameObject;
             item.GetComponent<LittleHeightsItem>().id = name;
+            item.GetComponent<LittleHeightsItem>().currAmount = 1;
             Instantiate(item, new Vector3(point.x + Random.Range(-4, 4f), point.y + Random.Range(-4f, 4f), point.z), Quaternion.identity);
         }
     }
