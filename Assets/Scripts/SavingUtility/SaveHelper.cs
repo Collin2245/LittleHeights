@@ -15,9 +15,13 @@ public class SaveHelper : MonoBehaviour
 {
     public string saveFilePath;
     public string jsonString;
+    SaveObject saveObject;
     // Start is called before the first frame update
     void Start()
     {
+        saveObject = new SaveObject();
+        saveObject.characterName = "Collin Krueger";
+        
         if(!Directory.Exists(Application.persistentDataPath + "/Characters/"))
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/Characters/");
@@ -29,14 +33,19 @@ public class SaveHelper : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.Home))
         {
-            if(File.Exists(UpdateCharacterSavePathFile("test")))
+            jsonString = GameObject.Find("Human").GetComponent<Character4DBase>().ToJson();
+            saveObject.characterName = "Collin Krueger";
+            //saveObject.jsonTest = jsonString;
+            if (File.Exists(UpdateCharacterSavePathFile("test")))
             {
-                Debug.Log("File exists here");
-                Debug.Log(File.ReadAllText(saveFilePath)); 
-            }else
+                File.WriteAllText(saveFilePath, "{\"saveObject\":" + JsonUtility.ToJson(saveObject) + ",\"characterInfo\":" + jsonString +"}");
+                Debug.Log(File.ReadAllText(saveFilePath));
+            }
+            else
             {
                 Debug.Log("File does not exist here");
-                SaveJsonByteArray(saveFilePath,GetJsonCharacterByteArray());
+                //SaveJsonByteArray(saveFilePath,JsonToByteArray(jsonString));
+                JsonUtility.ToJson(saveObject);
             }
         }
         
@@ -48,9 +57,9 @@ public class SaveHelper : MonoBehaviour
         return saveFilePath;
     }
 
-    byte[] GetJsonCharacterByteArray()
+    byte[] JsonToByteArray(string json)
     {
-        return Encoding.Default.GetBytes(GameObject.Find("Human").GetComponent<Character4DBase>().ToJson());
+        return Encoding.Default.GetBytes(json);
     }
 
     void SaveJsonByteArray(string path, byte[] byteArray)
