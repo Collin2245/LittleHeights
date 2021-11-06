@@ -24,6 +24,7 @@ public class SaveHelper : MonoBehaviour
         saveObject = new SaveObject();
         masterSave = new MasterSave();
         saveObject.characterName = "Collin Krueger";
+        saveObject.jsonTest = "111";
         
         if(!Directory.Exists(Application.persistentDataPath + "/Characters/"))
         {
@@ -41,9 +42,8 @@ public class SaveHelper : MonoBehaviour
             //saveObject.jsonTest = jsonString;
             if (File.Exists(UpdateCharacterSavePathFile("test")))
             {
-                masterSave.saveObject = saveObject;
-                masterSave.characterInfo = GameObject.Find("Human").GetComponent<Character4D>();
-                File.WriteAllText(saveFilePath, JsonUtility.ToJson(masterSave));
+                masterSave.saveObject = saveObject; 
+                File.WriteAllBytes(saveFilePath,Encoding.Default.GetBytes(JsonUtility.ToJson(masterSave)));
                 Debug.Log(File.ReadAllText(saveFilePath));
             }
             else

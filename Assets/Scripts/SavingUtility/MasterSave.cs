@@ -3,9 +3,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MasterSave
+[System.Serializable]
+public struct MasterSave
 {
-    // Start is called before the first frame update
     public SaveObject saveObject;
-    public Character4D characterInfo;
+}
+[System.Serializable]
+public struct SaveObject
+{
+    public string characterName;
+    public string jsonTest;
 }

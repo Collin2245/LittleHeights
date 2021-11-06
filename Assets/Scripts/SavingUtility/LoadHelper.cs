@@ -32,8 +32,7 @@ public class LoadHelper : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.PageUp))
         {
             string[] characters = Directory.GetFiles(charactersFilePath);
-            Debug.Log(File.ReadAllText(characters[0]));
-            masterSave = LoadSave(charactersFilePath);
+            masterSave = LoadSave(File.ReadAllText(characters[0]));
         }
     }
 
