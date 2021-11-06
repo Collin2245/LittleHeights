@@ -5,7 +5,7 @@ using System.Text;
 using HeroEditor4D.Common;
 
 [System.Serializable]
-public class SaveObject: MonoBehaviour
+public class SaveObject
 {
     public string characterName;
     public string jsonTest;

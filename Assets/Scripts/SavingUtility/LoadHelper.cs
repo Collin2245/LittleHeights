@@ -13,7 +13,37 @@ using HeroEditor4D.Common;
 [System.Serializable]
 public class LoadHelper : MonoBehaviour
 {
+    MasterSave masterSave;
+    string charactersFilePath;
+    
     // Start is called before the first frame update
+    private void Start()
+    {
+        charactersFilePath = Application.persistentDataPath + "/Characters/";
+        if (!Directory.Exists(charactersFilePath))
+        {
+            Directory.CreateDirectory(charactersFilePath);
 
-      
+        }
+    }
+
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.PageUp))
+        {
+            string[] characters = Directory.GetFiles(charactersFilePath);
+            Debug.Log(File.ReadAllText(characters[0]));
+            masterSave = LoadSave(charactersFilePath);
+        }
+    }
+
+    Character4DBase ResolveCharacter()
+    {
+        return new Character4D();
+    }
+
+    MasterSave LoadSave(string json)
+    { 
+        return JsonUtility.FromJson<MasterSave>(json);
+    }
 }

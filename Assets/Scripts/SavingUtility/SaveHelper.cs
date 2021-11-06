@@ -16,10 +16,13 @@ public class SaveHelper : MonoBehaviour
     public string saveFilePath;
     public string jsonString;
     SaveObject saveObject;
+    MasterSave masterSave;
+
     // Start is called before the first frame update
     void Start()
     {
         saveObject = new SaveObject();
+        masterSave = new MasterSave();
         saveObject.characterName = "Collin Krueger";
         
         if(!Directory.Exists(Application.persistentDataPath + "/Characters/"))
@@ -38,7 +41,9 @@ public class SaveHelper : MonoBehaviour
             //saveObject.jsonTest = jsonString;
             if (File.Exists(UpdateCharacterSavePathFile("test")))
             {
-                File.WriteAllText(saveFilePath, "{\"saveObject\":" + JsonUtility.ToJson(saveObject) + ",\"characterInfo\":" + jsonString +"}");
+                masterSave.saveObject = saveObject;
+                masterSave.characterInfo = GameObject.Find("Human").GetComponent<Character4D>();
+                File.WriteAllText(saveFilePath, JsonUtility.ToJson(masterSave));
                 Debug.Log(File.ReadAllText(saveFilePath));
             }
             else
