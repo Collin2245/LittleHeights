@@ -25,12 +25,14 @@ public class SaveHelper : MonoBehaviour
     {
         saveObject = new SaveObject();
         masterSave = new MasterSave();
-        saveObject.characterName = "Collin Krueger";
-        saveObject.jsonTest = "111";
-        
+
         if(!Directory.Exists(Application.persistentDataPath + "/Characters/"))
         {
             Directory.CreateDirectory(Application.persistentDataPath + "/Characters/");
+        }
+        if (!Directory.Exists(Application.persistentDataPath + "/Worlds/"))
+        {
+            Directory.CreateDirectory(Application.persistentDataPath + "/Worlds/");
         }
     }
 
@@ -51,7 +53,7 @@ public class SaveHelper : MonoBehaviour
     }
 
     byte[] JsonToByteArray(string json)
-    {
+    { 
         return Encoding.Default.GetBytes(json);
     }
 
