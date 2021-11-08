@@ -9,6 +9,7 @@ using Assets.HeroEditor4D.FantasyInventory.Scripts.Interface.Elements;
 using Assets.HeroEditor4D.Common.SimpleColorPicker.Scripts;
 using System.Text;
 using HeroEditor4D.Common;
+using Newtonsoft.Json;
 
 [System.Serializable]
 public class SaveHelper : MonoBehaviour
@@ -17,6 +18,7 @@ public class SaveHelper : MonoBehaviour
     public string jsonString;
     SaveObject saveObject;
     MasterSave masterSave;
+    CharacterJson characterJson;
 
     // Start is called before the first frame update
     void Start()
@@ -35,23 +37,9 @@ public class SaveHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Home))
+        if (Input.GetKeyDown(KeyCode.Home))
         {
-            jsonString = GameObject.Find("Human").GetComponent<Character4DBase>().ToJson();
-            saveObject.characterName = "Collin Krueger";
-            //saveObject.jsonTest = jsonString;
-            if (File.Exists(UpdateCharacterSavePathFile("test")))
-            {
-                masterSave.saveObject = saveObject; 
-                File.WriteAllBytes(saveFilePath,Encoding.Default.GetBytes(JsonUtility.ToJson(masterSave)));
-                Debug.Log(File.ReadAllText(saveFilePath));
-            }
-            else
-            {
-                Debug.Log("File does not exist here");
-                //SaveJsonByteArray(saveFilePath,JsonToByteArray(jsonString));
-                JsonUtility.ToJson(saveObject);
-            }
+            SaveMasterSave(saveFilePath);
         }
         
     }
@@ -70,5 +58,26 @@ public class SaveHelper : MonoBehaviour
     void SaveJsonByteArray(string path, byte[] byteArray)
     {
         System.IO.File.WriteAllBytes(path, byteArray);
+    }
+
+    void SaveMasterSave(string path)
+    {
+            characterJson.characterJson = JsonConvert.DeserializeObject<Dictionary<string, string>>(GameObject.Find("Human").GetComponent<Character4DBase>().ToJson());
+            saveObject.characterName = "Collin Krueger";
+            //saveObject.jsonTest = jsonString;
+            if (File.Exists(UpdateCharacterSavePathFile("test")))
+            {
+                masterSave.saveObject = saveObject;
+                masterSave.characterJson.characterJson = characterJson.characterJson;
+                File.WriteAllBytes(saveFilePath, Encoding.Default.GetBytes(JsonConvert.SerializeObject(masterSave)));
+                Debug.Log(File.ReadAllText(saveFilePath));
+            }
+            else
+            {
+                Debug.Log("File does not exist here");
+                //SaveJsonByteArray(saveFilePath,JsonToByteArray(jsonString));
+                JsonUtility.ToJson(saveObject);
+            }
+        }
     }
 }
