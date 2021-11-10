@@ -20,13 +20,18 @@ public class LoadHelper : MonoBehaviour
     // Start is called before the first frame update
     private void Start()
     {
-        character4D = GameObject.Find("Human").GetComponent<Character4D>();
+        
         charactersFilePath = Application.persistentDataPath + "/Characters/";
         if (!Directory.Exists(charactersFilePath))
         {
             Directory.CreateDirectory(charactersFilePath);
 
         }
+    }
+
+    private void SetCharacter()
+    {
+        character4D = GameObject.Find("Human").GetComponent<Character4D>();
     }
 
     private void Update()
@@ -40,6 +45,16 @@ public class LoadHelper : MonoBehaviour
         }
     }
 
+    public static string[] GetSaves()
+    {
+        return Directory.GetFiles(Application.persistentDataPath + "/Characters/");
+    }
+
+    public static MasterSave GetMasterSave(string path)
+    {
+        return  LoadSave(File.ReadAllText(path));
+    }
+
     Character4D ResolveCharacter()
     {
         Character4D character = new Character4D();
@@ -47,7 +62,7 @@ public class LoadHelper : MonoBehaviour
         return new Character4D();
     }
 
-    MasterSave LoadSave(string json)
+    static MasterSave LoadSave(string json)
     { 
         return JsonConvert.DeserializeObject<MasterSave>(json);
     }

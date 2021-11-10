@@ -10,6 +10,10 @@ public class MainMenuFunctions : MonoBehaviour
     Button CreateLoadButton;
     [SerializeField]
     Button CharacterCreationButton;
+    [SerializeField]
+    Button CharacterLoadButton;
+
+    //todo: remove this
     public void Start()
     {
         if (CreateLoadButton != null)
@@ -19,6 +23,10 @@ public class MainMenuFunctions : MonoBehaviour
         if (CharacterCreationButton != null)
         {
             CharacterCreationButton.onClick.AddListener(ToCharacterCreationButton);
+        }
+        if (CharacterLoadButton != null)
+        {
+            CharacterLoadButton.onClick.AddListener(ToCharacterLoadButton);
         }
 
     }
@@ -32,4 +40,8 @@ public class MainMenuFunctions : MonoBehaviour
         SceneManager.LoadScene("CharacterCreation", LoadSceneMode.Single);
     }
 
+    public void ToCharacterLoadButton()
+    {
+        SceneManager.LoadScene("CharacterLoad", LoadSceneMode.Single);
+    }
 }

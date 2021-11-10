@@ -9,12 +9,15 @@ EditorBuildSettings:
     path: Assets/Scenes/LandingScreen.unity
     guid: bf7699f4fba0f80459c83b5dd7d9acb1
   - enabled: 1
-    path: Assets/Scenes/LittleHeightsWorldView.unity
-    guid: 2cda990e2423bbf4892e6590ba056729
-  - enabled: 1
     path: Assets/Scenes/CreateLoad.unity
     guid: 707e3b1e517e58741a96ef0f6ad60dd7
   - enabled: 1
     path: Assets/Scenes/CharacterCreation.unity
     guid: a59e1349a962f6747ada1b503012a582
+  - enabled: 1
+    path: Assets/Scenes/LittleHeightsWorldView.unity
+    guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/CharacterLoad.unity
+    guid: 5bedb14d9e3836a42bd6fb6bd16efd1f
   m_configObjects: {}
