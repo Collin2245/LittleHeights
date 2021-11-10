@@ -12202,10 +12202,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 705737614}
-        m_TargetAssemblyTypeName: Assets.HeroEditor4D.Common.EditorScripts.CharacterEditor,
-          Assembly-CSharp
-        m_MethodName: SaveToJson
+      - m_Target: {fileID: 125569780}
+        m_TargetAssemblyTypeName: SaveHelper, Assembly-CSharp
+        m_MethodName: NewSave
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
