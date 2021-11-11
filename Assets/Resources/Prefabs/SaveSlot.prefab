@@ -168,6 +168,7 @@ GameObject:
   - component: {fileID: 3577254016772469968}
   - component: {fileID: 3577254016772469969}
   - component: {fileID: 9198459628478666856}
+  - component: {fileID: 7507572041935388753}
   m_Layer: 5
   m_Name: SaveSlot
   m_TagString: Untagged
@@ -289,6 +290,18 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
+--- !u!114 &7507572041935388753
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3577254016772469983}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ade6b2c994689e14aa3098c62d359a96, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3577254016978999081
 GameObject:
   m_ObjectHideFlags: 0

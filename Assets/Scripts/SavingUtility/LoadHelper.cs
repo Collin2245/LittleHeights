@@ -17,15 +17,14 @@ public class LoadHelper : MonoBehaviour
     MasterSave masterSave;
     string charactersFilePath;
     Character4D character4D;
+
     // Start is called before the first frame update
     private void Start()
     {
-        
         charactersFilePath = Application.persistentDataPath + "/Characters/";
         if (!Directory.Exists(charactersFilePath))
         {
             Directory.CreateDirectory(charactersFilePath);
-
         }
     }
 
