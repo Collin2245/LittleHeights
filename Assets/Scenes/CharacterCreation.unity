@@ -1267,6 +1267,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   saveFilePath: 
   jsonString: 
+  ButtonObj: {fileID: 1429623824}
+  TextObj: {fileID: 395569149}
 --- !u!114 &125569781
 MonoBehaviour:
   m_ObjectHideFlags: 0

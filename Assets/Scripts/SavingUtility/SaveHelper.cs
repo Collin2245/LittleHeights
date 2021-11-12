@@ -21,6 +21,10 @@ public class SaveHelper : MonoBehaviour
     SaveObject saveObject;
     MasterSave masterSave;
     CharacterJson characterJson;
+    [SerializeField] 
+    GameObject ButtonObj;
+    [SerializeField]
+    GameObject TextObj;
 
     // Start is called before the first frame update
     void Start()
@@ -41,15 +45,16 @@ public class SaveHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Home))
+        if(TextObj != null && ButtonObj != null)
         {
-            SaveMasterSave(saveFilePath);
+            if (!(TextObj.GetComponent<Text>().text == ""))
+            {
+                ButtonObj.GetComponent<Button>().interactable = true;
+            }else
+            {
+                ButtonObj.GetComponent<Button>().interactable = false;
+            }
         }
-        if (Input.GetKeyDown(KeyCode.End))
-        {
-            NewSave();
-        }
-
     }
 
     void SaveName(string name)
@@ -60,6 +65,7 @@ public class SaveHelper : MonoBehaviour
     public void NewSave()
     {
         int currSaves = Directory.GetFiles(characterPath).Length;
+        saveObject.saveSlot = currSaves + 1;
         SaveMasterSave(UpdateCharacterSavePathFile((currSaves + 1).ToString()));
     }
 

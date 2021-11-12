@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -26,6 +27,7 @@ public class CharacterSaveDropDown : MonoBehaviour
             Debug.Log(saves[i]);
             GenerateSaveSlot(currMasterSave.saveObject.characterName, 250, 1, i+1);
         }
+        Instantiate(Resources.Load<GameObject>("Prefabs/NewCharacterSlot"), content.transform);
     }
 
     void GenerateSaveSlot(string name, int gold, int level, int num)
@@ -40,8 +42,10 @@ public class CharacterSaveDropDown : MonoBehaviour
         saveSlot.transform.Find("SlotNumBackground").gameObject.transform.Find("SlotNum").gameObject.GetComponent<Text>().text = num.ToString();
         if(num == 1)
         {
+            //set default selcted first save
             Toggle t = saveSlot.GetComponent<Toggle>();
-            //t.Select;
+            MasterSave s = LoadHelper.GetMasterSave(Directory.GetFiles(Application.persistentDataPath + "/Characters/")[0]);
+            PersistentData.Instance.CurrentSave = s;
         }
 
     }

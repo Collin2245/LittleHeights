@@ -14,6 +14,7 @@ public struct SaveObject
 {
     public string characterName;
     public string jsonTest;
+    public int saveSlot;
 }
 [System.Serializable]
 public struct CharacterJson

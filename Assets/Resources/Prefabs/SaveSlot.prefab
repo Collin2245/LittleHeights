@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 3577254016772469968}
   - component: {fileID: 3577254016772469969}
   - component: {fileID: 9198459628478666856}
-  - component: {fileID: 7507572041935388753}
+  - component: {fileID: 849777262491926994}
   m_Layer: 5
   m_Name: SaveSlot
   m_TagString: Untagged
@@ -255,7 +255,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Navigation:
-    m_Mode: 3
+    m_Mode: -1
     m_WrapAround: 0
     m_SelectOnUp: {fileID: 0}
     m_SelectOnDown: {fileID: 0}
@@ -290,7 +290,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_IsOn: 0
---- !u!114 &7507572041935388753
+--- !u!114 &849777262491926994
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
