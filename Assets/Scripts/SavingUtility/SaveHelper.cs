@@ -11,6 +11,7 @@ using System.Text;
 using HeroEditor4D.Common;
 using Newtonsoft.Json;
 using UnityEngine.UI;
+using System;
 
 [System.Serializable]
 public class SaveHelper : MonoBehaviour
@@ -66,7 +67,9 @@ public class SaveHelper : MonoBehaviour
     {
         int currSaves = Directory.GetFiles(characterPath).Length;
         saveObject.saveSlot = currSaves + 1;
-        SaveMasterSave(UpdateCharacterSavePathFile((currSaves + 1).ToString()));
+        saveObject.guid = Guid.NewGuid().ToString();
+        Guid test = Guid.Parse(saveObject.guid);
+        SaveMasterSave(UpdateCharacterSavePathFile((saveObject.guid).ToString()));
     }
 
     string UpdateCharacterSavePathFile(string name)
