@@ -20,7 +20,7 @@ public class CharacterSaveDropDown : MonoBehaviour
 
     void LoadDDL()
     {
-        string[] saves = LoadHelper.GetSaves();
+        string[] saves = LoadHelper.GetCharacterSaves();
         for (int i = 0; i < saves.Length; i++)
         {
             currMasterSave = LoadHelper.GetMasterSave(saves[i]);

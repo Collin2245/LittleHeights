@@ -20,19 +20,19 @@ public class TileManager : MonoBehaviour
     private bool playerPlaced;
     private GameObject player;
     public TileManager Instance;
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Debug.Log("creating Tile manager instance");
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
-        else
-        {
-            Destroy(gameObject);
-        }
-    }
+    //private void Awake()
+    //{
+    //    if (Instance == null)
+    //    {
+    //        Debug.Log("creating Tile manager instance");
+    //        Instance = this;
+    //        DontDestroyOnLoad(gameObject);
+    //    }
+    //    else
+    //    {
+    //        Destroy(gameObject);
+    //    }
+    //}
     void Start()
     {
         playerPlaced = false;

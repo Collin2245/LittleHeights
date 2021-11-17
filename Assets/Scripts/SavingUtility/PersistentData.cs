@@ -6,6 +6,7 @@ public class PersistentData : MonoBehaviour
 {
     public static PersistentData Instance { get; private set; }
     public MasterSave CurrentSave;
+    public MasterWorldSave CurrentWorld;
     private void Awake()
     {
         if (Instance == null)

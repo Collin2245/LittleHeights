@@ -38,20 +38,30 @@ public class LoadHelper : MonoBehaviour
         if(Input.GetKeyDown(KeyCode.PageUp))
         {
             string[] characters = Directory.GetFiles(charactersFilePath);
-            masterSave = LoadSave(File.ReadAllText(characters[0]));
+            masterSave = LoadCharacterSave(File.ReadAllText(characters[0]));
             string test = JsonConvert.SerializeObject(masterSave.characterJson.characterJson);
             GameObject.Find("Human").GetComponent<Character4DBase>().FromJson(JsonConvert.SerializeObject(masterSave.characterJson.characterJson),false);
         }
     }
 
-    public static string[] GetSaves()
+    public static string[] GetCharacterSaves()
     {
         return Directory.GetFiles(Application.persistentDataPath + "/Characters/");
     }
 
+    public static string[] GetWorldSaves()
+    {
+        return Directory.GetFiles(Application.persistentDataPath + "/Worlds/");
+    }
+
     public static MasterSave GetMasterSave(string path)
     {
-        return  LoadSave(File.ReadAllText(path));
+        return  LoadCharacterSave(File.ReadAllText(path));
+    }
+
+    public static MasterWorldSave GetMasterWorldSave(string path)
+    {
+        return LoadWorldSave(File.ReadAllText(path));
     }
 
     Character4D ResolveCharacter()
@@ -61,8 +71,13 @@ public class LoadHelper : MonoBehaviour
         return new Character4D();
     }
 
-    static MasterSave LoadSave(string json)
+    static MasterSave LoadCharacterSave(string json)
     { 
         return JsonConvert.DeserializeObject<MasterSave>(json);
+    }
+
+    static MasterWorldSave LoadWorldSave(string json)
+    {
+        return JsonConvert.DeserializeObject<MasterWorldSave>(json);
     }
 }

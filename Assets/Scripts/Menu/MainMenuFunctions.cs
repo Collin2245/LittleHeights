@@ -44,4 +44,13 @@ public class MainMenuFunctions : MonoBehaviour
     {
         SceneManager.LoadScene("CharacterLoad", LoadSceneMode.Single);
     }
+
+    public void ToWorldCreateButton()
+    {
+        SceneManager.LoadScene("WorldCreate", LoadSceneMode.Single);
+    }
+    public void ToWorldLoadButton()
+    {
+        SceneManager.LoadScene("WorldLoad", LoadSceneMode.Single);
+    }
 }

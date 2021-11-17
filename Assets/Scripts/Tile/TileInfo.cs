@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class TileInfo
 {
     // Start is called before the first frame update
@@ -10,18 +11,6 @@ public class TileInfo
     public bool isItemOn;
     public bool isTreeOn;
     public bool isGrass;
-    
 
-
-
-
-    public TileInfo()
-    {
-        this.isWater = false;
-        this.isWalkableWater = false;
-        this.isItemOn = false;
-        this.isTreeOn = false;
-        this.isGrass = false;
-    }
 
 }

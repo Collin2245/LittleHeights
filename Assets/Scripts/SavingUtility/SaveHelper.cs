@@ -19,19 +19,26 @@ public class SaveHelper : MonoBehaviour
     public string saveFilePath;
     public string jsonString;
     string characterPath;
+    string worldPath;
     SaveObject saveObject;
     MasterSave masterSave;
     CharacterJson characterJson;
+    MasterWorldSave masterWorldSave;
     [SerializeField] 
     GameObject ButtonObj;
     [SerializeField]
-    GameObject TextObj;
+    GameObject ButtonObjWorld;
+    [SerializeField]
+    GameObject TextObjCharacter;
+    [SerializeField]
+    GameObject TextObjWorld;
 
     // Start is called before the first frame update
     void Start()
     {
         saveObject = new SaveObject();
         masterSave = new MasterSave();
+        masterWorldSave = new MasterWorldSave();
         characterPath = Application.persistentDataPath + "/Characters/";
         if (!Directory.Exists(Application.persistentDataPath + "/Characters/"))
         {
@@ -46,9 +53,9 @@ public class SaveHelper : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(TextObj != null && ButtonObj != null)
+        if(TextObjCharacter != null && ButtonObj != null)
         {
-            if (!(TextObj.GetComponent<Text>().text == ""))
+            if (!(TextObjCharacter.GetComponent<Text>().text == ""))
             {
                 ButtonObj.GetComponent<Button>().interactable = true;
             }else
@@ -56,11 +63,39 @@ public class SaveHelper : MonoBehaviour
                 ButtonObj.GetComponent<Button>().interactable = false;
             }
         }
+        if (TextObjWorld != null && ButtonObjWorld != null)
+        {
+            if (!(TextObjWorld.GetComponent<Text>().text == ""))
+            {
+                ButtonObjWorld.GetComponent<Button>().interactable = true;
+            }
+            else
+            {
+                ButtonObjWorld.GetComponent<Button>().interactable = false;
+            }
+        }
     }
 
-    void SaveName(string name)
+    void SaveName(string name, string path)
     {
         saveObject.characterName = name;
+        if (File.Exists(path))
+        {
+            masterSave.saveObject = saveObject;
+            masterSave.characterJson.characterJson = characterJson.characterJson;
+            File.WriteAllBytes(saveFilePath, Encoding.Default.GetBytes(JsonConvert.SerializeObject(masterSave)));
+            Debug.Log(File.ReadAllText(saveFilePath));
+        }
+        else
+        {
+            Debug.Log("File does not exist here");
+            //add input validation here
+            saveObject.characterName = GameObject.Find("CharacterName").GetComponent<Text>().text;
+            masterSave.saveObject = saveObject;
+            masterSave.characterJson.characterJson = characterJson.characterJson;
+            File.WriteAllBytes(saveFilePath, Encoding.Default.GetBytes(JsonConvert.SerializeObject(masterSave)));
+            Debug.Log(File.ReadAllText(saveFilePath));
+        }
     }    
 
     public void NewSave()
@@ -71,6 +106,24 @@ public class SaveHelper : MonoBehaviour
         Guid test = Guid.Parse(saveObject.guid);
         SaveMasterSave(UpdateCharacterSavePathFile((saveObject.guid).ToString()));
     }
+
+    public void NewWorldSave()
+    {
+        masterWorldSave.guid = Guid.NewGuid().ToString();
+        masterWorldSave.name = TextObjWorld.GetComponent<Text>().text;
+        masterWorldSave.seed = UnityEngine.Random.Range(1f, 100000f);
+        //MocVector3 mocVector3 = new MocVector3();
+        //mocVector3.x = 1;
+        //mocVector3.y = 2;
+        //mocVector3.z = 3;
+        //masterWorldSave.CharacterToWorldPos = new Dictionary<string, MocVector3>() { { "111", mocVector3 } };
+        //TextObjWorld.GetComponent<Text>().text;
+        worldPath = Application.persistentDataPath + "/Worlds/" + masterWorldSave.guid + ".data";
+        File.WriteAllBytes(worldPath, Encoding.Default.GetBytes(JsonConvert.SerializeObject(masterWorldSave)));
+        Debug.Log(File.ReadAllText(worldPath));
+        PersistentData.Instance.CurrentWorld = masterWorldSave;
+    }
+
 
     string UpdateCharacterSavePathFile(string name)
     {

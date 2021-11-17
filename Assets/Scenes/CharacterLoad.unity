@@ -620,7 +620,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 784151079}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &784151079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -706,6 +718,11 @@ MonoBehaviour:
       characterName: 
       jsonTest: 
       saveSlot: 0
+      guid: 
+  CurrentWorld:
+    name: 
+    seed: 0
+    guid: 
 --- !u!4 &880995676
 Transform:
   m_ObjectHideFlags: 0
@@ -1217,6 +1234,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1426375477}
   - component: {fileID: 1426375476}
+  - component: {fileID: 1426375478}
   m_Layer: 0
   m_Name: SaveHelper
   m_TagString: Untagged
@@ -1251,6 +1269,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426375478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426375475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5c1bb3a5916ab2c4ba76ff9ccda9a7fe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  saveFilePath: 
+  jsonString: 
+  ButtonObj: {fileID: 0}
+  ButtonObjWorld: {fileID: 0}
+  TextObjCharacter: {fileID: 0}
+  TextObjWorld: {fileID: 0}
 --- !u!1 &1514046266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1410,7 +1446,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 62994875}
   m_HandleRect: {fileID: 62994874}
   m_Direction: 2
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

@@ -7,5 +7,16 @@ public struct MasterWorldSave
 {
     public string name;
     public float seed;
-    public Dictionary<string,Vector3> CharacterToWorldPos;
+    public string guid;
+    public Dictionary<string, MocVector3> CharacterToWorldPos;
+    //public Dictionary<Vector3Int, TileInfo> tileInfo;
+    //public Dictionary<Vector2Int, bool> drawnChunks;
+}
+
+[System.Serializable]
+public struct MocVector3
+{
+    public float x;
+    public float y;
+    public float z;
 }
