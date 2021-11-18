@@ -684,60 +684,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   content: {fileID: 938103687}
---- !u!1 &880995674
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 880995676}
-  - component: {fileID: 880995675}
-  m_Layer: 0
-  m_Name: PersistentSaveHolder
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!114 &880995675
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 880995674}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8dbeec820a5d52d409434bf50f7e1ce8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  CurrentSave:
-    saveObject:
-      characterName: 
-      jsonTest: 
-      saveSlot: 0
-      guid: 
-  CurrentWorld:
-    name: 
-    seed: 0
-    guid: 
---- !u!4 &880995676
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 880995674}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1215.2045, y: 446.8549, z: -0.90641904}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 6
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &938103687
 GameObject:
   m_ObjectHideFlags: 0
@@ -1490,6 +1436,63 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1737767944}
   m_CullTransparentMesh: 1
+--- !u!1001 &1831430619
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5004224671095400168, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_RootOrder
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004224671095400168, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 1122.3197
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004224671095400168, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 406.69894
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004224671095400168, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.7199082
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004224671095400168, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004224671095400168, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004224671095400168, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004224671095400168, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004224671095400168, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004224671095400168, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004224671095400168, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5004224671095400174, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
+      propertyPath: m_Name
+      value: PersistentSaveHolder
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: a4daefde50bbefe42a46f0373e30ede4, type: 3}
 --- !u!1 &1909999048
 GameObject:
   m_ObjectHideFlags: 0
