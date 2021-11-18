@@ -1231,6 +1231,7 @@ GameObject:
   - component: {fileID: 125569779}
   - component: {fileID: 125569780}
   - component: {fileID: 125569781}
+  - component: {fileID: 125569782}
   m_Layer: 0
   m_Name: SaveUtility
   m_TagString: Untagged
@@ -1283,6 +1284,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e8a3579398b946d4a823f7a41cdcefc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &125569782
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 125569778}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f1f636d480eda41b6f695aba1451aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CreateLoadButton: {fileID: 0}
+  CharacterCreationButton: {fileID: 0}
+  CharacterLoadButton: {fileID: 0}
 --- !u!1 &128484200
 GameObject:
   m_ObjectHideFlags: 0
@@ -12266,6 +12282,18 @@ MonoBehaviour:
       - m_Target: {fileID: 125569780}
         m_TargetAssemblyTypeName: SaveHelper, Assembly-CSharp
         m_MethodName: NewSave
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 125569782}
+        m_TargetAssemblyTypeName: MainMenuFunctions, Assembly-CSharp
+        m_MethodName: ToWorldLoadButton
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

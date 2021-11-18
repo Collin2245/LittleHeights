@@ -112,13 +112,26 @@ public class SaveHelper : MonoBehaviour
         masterWorldSave.guid = Guid.NewGuid().ToString();
         masterWorldSave.name = TextObjWorld.GetComponent<Text>().text;
         masterWorldSave.seed = UnityEngine.Random.Range(1f, 100000f);
-        //MocVector3 mocVector3 = new MocVector3();
-        //mocVector3.x = 1;
-        //mocVector3.y = 2;
-        //mocVector3.z = 3;
-        //masterWorldSave.CharacterToWorldPos = new Dictionary<string, MocVector3>() { { "111", mocVector3 } };
-        //TextObjWorld.GetComponent<Text>().text;
+        masterWorldSave.tileInfo = new List<KeyValuePair<MocVector3int, TileInfo>>();
+        //masterWorldSave.DrawnChunks = new List<KeyValuePair<MocVector2int, bool>>();
+        masterWorldSave.CharacterToWorldPos = new List<KeyValuePair<string, MocVector3int>>();
+        PersistentData.Instance.CurrentWorld = masterWorldSave;
         worldPath = Application.persistentDataPath + "/Worlds/" + masterWorldSave.guid + ".data";
+        File.WriteAllBytes(worldPath, Encoding.Default.GetBytes(JsonConvert.SerializeObject(masterWorldSave)));
+        Debug.Log(File.ReadAllText(worldPath));
+        PersistentData.Instance.CurrentWorld = masterWorldSave;
+    }
+
+    public static void NewWorldSave(MasterWorldSave masterWorldSave)
+    {
+        //masterWorldSave.guid = Guid.NewGuid().ToString();
+        //masterWorldSave.name = TextObjWorld.GetComponent<Text>().text;
+        //masterWorldSave.seed = UnityEngine.Random.Range(1f, 100000f);
+        //masterWorldSave.tileInfo = new Dictionary<MocVector3int, TileInfo>();
+        //masterWorldSave.DrawnChunks = new Dictionary<MocVector2int, bool>();
+        //masterWorldSave.CharacterToWorldPos = new Dictionary<string, MocVector3int>();
+        PersistentData.Instance.CurrentWorld = masterWorldSave;
+        string worldPath = Application.persistentDataPath + "/Worlds/" + masterWorldSave.guid + ".data";
         File.WriteAllBytes(worldPath, Encoding.Default.GetBytes(JsonConvert.SerializeObject(masterWorldSave)));
         Debug.Log(File.ReadAllText(worldPath));
         PersistentData.Instance.CurrentWorld = masterWorldSave;

@@ -6,30 +6,6 @@ using UnityEngine.UI;
 
 public class MainMenuFunctions : MonoBehaviour
 {
-    [SerializeField]
-    Button CreateLoadButton;
-    [SerializeField]
-    Button CharacterCreationButton;
-    [SerializeField]
-    Button CharacterLoadButton;
-
-    //todo: remove this
-    public void Start()
-    {
-        if (CreateLoadButton != null)
-        {
-            CreateLoadButton.onClick.AddListener(ToCreateLoad);
-        }
-        if (CharacterCreationButton != null)
-        {
-            CharacterCreationButton.onClick.AddListener(ToCharacterCreationButton);
-        }
-        if (CharacterLoadButton != null)
-        {
-            CharacterLoadButton.onClick.AddListener(ToCharacterLoadButton);
-        }
-
-    }
     public void ToCreateLoad()
     {
         SceneManager.LoadScene("CreateLoad", LoadSceneMode.Single);
@@ -52,5 +28,9 @@ public class MainMenuFunctions : MonoBehaviour
     public void ToWorldLoadButton()
     {
         SceneManager.LoadScene("WorldLoad", LoadSceneMode.Single);
+    }
+    public void ToLittleHeightsWorldView()
+    {
+        SceneManager.LoadScene("LittleHeightsWorldView", LoadSceneMode.Single);
     }
 }

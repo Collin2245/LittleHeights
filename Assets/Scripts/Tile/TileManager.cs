@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Linq;
 
 public class TileManager : MonoBehaviour
 {
@@ -14,8 +15,10 @@ public class TileManager : MonoBehaviour
     public int chunkSize;
     public float scale;
     public float seed;
-    public Dictionary<Vector3Int, TileInfo> tileInfo;
-    public Dictionary<Vector2Int, bool> drawnChunks;
+    public Dictionary<MocVector3int, TileInfo> tileInfo;
+    public Dictionary<MocVector2int, bool> drawnChunks;    
+    public List<KeyValuePair<MocVector3int, TileInfo>> tileInfoList;
+    public List<KeyValuePair<MocVector2int, bool>> drawnChunksList;
     private bool useDictionaryOnAllTilesFlag;
     private bool playerPlaced;
     private GameObject player;
@@ -35,19 +38,43 @@ public class TileManager : MonoBehaviour
     //}
     void Start()
     {
+        LoadWithPersistentData();
+    }
+
+    void LoadWithPersistentData()
+    {
         playerPlaced = false;
         tiles = this.GetComponent<Tiles>();
-        tileInfo = GetComponent<TileDict>().tileInfo;
-        drawnChunks = new Dictionary<Vector2Int, bool>();
+        //converts because json serialization is stupid sometimes
+        tileInfo = PersistentData.Instance.CurrentWorld.tileInfo.ToDictionary(x => x.Key, x => x.Value);
+        //drawnChunks = PersistentData.Instance.CurrentWorld.DrawnChunks.ToDictionary(x => x.Key, x => x.Value);
+        drawnChunks = new Dictionary<MocVector2int, bool>();
         startMult = 500;
-        seed = Random.Range(1f, 100000f);
+        seed = PersistentData.Instance.CurrentWorld.seed;
         chunkSize = 35;
         scale = 0.5f;
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = new Vector3(chunkSize * startMult + 0.5f * chunkSize, chunkSize * startMult + 0.5f * chunkSize, -10);
-        DrawChunk(chunkSize, scale, seed,new Vector2Int(chunkSize*startMult, chunkSize*startMult));
+        DrawChunk(chunkSize, scale, seed, new Vector2Int(chunkSize * startMult, chunkSize * startMult));
         DrawChunksAroundPlayer();
         Debug.Log("seed: " + seed);
+    }
+
+    void LoadWithoutInput()
+    {
+        //playerPlaced = false;
+        //tiles = this.GetComponent<Tiles>();
+        //tileInfo = GetComponent<TileDict>().tileInfo;
+        //drawnChunks = new Dictionary<Vector2Int, bool>();
+        //startMult = 500;
+        //seed = Random.Range(1f, 100000f);
+        //chunkSize = 35;
+        //scale = 0.5f;
+        //player = GameObject.FindGameObjectWithTag("Player");
+        //player.transform.position = new Vector3(chunkSize * startMult + 0.5f * chunkSize, chunkSize * startMult + 0.5f * chunkSize, -10);
+        //DrawChunk(chunkSize, scale, seed, new Vector2Int(chunkSize * startMult, chunkSize * startMult));
+        //DrawChunksAroundPlayer();
+        //Debug.Log("seed: " + seed);
     }
     // Update is called once per frame
     void Update()
@@ -55,16 +82,31 @@ public class TileManager : MonoBehaviour
         if(Input.GetAxisRaw("Horizontal") != 0 || Input.GetAxisRaw("Vertical") !=0)
         {
             DrawChunksAroundPlayer();
-        }   
+        }
+        if (Input.GetKeyDown(KeyCode.P))
+        {
+            UpdateInstance();
+            SaveHelper.NewWorldSave(PersistentData.Instance.CurrentWorld);
+        }
         //if (Input.GetMouseButtonDown(0))
         //{
         //    GetTileInfoAtPoint();
         //}
     }
 
+    void UpdateInstance()
+    {
+        //PersistentData.Instance.CurrentWorld.DrawnChunks = drawnChunks.ToList();
+        PersistentData.Instance.CurrentWorld.tileInfo = tileInfo.ToList();
+    }
+
     public TileInfo GetTileInfoAtPoint()
     {
-        Vector3Int point = baseMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        Vector3Int pointV3 = baseMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
+        MocVector3int point;
+        point.x = pointV3.x;
+        point.y = pointV3.y;
+        point.z = pointV3.z;
         float perlin = perlinAtPoint(point);
         if (!tileInfo.ContainsKey(point))
         {
@@ -100,7 +142,7 @@ public class TileManager : MonoBehaviour
         //Debug.Log("Is water?" + tileInfo[point].isWater);
         return tileInfo[point];
     }
-    public TileInfo GetTileInfoAtPoint(Vector3Int point)
+    public TileInfo GetTileInfoAtPoint(MocVector3int point)
     {
         float perlin = perlinAtPoint(point);
         if (!tileInfo.ContainsKey(point))
@@ -137,7 +179,7 @@ public class TileManager : MonoBehaviour
         return tileInfo[point];
     }
 
-    void DrawChunk(int chunkSize, float scale, float seed, Vector2Int chunk)
+    void DrawChunk(int chunkSize, float scale, float seed, MocVector2int chunk)
     {
         if(!drawnChunks.ContainsKey(chunk) || !drawnChunks[chunk])
         {
@@ -156,7 +198,7 @@ public class TileManager : MonoBehaviour
         }
     }
 
-    public float perlinAtPoint(Vector3Int point)
+    public float perlinAtPoint(MocVector3int point)
     {
         float xF = (((float)point.x + seed) / (float)chunkSize * scale);
         float yF = ((float)point.y / (float)chunkSize * scale);
@@ -200,15 +242,15 @@ public class TileManager : MonoBehaviour
     void DrawChunksAroundPlayer()
     {
         Vector2Int currChunk = GetChunkAccordingToPlayerPos();
-        DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x, currChunk.y));
-        DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x - chunkSize, currChunk.y - chunkSize));
-        DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x + chunkSize, currChunk.y));
-        DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x - chunkSize, currChunk.y));
-        DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x, currChunk.y + chunkSize));
-        DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x, currChunk.y - chunkSize));
-        DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x + chunkSize, currChunk.y + chunkSize));
-        DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x + chunkSize, currChunk.y - chunkSize));
-        DrawChunk(chunkSize, scale, seed, new Vector2Int(currChunk.x - chunkSize, currChunk.y + chunkSize));
+        DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x, currChunk.y));
+        DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x - chunkSize, currChunk.y - chunkSize));
+        DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x + chunkSize, currChunk.y));
+        DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x - chunkSize, currChunk.y));
+        DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x, currChunk.y + chunkSize));
+        DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x, currChunk.y - chunkSize));
+        DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x + chunkSize, currChunk.y + chunkSize));
+        DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x + chunkSize, currChunk.y - chunkSize));
+        DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x - chunkSize, currChunk.y + chunkSize));
     }
 
     private void GenerateGrassTile(Vector3Int point)

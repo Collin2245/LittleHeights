@@ -542,7 +542,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1154981133}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1488821306}
+        m_TargetAssemblyTypeName: MainMenuFunctions, Assembly-CSharp
+        m_MethodName: ToCharacterCreationButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1154981133
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,9 +605,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6f1f636d480eda41b6f695aba1451aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CreateLoadButton: {fileID: 0}
-  CharacterCreationButton: {fileID: 1154981132}
-  CharacterLoadButton: {fileID: 0}
 --- !u!1 &1450211701
 GameObject:
   m_ObjectHideFlags: 0
@@ -731,6 +740,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450211701}
   m_CullTransparentMesh: 1
+--- !u!1 &1488821305
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1488821307}
+  - component: {fileID: 1488821306}
+  m_Layer: 0
+  m_Name: MenuFunctions
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1488821306
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488821305}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f1f636d480eda41b6f695aba1451aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1488821307
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1488821305}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 1057.494, y: 278.4628, z: -0.4230535}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1855835817
 GameObject:
   m_ObjectHideFlags: 0
@@ -1017,7 +1070,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1989413832}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1488821306}
+        m_TargetAssemblyTypeName: MainMenuFunctions, Assembly-CSharp
+        m_MethodName: ToCharacterLoadButton
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1989413832
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1068,6 +1133,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d6f1f636d480eda41b6f695aba1451aa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CreateLoadButton: {fileID: 0}
-  CharacterCreationButton: {fileID: 0}
-  CharacterLoadButton: {fileID: 1989413831}

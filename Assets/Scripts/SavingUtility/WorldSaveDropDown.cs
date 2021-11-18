@@ -21,12 +21,12 @@ public class WorldSaveDropDown : MonoBehaviour
         {
             masterWorldSave = LoadHelper.GetMasterWorldSave(saves[i]);
             Debug.Log(saves[i]);
-            GenerateWorldSlot(masterWorldSave.name, 0f);
+            GenerateWorldSlot(masterWorldSave.name, 0f, i+1);
         }
-        Instantiate(Resources.Load<GameObject>("Prefabs/NewCharacterSlot"), content.transform);
+        Instantiate(Resources.Load<GameObject>("Prefabs/NewWorldSlot"), content.transform);
     }
 
-    void GenerateWorldSlot(string name, float time)
+    void GenerateWorldSlot(string name, float time, int num)
     {
         var worldSlot = Instantiate(Resources.Load<GameObject>("Prefabs/WorldSlot"), content.transform);
         //SaveSlotToMasterSave.Add(saveSlot, currMasterSave);
@@ -35,7 +35,7 @@ public class WorldSaveDropDown : MonoBehaviour
         worldSlot.transform.Find("NamePlaceholder").gameObject.GetComponent<Text>().text = name;
         //saveSlot.transform.Find("GoldPlaceholder").gameObject.GetComponent<Text>().text = gold.ToString();
         //saveSlot.transform.Find("LevelPlaceholder").gameObject.GetComponent<Text>().text = level.ToString();
-        //saveSlot.transform.Find("SlotNumBackground").gameObject.transform.Find("SlotNum").gameObject.GetComponent<Text>().text = num.ToString();
+        worldSlot.transform.Find("SlotNumBackground").gameObject.transform.Find("SlotNum").gameObject.GetComponent<Text>().text = num.ToString();
         //if (num == 1)
         //{
         //    //set default selcted first save

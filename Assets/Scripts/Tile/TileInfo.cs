@@ -12,5 +12,10 @@ public class TileInfo
     public bool isTreeOn;
     public bool isGrass;
 
+    //public TileInfo()
+    //{
+    //    isGrass = true;
+    //    isWalkableWater = true;
+    //}
 
 }

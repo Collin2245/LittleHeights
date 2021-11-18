@@ -620,7 +620,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 784151079}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1426375478}
+        m_TargetAssemblyTypeName: MainMenuFunctions, Assembly-CSharp
+        m_MethodName: ToLittleHeightsWorldView
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &784151079
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -835,7 +847,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'To World Select
+  m_Text: 'Play
 
 '
 --- !u!222 &941074408
@@ -1168,6 +1180,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1426375477}
   - component: {fileID: 1426375476}
+  - component: {fileID: 1426375478}
   m_Layer: 0
   m_Name: SaveHelper
   m_TagString: Untagged
@@ -1202,6 +1215,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1426375478
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1426375475}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d6f1f636d480eda41b6f695aba1451aa, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1514046266
 GameObject:
   m_ObjectHideFlags: 0
@@ -1545,7 +1570,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1979732802}
   m_HandleRect: {fileID: 1979732801}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
