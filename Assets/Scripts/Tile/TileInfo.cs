@@ -11,6 +11,7 @@ public class TileInfo
     public bool isItemOn;
     public bool isTreeOn;
     public bool isGrass;
+    public string tileName;
 
     //public TileInfo()
     //{

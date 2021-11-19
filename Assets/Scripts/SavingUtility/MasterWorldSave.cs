@@ -11,7 +11,7 @@ public struct MasterWorldSave
     public float seed;
     public string guid;
     public List<KeyValuePair<string, MocVector3int>> CharacterToWorldPos;
-    //public List<KeyValuePair<MocVector2int,bool>> DrawnChunks;
+    public List<KeyValuePair<MocVector2int,bool>> DrawnChunks;
     public List<KeyValuePair<MocVector3int, TileInfo>> tileInfo;
 }
 
