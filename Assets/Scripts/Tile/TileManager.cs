@@ -15,28 +15,14 @@ public class TileManager : MonoBehaviour
     public int chunkSize;
     public float scale;
     public float seed;
-    public Dictionary<MocVector3int, TileInfo> tileInfo;
+    public Dictionary<MocVector2int, Dictionary<MocVector3int, TileInfo>> tileInfo;
     public Dictionary<MocVector2int, bool> drawnChunks;    
-    public Dictionary<MocVector2int, bool> drawnChunksPersistent;    
-    public List<KeyValuePair<MocVector3int, TileInfo>> tileInfoList;
-    public List<KeyValuePair<MocVector2int, bool>> drawnChunksList;
+    public List<KeyValuePair<MocVector2int, List<KeyValuePair<MocVector3int, TileInfo>>>> tileInfoPersistent;
     private bool useDictionaryOnAllTilesFlag;
     private bool playerPlaced;
     private GameObject player;
     public TileManager Instance;
-    //private void Awake()
-    //{
-    //    if (Instance == null)
-    //    {
-    //        Debug.Log("creating Tile manager instance");
-    //        Instance = this;
-    //        DontDestroyOnLoad(gameObject);
-    //    }
-    //    else
-    //    {
-    //        Destroy(gameObject);
-    //    }
-    //}
+
     void Start()
     {
         LoadWithPersistentData();
@@ -47,8 +33,8 @@ public class TileManager : MonoBehaviour
         playerPlaced = false;
         tiles = this.GetComponent<Tiles>();
         //converts because json serialization is stupid sometimes
-        tileInfo = PersistentData.Instance.CurrentWorld.tileInfo.ToDictionary(x => x.Key, x => x.Value);
-        drawnChunksPersistent = PersistentData.Instance.CurrentWorld.DrawnChunks.ToDictionary(x => x.Key, x => x.Value);
+        tileInfoPersistent = PersistentData.Instance.CurrentWorld.tileInfo;
+        tileInfo = tileInfoPersistent.ToDictionary(x => x.Key, x => x.Value.ToDictionary(x => x.Key, x => x.Value));
         drawnChunks = new Dictionary<MocVector2int, bool>();
         startMult = 500;
         seed = PersistentData.Instance.CurrentWorld.seed;
@@ -61,22 +47,6 @@ public class TileManager : MonoBehaviour
         Debug.Log("seed: " + seed);
     }
 
-    void LoadWithoutInput()
-    {
-        //playerPlaced = false;
-        //tiles = this.GetComponent<Tiles>();
-        //tileInfo = GetComponent<TileDict>().tileInfo;
-        //drawnChunks = new Dictionary<Vector2Int, bool>();
-        //startMult = 500;
-        //seed = Random.Range(1f, 100000f);
-        //chunkSize = 35;
-        //scale = 0.5f;
-        //player = GameObject.FindGameObjectWithTag("Player");
-        //player.transform.position = new Vector3(chunkSize * startMult + 0.5f * chunkSize, chunkSize * startMult + 0.5f * chunkSize, -10);
-        //DrawChunk(chunkSize, scale, seed, new Vector2Int(chunkSize * startMult, chunkSize * startMult));
-        //DrawChunksAroundPlayer();
-        //Debug.Log("seed: " + seed);
-    }
     // Update is called once per frame
     void Update()
     {
@@ -89,16 +59,27 @@ public class TileManager : MonoBehaviour
             UpdateInstance();
             SaveHelper.NewWorldSave(PersistentData.Instance.CurrentWorld);
         }
-        //if (Input.GetMouseButtonDown(0))
-        //{
-        //    GetTileInfoAtPoint();
-        //}
     }
 
     void UpdateInstance()
     {
-        PersistentData.Instance.CurrentWorld.DrawnChunks = drawnChunks.ToList();
-        PersistentData.Instance.CurrentWorld.tileInfo = tileInfo.ToList();
+        ConvertToListOfList(tileInfo);
+        PersistentData.Instance.CurrentWorld.tileInfo = tileInfoPersistent;
+    }
+
+    void ConvertToListOfList(Dictionary<MocVector2int, Dictionary<MocVector3int, TileInfo>> tileInfo)
+    {
+        tileInfoPersistent.Clear();
+        List<KeyValuePair<MocVector3int, TileInfo>> points = new List<KeyValuePair<MocVector3int, TileInfo>>();
+        foreach (KeyValuePair<MocVector2int, Dictionary<MocVector3int,TileInfo >> chunk in tileInfo)
+        {
+            points.Clear();
+            foreach(KeyValuePair<MocVector3int, TileInfo> point in chunk.Value)
+            {
+                points.Add(new KeyValuePair<MocVector3int, TileInfo>(point.Key, point.Value));
+            }
+            tileInfoPersistent.Add(new KeyValuePair<MocVector2int, List<KeyValuePair<MocVector3int,TileInfo>>>(chunk.Key, points));
+        }
     }
 
     public TileInfo GetTileInfoAtPoint()
@@ -114,31 +95,16 @@ public class TileManager : MonoBehaviour
 
             if (perlin < 0.35f)
             {
-                //TileInfo ti = new TileInfo
-                //{
-                //    isWater = true
-                //};
-                //tileInfo.Add(point, ti);
+
             }
             else if (perlin > 0.35f && perlin <= 0.4f)
             {
-                //TileInfo ti = new TileInfo
-                //{
-                //    isWalkableWater = true
-                //};
-                //tileInfo.Add(point, ti);
+
             }
             else if (perlin > 0.4f && perlin <= 0.8f)
             {
-                //TileInfo ti = new TileInfo
-                //{
-                //    isGrass = true
-                //};
-                //tileInfo.Add(point, ti);
+
             }
-
-
-
         }
         //Debug.Log("Is water?" + tileInfo[point].isWater);
         return tileInfo[point];
@@ -193,13 +159,14 @@ public class TileManager : MonoBehaviour
                     float xF = (((float)x + seed) / (float)chunkSize * scale);
                     float yF = ((float)y / (float)chunkSize * scale);
                     float perlin = Mathf.PerlinNoise(xF, yF);
-                    if(drawnChunksPersistent.ContainsKey(chunk))
+                    if(tileInfo.ContainsKey(chunk))
                     {
                         LoadTileWithPerlin(perlin, point);
                     }
                     else
                     {
-                        PlaceTileWithPerlin(perlin, point);
+                        tileInfo.Add(chunk, new Dictionary<MocVector3int, TileInfo>());
+                        PlaceTileWithPerlin(perlin,chunk,point);
                     }
                     
                 }
@@ -240,7 +207,7 @@ public class TileManager : MonoBehaviour
             Debug.LogError(perlin);
         }
     }
-    private void PlaceTileWithPerlin(float perlin, Vector3Int point)
+    private void PlaceTileWithPerlin(float perlin,Vector2Int chunk, Vector3Int point)
     {
         if (perlin <= 0.36f)
         {
