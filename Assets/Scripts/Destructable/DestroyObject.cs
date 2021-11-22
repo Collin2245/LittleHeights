@@ -107,7 +107,7 @@ public class DestroyObject : MonoBehaviour
             itemCounter = 0;
             StopCoroutine(treeEnumerator);
             tileManager.GetComponent<TileManager>().extraMapCollide.SetTile(point, null);
-            tileManager.GetComponent<TileManager>().GetTileInfoAtPoint(point).isTreeOn = false;
+            tileManager.GetComponent<TileManager>().GetTileInfoAtPoint().isTreeOn = false;
         }
         else
         {

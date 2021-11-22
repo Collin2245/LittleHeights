@@ -22,6 +22,8 @@ public class TileManager : MonoBehaviour
     private bool playerPlaced;
     private GameObject player;
     public TileManager Instance;
+    public Dictionary<string, TileBase> tileDict = new Dictionary<string, TileBase>();
+
 
     void Start()
     {
@@ -32,6 +34,7 @@ public class TileManager : MonoBehaviour
     {
         playerPlaced = false;
         tiles = this.GetComponent<Tiles>();
+        //FillTileDict();
         //converts because json serialization is stupid sometimes
         tileInfoPersistent = PersistentData.Instance.CurrentWorld.tileInfo;
         tileInfo = tileInfoPersistent.ToDictionary(x => x.Key, x => x.Value.ToDictionary(x => x.Key, x => x.Value));
@@ -46,6 +49,7 @@ public class TileManager : MonoBehaviour
         DrawChunksAroundPlayer();
         Debug.Log("seed: " + seed);
     }
+
 
     // Update is called once per frame
     void Update()
@@ -86,33 +90,34 @@ public class TileManager : MonoBehaviour
     {
         Vector3Int pointV3 = baseMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
         MocVector3int point;
+        Vector2Int chunk = GetChunk(pointV3);
         point.x = pointV3.x;
         point.y = pointV3.y;
         point.z = pointV3.z;
         float perlin = perlinAtPoint(point);
-        if (!tileInfo.ContainsKey(point))
-        {
+        //if (!tileInfo.)
+        //{
 
-            if (perlin < 0.35f)
-            {
+        //    if (perlin < 0.35f)
+        //    {
 
-            }
-            else if (perlin > 0.35f && perlin <= 0.4f)
-            {
+        //    }
+        //    else if (perlin > 0.35f && perlin <= 0.4f)
+        //    {
 
-            }
-            else if (perlin > 0.4f && perlin <= 0.8f)
-            {
+        //    }
+        //    else if (perlin > 0.4f && perlin <= 0.8f)
+        //    {
 
-            }
-        }
+        //    }
+        //}
         //Debug.Log("Is water?" + tileInfo[point].isWater);
-        return tileInfo[point];
+        return tileInfo[chunk][point];
     }
-    public TileInfo GetTileInfoAtPoint(MocVector3int point)
+    public TileInfo GetTileInfoAtPoint(MocVector2int chunk,  MocVector3int point)
     {
         float perlin = perlinAtPoint(point);
-        if (!tileInfo.ContainsKey(point))
+        if (!tileInfo[chunk].ContainsKey(point))
         {
 
             if (perlin < 0.35f)
@@ -121,7 +126,7 @@ public class TileManager : MonoBehaviour
                 {
                     isWater = true
                 };
-                tileInfo.Add(point, ti);
+                tileInfo[chunk].Add(point, ti);
             }
             else if (perlin > 0.35f && perlin <= 0.4f)
             {
@@ -129,7 +134,7 @@ public class TileManager : MonoBehaviour
                 {
                     isWalkableWater = true
                 };
-                tileInfo.Add(point, ti);
+                tileInfo[chunk].Add(point, ti);
             }
             else if (perlin > 0.4f && perlin <= 0.8f)
             {
@@ -137,13 +142,13 @@ public class TileManager : MonoBehaviour
                 {
                     isGrass = true
                 };
-                tileInfo.Add(point, ti);
+                tileInfo[chunk].Add(point, ti);
             }
 
 
 
         }
-        return tileInfo[point];
+        return tileInfo[chunk][point];
     }
 
     void DrawChunk(int chunkSize, float scale, float seed, MocVector2int chunk)
@@ -151,24 +156,33 @@ public class TileManager : MonoBehaviour
         if(!drawnChunks.ContainsKey(chunk) || !drawnChunks[chunk])
         {
             drawnChunks.Add(chunk, true);
-            for (int y = chunk.y; y < chunkSize + chunk.y; y++)
+            if(tileInfo.ContainsKey(chunk))
             {
-                for (int x = chunk.x; x < chunkSize + chunk.x; x++)
+                for (int y = chunk.y; y < chunkSize + chunk.y; y++)
                 {
-                    Vector3Int point = new Vector3Int(x, y, 0);
-                    float xF = (((float)x + seed) / (float)chunkSize * scale);
-                    float yF = ((float)y / (float)chunkSize * scale);
-                    float perlin = Mathf.PerlinNoise(xF, yF);
-                    if(tileInfo.ContainsKey(chunk))
+                    for (int x = chunk.x; x < chunkSize + chunk.x; x++)
                     {
-                        LoadTileWithPerlin(perlin, point);
+                        Vector3Int point = new Vector3Int(x, y, 0);
+                        float xF = (((float)x + seed) / (float)chunkSize * scale);
+                        float yF = ((float)y / (float)chunkSize * scale);
+                        float perlin = Mathf.PerlinNoise(xF, yF);
+                        LoadTileWithPerlin(perlin, chunk, point);
                     }
-                    else
+                }
+            }
+            else
+            {
+                tileInfo.Add(chunk, new Dictionary<MocVector3int, TileInfo>());
+                for (int y = chunk.y; y < chunkSize + chunk.y; y++)
+                {
+                    for (int x = chunk.x; x < chunkSize + chunk.x; x++)
                     {
-                        tileInfo.Add(chunk, new Dictionary<MocVector3int, TileInfo>());
-                        PlaceTileWithPerlin(perlin,chunk,point);
+                        Vector3Int point = new Vector3Int(x, y, 0);
+                        float xF = (((float)x + seed) / (float)chunkSize * scale);
+                        float yF = ((float)y / (float)chunkSize * scale);
+                        float perlin = Mathf.PerlinNoise(xF, yF);    
+                        PlaceTileWithPerlin(perlin, chunk, point);
                     }
-                    
                 }
             }
         }
@@ -180,11 +194,14 @@ public class TileManager : MonoBehaviour
         float yF = ((float)point.y / (float)chunkSize * scale);
         return Mathf.PerlinNoise(xF, yF);
     }
-    private void LoadTileWithPerlin(float perlin, Vector3Int point)
+    private void LoadTileWithPerlin(float perlin,Vector2Int chunk, Vector3Int point)
     {
+        int randomNum = Random.Range(0, 200);
         if (perlin <= 0.36f)
         {
-            GenerateDeepWaterTile(point);
+            Color color = new Color(0.7f, 0.9f, 0.95f);
+            baseMap.SetTile(point, tiles.waterRuleTile);
+            baseMap.SetColor(point, color);
         }
         else if (perlin > 0.36f && perlin <= 0.4f)
         {
@@ -192,7 +209,14 @@ public class TileManager : MonoBehaviour
         }
         else if (perlin > 0.4f && perlin <= 0.8f)
         {
-            GenerateGrassTile(point);
+            if (randomNum % 2 == 1)
+            {
+                baseMap.SetTile(point, tiles.grass1Tile);
+            }
+            else
+            {
+                baseMap.SetTile(point, tiles.grass2Tile);
+            }
         }
         else if (perlin > 0.8f && perlin <= 0.9f)
         {
@@ -211,7 +235,7 @@ public class TileManager : MonoBehaviour
     {
         if (perlin <= 0.36f)
         {
-            GenerateDeepWaterTile(point);
+            GenerateDeepWaterTile(chunk,point);
         }
         else if (perlin > 0.36f && perlin <= 0.4f)
         {
@@ -219,7 +243,7 @@ public class TileManager : MonoBehaviour
         }
         else if (perlin > 0.4f && perlin <= 0.8f)
         {
-            GenerateGrassTile(point);
+            GenerateGrassTile(chunk,point);
         }
         else if (perlin > 0.8f && perlin <= 0.9f)
         {
@@ -241,6 +265,10 @@ public class TileManager : MonoBehaviour
         return new Vector2Int((playerWorldPos.x / chunkSize) *chunkSize, (playerWorldPos.y / chunkSize)*chunkSize);
     }
 
+    Vector2Int GetChunk(Vector3Int pos)
+    {
+        return new Vector2Int((pos.x / chunkSize) * chunkSize, (pos.y / chunkSize) * chunkSize);
+    }
     void DrawChunksAroundPlayer()
     {
         Vector2Int currChunk = GetChunkAccordingToPlayerPos();
@@ -255,7 +283,7 @@ public class TileManager : MonoBehaviour
         DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x - chunkSize, currChunk.y + chunkSize));
     }
 
-    private void GenerateGrassTile(Vector3Int point)
+    private void GenerateGrassTile(Vector2Int chunk, Vector3Int point)
     {
             int randomNum = Random.Range(0, 200);
             if( randomNum % 2 == 1)
@@ -272,9 +300,9 @@ public class TileManager : MonoBehaviour
             TileInfo tI = new TileInfo
             {
                 isTreeOn = true,
-                tileName = "orangeSmallTree"
+                tileName = "orangeTreeSmallTile"
             };
-            tileInfo.Add(point, tI);
+            tileInfo[chunk].Add(point, tI);
         }
             else if (randomNum == 3)
             {
@@ -285,12 +313,15 @@ public class TileManager : MonoBehaviour
                     isTreeOn = true,
                     tileName = "deadTreeSmallTile"
                 };
-            tileInfo.Add(point, tI);
+            tileInfo[chunk].Add(point, tI);
         }
             else if (randomNum == 4)
             {
-                //tI.isTreeOn = true;
-                extraMapNonCollide.SetTile(point, tiles.purpleFlowerTile);
+            TileInfo tI = new TileInfo
+            {
+                tileName = "purpleFlowerTile"
+            };
+            extraMapNonCollide.SetTile(point, tiles.purpleFlowerTile);
             }
             else if (randomNum == 5 ||randomNum == 6)
             {
@@ -301,17 +332,24 @@ public class TileManager : MonoBehaviour
                     isTreeOn = true,
                     tileName = "tealSmallEvergreenTile"
                 };
-            tileInfo.Add(point, tI);
+                tileInfo[chunk].Add(point, tI);
         }
             else if (randomNum == 7)
             {
-                //tI.isTreeOn = true;
-                extraMapNonCollide.SetTile(point, tiles.tealSmallBushTile);
+            TileInfo tI = new TileInfo
+            {
+                tileName = "tealSmallBushTile"
+            };
+            extraMapNonCollide.SetTile(point, tiles.tealSmallBushTile);
             }
             else if (randomNum == 8)
             {
-                //tI.isTreeOn = true;
-                extraMapNonCollide.SetTile(point, tiles.grassWithRocksTile);
+            //tI.isTreeOn = true;
+            TileInfo tI = new TileInfo
+            {
+                tileName = "grassWithRocksTile"
+            };
+            extraMapNonCollide.SetTile(point, tiles.grassWithRocksTile);
             }
             else if (randomNum >=15 && playerPlaced == false)
             {
@@ -319,7 +357,7 @@ public class TileManager : MonoBehaviour
                 playerPlaced = true;
         }
     }
-    private void GenerateDeepWaterTile(Vector3Int point)
+    private void GenerateDeepWaterTile(Vector2Int chunk, Vector3Int point)
     {
         Color color = new Color(0.7f, 0.9f, 0.95f);
         baseMap.SetTile(point, tiles.waterRuleTile);
@@ -331,9 +369,9 @@ public class TileManager : MonoBehaviour
             //add ti info here
             TileInfo tI = new TileInfo
             {
-                tileName = "rockOnWater"
+                tileName = "rockOnWaterGray1Tile"
             };
-            tileInfo.Add(point, tI);
+            tileInfo[chunk].Add(point, tI);
             extraMapCollide.SetTile(point, tiles.rockOnWaterGray1Tile);
             extraMapNonCollide.SetTile(point, tiles.rockOnWaterGray1Tile);
             extraMapNonCollide.SetColor(point, color);
@@ -344,15 +382,47 @@ public class TileManager : MonoBehaviour
             extraMapCollide.SetTile(point, tiles.lilyPadOnWaterTile);
             TileInfo tI = new TileInfo
             {
-                tileName = "lilyPad"
+                tileName = "lilyPadOnWaterTile"
             };
-            tileInfo.Add(point, tI);
+            tileInfo[chunk].Add(point, tI);
 
         }
         else
         {
             extraMapCollide.SetTile(point, tiles.animatedWaterTile);
             extraMapCollide.SetColor(point, color);
+        }
+    }
+    
+    private void PlaceTile(Vector2Int chunk, Vector3Int point, string tileName)
+    {
+        Color color;
+        Tile tileToPlace;
+        switch (tileName)
+        {
+            case "lilyPadOnWaterTile":
+                extraMapCollide.SetTile(point, tiles.lilyPadOnWaterTile);
+                break;
+            case "tealSmallEvergreenTile":
+                tileToPlace = tiles.tealSmallEvergreenTile;
+                break;
+            case "deadTreeSmallTile":
+                tileToPlace = tiles.deadTreeSmallTile;
+                break;
+            case "rockOnWaterGray1Tile":
+                color = new Color(0.7f, 0.9f, 0.95f);
+                extraMapCollide.SetTile(point, tiles.rockOnWaterGray1Tile);
+                extraMapNonCollide.SetTile(point, tiles.rockOnWaterGray1Tile);
+                extraMapNonCollide.SetColor(point, color);
+                break;
+            case "orangeTreeSmallTile":
+                tileToPlace = tiles.orangeTreeSmallTile;
+                break;
+            case "purpleFlowerTile":
+                tileToPlace = tiles.purpleFlowerTile;
+                break;
+            default:
+                break;
         }
     }
 }

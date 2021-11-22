@@ -112,8 +112,7 @@ public class SaveHelper : MonoBehaviour
         masterWorldSave.guid = Guid.NewGuid().ToString();
         masterWorldSave.name = TextObjWorld.GetComponent<Text>().text;
         masterWorldSave.seed = UnityEngine.Random.Range(1f, 100000f);
-        masterWorldSave.tileInfo = new List<KeyValuePair<MocVector3int, TileInfo>>();
-        masterWorldSave.DrawnChunks = new List<KeyValuePair<MocVector2int, bool>>();
+        masterWorldSave.tileInfo = new List<KeyValuePair<MocVector2int, List<KeyValuePair<MocVector3int, TileInfo>>>>();
         masterWorldSave.CharacterToWorldPos = new List<KeyValuePair<string, MocVector3int>>();
         PersistentData.Instance.CurrentWorld = masterWorldSave;
         worldPath = Application.persistentDataPath + "/Worlds/" + masterWorldSave.guid + ".data";
