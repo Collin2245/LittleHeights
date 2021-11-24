@@ -23,6 +23,7 @@ public class TileManager : MonoBehaviour
     private GameObject player;
     public TileManager Instance;
     public Dictionary<string, TileBase> tileDict = new Dictionary<string, TileBase>();
+    Dictionary<string, MocVector3int> playerPlacedDict;
 
 
     void Start()
@@ -32,7 +33,7 @@ public class TileManager : MonoBehaviour
 
     void LoadWithPersistentData()
     {
-        playerPlaced = false;
+        
         tiles = this.GetComponent<Tiles>();
         //FillTileDict();
         //converts because json serialization is stupid sometimes
@@ -45,6 +46,7 @@ public class TileManager : MonoBehaviour
         scale = 0.5f;
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = new Vector3(chunkSize * startMult + 0.5f * chunkSize, chunkSize * startMult + 0.5f * chunkSize, -10);
+        PlacePlayer();
         DrawChunk(chunkSize, scale, seed, new Vector2Int(chunkSize * startMult, chunkSize * startMult));
         DrawChunksAroundPlayer();
         Debug.Log("seed: " + seed);
@@ -67,6 +69,7 @@ public class TileManager : MonoBehaviour
 
     void UpdateInstance()
     {
+        SavePlayerPos();
         ConvertToListOfList(tileInfo);
         PersistentData.Instance.CurrentWorld.tileInfo = tileInfoPersistent;
     }
@@ -166,7 +169,13 @@ public class TileManager : MonoBehaviour
                         float xF = (((float)x + seed) / (float)chunkSize * scale);
                         float yF = ((float)y / (float)chunkSize * scale);
                         float perlin = Mathf.PerlinNoise(xF, yF);
+
+                        //add character load here and check if character has entry in dict
                         LoadTileWithPerlin(perlin, chunk, point);
+                        if(tileInfo[chunk].ContainsKey(point))
+                        {
+                            LoadTile(chunk, point, tileInfo[chunk][point].tileName);
+                        }
                     }
                 }
             }
@@ -180,7 +189,9 @@ public class TileManager : MonoBehaviour
                         Vector3Int point = new Vector3Int(x, y, 0);
                         float xF = (((float)x + seed) / (float)chunkSize * scale);
                         float yF = ((float)y / (float)chunkSize * scale);
-                        float perlin = Mathf.PerlinNoise(xF, yF);    
+                        float perlin = Mathf.PerlinNoise(xF, yF);
+                        
+                        //add initial placement here
                         PlaceTileWithPerlin(perlin, chunk, point);
                     }
                 }
@@ -354,8 +365,9 @@ public class TileManager : MonoBehaviour
             else if (randomNum >=15 && playerPlaced == false)
             {
                 player.transform.position = new Vector3Int(point.x,point.y,-10);
+                //PersistentData.Instance.CurrentWorld.CharacterToWorldPos.Add(new KeyValuePair<string, MocVector3int>() { PersistentData.Instance.CurrentSave.saveObject.guid, })
                 playerPlaced = true;
-        }
+            }
     }
     private void GenerateDeepWaterTile(Vector2Int chunk, Vector3Int point)
     {
@@ -393,21 +405,39 @@ public class TileManager : MonoBehaviour
             extraMapCollide.SetColor(point, color);
         }
     }
-    
-    private void PlaceTile(Vector2Int chunk, Vector3Int point, string tileName)
+
+    void PlacePlayer()
+    {
+        playerPlacedDict = PersistentData.Instance.CurrentWorld.CharacterToWorldPos.ToDictionary(x => x.Key, x => x.Value);
+        playerPlaced = playerPlacedDict.ContainsKey(PersistentData.Instance.CurrentSave.saveObject.guid);
+        if(playerPlaced)
+        {
+            MocVector3int temp = playerPlacedDict[PersistentData.Instance.CurrentSave.saveObject.guid];
+            Vector3 pos = new Vector3((float)temp.x, (float)temp.y, (float)temp.z);
+            player.transform.position = pos;
+        }
+    }
+
+    void SavePlayerPos()
+    {
+        MocVector3int pos = new Vector3Int(((int)player.transform.position.x), ((int)player.transform.position.y), ((int)player.transform.position.z));
+        playerPlacedDict[PersistentData.Instance.CurrentSave.saveObject.guid] = pos;
+        PersistentData.Instance.CurrentWorld.CharacterToWorldPos = playerPlacedDict.ToList();
+    }
+
+    private void LoadTile(Vector2Int chunk, Vector3Int point, string tileName)
     {
         Color color;
-        Tile tileToPlace;
         switch (tileName)
         {
             case "lilyPadOnWaterTile":
                 extraMapCollide.SetTile(point, tiles.lilyPadOnWaterTile);
                 break;
             case "tealSmallEvergreenTile":
-                tileToPlace = tiles.tealSmallEvergreenTile;
+                extraMapCollide.SetTile(point, tiles.tealSmallEvergreenTile);
                 break;
             case "deadTreeSmallTile":
-                tileToPlace = tiles.deadTreeSmallTile;
+                extraMapCollide.SetTile(point, tiles.deadTreeSmallTile);
                 break;
             case "rockOnWaterGray1Tile":
                 color = new Color(0.7f, 0.9f, 0.95f);
@@ -416,10 +446,10 @@ public class TileManager : MonoBehaviour
                 extraMapNonCollide.SetColor(point, color);
                 break;
             case "orangeTreeSmallTile":
-                tileToPlace = tiles.orangeTreeSmallTile;
+                extraMapCollide.SetTile(point, tiles.orangeTreeSmallTile);
                 break;
             case "purpleFlowerTile":
-                tileToPlace = tiles.purpleFlowerTile;
+                extraMapNonCollide.SetTile(point, tiles.purpleFlowerTile);
                 break;
             default:
                 break;

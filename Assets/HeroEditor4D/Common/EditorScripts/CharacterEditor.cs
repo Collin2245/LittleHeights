@@ -438,13 +438,13 @@ namespace Assets.HeroEditor4D.Common.EditorScripts
 
         protected override void FeedbackTip()
 	    {
-			#if UNITY_EDITOR
+			//#if UNITY_EDITOR
 
-		    var success = UnityEditor.EditorUtility.DisplayDialog("HeroView Editor", "Hi! Thank you for using my asset! I hope you enjoy making your game with it. The only thing I would ask you to do is to leave a review on the Asset Store. It would be awesome support for my asset, thanks!", "Review", "Later");
+		    //var success = UnityEditor.EditorUtility.DisplayDialog("HeroView Editor", "Hi! Thank you for using my asset! I hope you enjoy making your game with it. The only thing I would ask you to do is to leave a review on the Asset Store. It would be awesome support for my asset, thanks!", "Review", "Later");
 			
-			RequestFeedbackResult(success);
+			//RequestFeedbackResult(success);
 
-            #endif
+            //#endif
         }
     }
 }

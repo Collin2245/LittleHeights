@@ -114,7 +114,6 @@ public class SaveHelper : MonoBehaviour
         masterWorldSave.seed = UnityEngine.Random.Range(1f, 100000f);
         masterWorldSave.tileInfo = new List<KeyValuePair<MocVector2int, List<KeyValuePair<MocVector3int, TileInfo>>>>();
         masterWorldSave.CharacterToWorldPos = new List<KeyValuePair<string, MocVector3int>>();
-        PersistentData.Instance.CurrentWorld = masterWorldSave;
         worldPath = Application.persistentDataPath + "/Worlds/" + masterWorldSave.guid + ".data";
         File.WriteAllBytes(worldPath, Encoding.Default.GetBytes(JsonConvert.SerializeObject(masterWorldSave)));
         Debug.Log(File.ReadAllText(worldPath));
@@ -170,6 +169,7 @@ public class SaveHelper : MonoBehaviour
             saveObject.characterName = GameObject.Find("CharacterName").GetComponent<Text>().text;
             masterSave.saveObject = saveObject;
             masterSave.characterJson.characterJson = characterJson.characterJson;
+            PersistentData.Instance.CurrentSave = masterSave;
             File.WriteAllBytes(saveFilePath, Encoding.Default.GetBytes(JsonConvert.SerializeObject(masterSave)));
             Debug.Log(File.ReadAllText(saveFilePath));
         }
