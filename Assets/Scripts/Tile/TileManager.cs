@@ -47,7 +47,7 @@ public class TileManager : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         player.transform.position = new Vector3(chunkSize * startMult + 0.5f * chunkSize, chunkSize * startMult + 0.5f * chunkSize, -10);
         PlacePlayer();
-        DrawChunk(chunkSize, scale, seed, new Vector2Int(chunkSize * startMult, chunkSize * startMult));
+        //DrawChunk(chunkSize, scale, seed, new Vector2Int(chunkSize * startMult, chunkSize * startMult));
         DrawChunksAroundPlayer();
         Debug.Log("seed: " + seed);
     }
@@ -63,7 +63,7 @@ public class TileManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.P))
         {
             UpdateInstance();
-            SaveHelper.NewWorldSave(PersistentData.Instance.CurrentWorld);
+            SaveHelper.SaveWorld(PersistentData.Instance.CurrentWorld);
         }
     }
 
@@ -71,22 +71,32 @@ public class TileManager : MonoBehaviour
     {
         SavePlayerPos();
         ConvertToListOfList(tileInfo);
-        PersistentData.Instance.CurrentWorld.tileInfo = tileInfoPersistent;
     }
 
     void ConvertToListOfList(Dictionary<MocVector2int, Dictionary<MocVector3int, TileInfo>> tileInfo)
     {
+        //CHANGE TO FOR LOOP
         tileInfoPersistent.Clear();
-        List<KeyValuePair<MocVector3int, TileInfo>> points = new List<KeyValuePair<MocVector3int, TileInfo>>();
-        foreach (KeyValuePair<MocVector2int, Dictionary<MocVector3int,TileInfo >> chunk in tileInfo)
+        for(int i = 0; i < tileInfo.Count-1; i ++)
         {
-            points.Clear();
-            foreach(KeyValuePair<MocVector3int, TileInfo> point in chunk.Value)
+            List<KeyValuePair<MocVector3int, TileInfo>> points = new List<KeyValuePair<MocVector3int, TileInfo>>();
+            for (int y = 0; y < tileInfo.ElementAt(i).Value.Count - 1; y++)
             {
-                points.Add(new KeyValuePair<MocVector3int, TileInfo>(point.Key, point.Value));
+                points.Add(new KeyValuePair<MocVector3int, TileInfo>(tileInfo.ElementAt(i).Value.ElementAt(y).Key, tileInfo.ElementAt(i).Value.ElementAt(y).Value));
             }
-            tileInfoPersistent.Add(new KeyValuePair<MocVector2int, List<KeyValuePair<MocVector3int,TileInfo>>>(chunk.Key, points));
+            PersistentData.Instance.CurrentWorld.tileInfo.Add(new KeyValuePair<MocVector2int, List<KeyValuePair<MocVector3int, TileInfo>>>(tileInfo.ElementAt(i).Key, points));
         }
+      
+        //foreach (KeyValuePair<MocVector2int, Dictionary<MocVector3int,TileInfo >> chunk in tileInfo)
+        //{
+        //    List<KeyValuePair<MocVector3int, TileInfo>> points = new List<KeyValuePair<MocVector3int, TileInfo>>();
+        //    foreach (KeyValuePair<MocVector3int, TileInfo> point in chunk.Value)
+        //    {
+        //        //points is being set for all entries of dict
+        //        points.Add(new KeyValuePair<MocVector3int, TileInfo>(point.Key, point.Value));
+        //    }
+        //    PersistentData.Instance.CurrentWorld.tileInfo.Add(new KeyValuePair<MocVector2int, List<KeyValuePair<MocVector3int,TileInfo>>>(chunk.Key, points));
+        //}
     }
 
     public TileInfo GetTileInfoAtPoint()
@@ -170,8 +180,13 @@ public class TileManager : MonoBehaviour
                         float yF = ((float)y / (float)chunkSize * scale);
                         float perlin = Mathf.PerlinNoise(xF, yF);
 
-                        //add character load here and check if character has entry in dict
+                        
                         LoadTileWithPerlin(perlin, chunk, point);
+                        Debug.Log(tileInfo[chunk].Keys);
+                        var test = tileInfo[chunk];
+                        var test2 = tileInfo[chunk].ContainsKey(point);
+                      
+                        var test4 = "f";
                         if(tileInfo[chunk].ContainsKey(point))
                         {
                             LoadTile(chunk, point, tileInfo[chunk][point].tileName);
@@ -186,6 +201,7 @@ public class TileManager : MonoBehaviour
                 {
                     for (int x = chunk.x; x < chunkSize + chunk.x; x++)
                     {
+                        //issue here, points saving to the rw
                         Vector3Int point = new Vector3Int(x, y, 0);
                         float xF = (((float)x + seed) / (float)chunkSize * scale);
                         float yF = ((float)y / (float)chunkSize * scale);
@@ -284,11 +300,12 @@ public class TileManager : MonoBehaviour
     {
         Vector2Int currChunk = GetChunkAccordingToPlayerPos();
         DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x, currChunk.y));
-        DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x - chunkSize, currChunk.y - chunkSize));
+
         DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x + chunkSize, currChunk.y));
         DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x - chunkSize, currChunk.y));
         DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x, currChunk.y + chunkSize));
         DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x, currChunk.y - chunkSize));
+        DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x - chunkSize, currChunk.y - chunkSize));
         DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x + chunkSize, currChunk.y + chunkSize));
         DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x + chunkSize, currChunk.y - chunkSize));
         DrawChunk(chunkSize, scale, seed, new MocVector2int(currChunk.x - chunkSize, currChunk.y + chunkSize));

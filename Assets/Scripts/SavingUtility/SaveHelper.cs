@@ -120,14 +120,8 @@ public class SaveHelper : MonoBehaviour
         PersistentData.Instance.CurrentWorld = masterWorldSave;
     }
 
-    public static void NewWorldSave(MasterWorldSave masterWorldSave)
+    public static void SaveWorld(MasterWorldSave masterWorldSave)
     {
-        //masterWorldSave.guid = Guid.NewGuid().ToString();
-        //masterWorldSave.name = TextObjWorld.GetComponent<Text>().text;
-        //masterWorldSave.seed = UnityEngine.Random.Range(1f, 100000f);
-        //masterWorldSave.tileInfo = new Dictionary<MocVector3int, TileInfo>();
-        //masterWorldSave.DrawnChunks = new Dictionary<MocVector2int, bool>();
-        //masterWorldSave.CharacterToWorldPos = new Dictionary<string, MocVector3int>();
         PersistentData.Instance.CurrentWorld = masterWorldSave;
         string worldPath = Application.persistentDataPath + "/Worlds/" + masterWorldSave.guid + ".data";
         File.WriteAllBytes(worldPath, Encoding.Default.GetBytes(JsonConvert.SerializeObject(masterWorldSave)));
