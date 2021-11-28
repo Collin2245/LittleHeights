@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using Assets.HeroEditor4D.Common.CharacterScripts;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,7 +10,8 @@ public class PlayerController : MonoBehaviour
     int day;
 
     Camera mainCamera;
-    Animator animator;
+    public AnimationManager animator;
+    Character4D character4D;
     float horizontal;
     float vertical;
     float moveLimiter = 0.7f;
@@ -33,7 +35,8 @@ public class PlayerController : MonoBehaviour
         MainUI.enabled = false;
         mainCamera = GetComponentInChildren<Camera>();
         body = GetComponent<Rigidbody2D>();
-        animator = this.GetComponent<Animator>();
+        animator = this.GetComponentInChildren<AnimationManager>();
+        character4D = this.GetComponentInChildren<Character4D>();
     }
 
     private void OnMouseOver()
@@ -56,40 +59,36 @@ public class PlayerController : MonoBehaviour
         if (horizontal !=0 || vertical != 0)
         {
             isMoving = true;
-            animator.SetBool("IsMoving", isMoving);
-            animator.SetFloat("Horizontal", horizontal);
-            animator.SetFloat("Vertical", vertical);
-            lastMoveLeft = false;
-            lastMoveUp = false;
-            lastMoveDown = false;
-            lastMoveRight = false;
-            prevAnimation = animator.GetCurrentAnimatorClipInfo(0)[0].clip.name;
-            //Debug.Log(prevAnimation);
+            animator.SetState(CharacterState.Walk);
+            if (horizontal > 0)
+            {
+                character4D.SetDirection(Vector2.right);
+            }
+            else if (horizontal < 0)
+            {
+                character4D.SetDirection(Vector2.left);
+            }
+            else if (vertical < 0)
+            {
+                character4D.SetDirection(Vector2.down);
+            }
+            else if (vertical > 0)
+            {
+                character4D.SetDirection(Vector2.up);
+                
+            }
+
         }
         else
         {
-            switch (prevAnimation)
-            {
-                case "PlayerAnimated_walkLeft":
-                    lastMoveLeft = true;
-                    break;
-                case "PlayerAnimated_walkRight":
-                    lastMoveRight = true;
-                    break;
-                case "PlayerAnimated_walkUp":
-                    lastMoveUp = true;
-                    break;
-                case "PlayerAnimated_walkDown":
-                    lastMoveDown = true;
-                    break;
-            }
+            animator.SetState(CharacterState.Idle);
             isMoving = false;
         }
-        animator.SetBool("lastMoveLeft", lastMoveLeft);
-        animator.SetBool("lastMoveUp", lastMoveUp);
-        animator.SetBool("lastMoveRight", lastMoveRight);
-        animator.SetBool("lastMoveDown", lastMoveDown);
-        animator.SetBool("IsMoving", isMoving);
+        //animator.SetBool("lastMoveLeft", lastMoveLeft);
+        //animator.SetBool("lastMoveUp", lastMoveUp);
+        //animator.SetBool("lastMoveRight", lastMoveRight);
+        //animator.SetBool("lastMoveDown", lastMoveDown);
+        //animator.SetBool("IsMoving", isMoving);
         moveCamera();
 
     }

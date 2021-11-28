@@ -2852,7 +2852,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2675111554100849049}
-  - component: {fileID: 2675111554100850278}
   - component: {fileID: 2675111554100850279}
   - component: {fileID: 4873026374172086092}
   - component: {fileID: 2100707265766108079}
@@ -2861,6 +2860,7 @@ GameObject:
   - component: {fileID: 4873026374174585916}
   - component: {fileID: 7374944988916863252}
   - component: {fileID: 6645417793313407356}
+  - component: {fileID: 2884125930490268353}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -2888,20 +2888,6 @@ Transform:
   m_Father: {fileID: 6486133008107591665}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2675111554100850278
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2675111554100850277}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6fe07dcecc975474a82865a0342a6177, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeArea: 0
-  runSpeed: 7
 --- !u!50 &2675111554100850279
 Rigidbody2D:
   serializedVersion: 4
@@ -2976,7 +2962,7 @@ Animator:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2675111554100850277}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 36a181311f1cd4643b9559f017153f40, type: 2}
   m_CullingMode: 0
@@ -2995,7 +2981,7 @@ SpriteRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2675111554100850277}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 0
   m_ReceiveShadows: 0
   m_DynamicOccludee: 1
@@ -3047,7 +3033,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2675111554100850277}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: d67c620baaa53d84cb861053a34b24de, type: 3}
   m_Name: 
@@ -3190,6 +3176,20 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &2884125930490268353
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2675111554100850277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6fe07dcecc975474a82865a0342a6177, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  activeArea: 0
+  runSpeed: 7
 --- !u!1 &2862932624473102316
 GameObject:
   m_ObjectHideFlags: 0
@@ -9759,7 +9759,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4609134914631721, guid: c1e30fb11502b4746a7aafa817c94151, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -3.2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4609134914631721, guid: c1e30fb11502b4746a7aafa817c94151, type: 3}
       propertyPath: m_LocalPosition.y

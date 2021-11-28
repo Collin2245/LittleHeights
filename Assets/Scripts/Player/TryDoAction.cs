@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using Assets.HeroEditor4D.Common.CharacterScripts;
 
 public class TryDoAction : MonoBehaviour
 {
@@ -9,10 +10,16 @@ public class TryDoAction : MonoBehaviour
     DestroyObject destroyObject;
     Vector3Int point;
     TileInfo tileInfo;
+    PlayerController player;
+    public float attackSpeed;
+    float startTime;
     void Start()
     {
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
         destroyObject = GetComponent<DestroyObject>();
+        player = GameObject.Find("Player").GetComponent<PlayerController>();
+        attackSpeed = 2.0f;
+        startTime = 0.0f;
     }
 
     // Update is called once per frame
@@ -22,10 +29,16 @@ public class TryDoAction : MonoBehaviour
         {
             point = tileManager.baseMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             tileInfo = tileManager.GetTileInfoAtPoint();
+            if(Input.GetMouseButtonDown(0))
+            {
+                player.animator.Attack();
+            }
+            
             TryDestroyOrAttackObject();
         }
         else
         {
+            //player.animator.SetState(CharacterState.Idle);
             StopDestroyingObject();
         }
     }

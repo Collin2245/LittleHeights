@@ -687,24 +687,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &754713021 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1721707034548866455, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-  m_PrefabInstance: {fileID: 1721707035016268842}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &754713025
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 754713021}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e6ff9a6db3377ac488ef8a02ea8d65d6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  itemId: stick
 --- !u!1 &789623669
 GameObject:
   m_ObjectHideFlags: 0
@@ -1297,63 +1279,6 @@ Transform:
   m_Father: {fileID: 789623671}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &1721707035016268842
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 5228478063548015364}
-    m_Modifications:
-    - target: {fileID: 1721707034635362994, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_Name
-      value: SwordHolder
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721707034635362995, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_RootOrder
-      value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721707034635362995, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721707034635362995, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.575
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721707034635362995, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721707034635362995, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721707034635362995, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721707034635362995, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721707034635362995, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721707034635362995, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721707034635362995, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 1721707034635362995, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 5670f33fabe47cc4e91f1b456d1289bd, type: 3}
 --- !u!1001 &2946190703244146375
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2640,8 +2565,3 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: fda415032683f254c9171c1f69baed53, type: 3}
---- !u!4 &5228478063548015364 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2675111554100849049, guid: fda415032683f254c9171c1f69baed53, type: 3}
-  m_PrefabInstance: {fileID: 5228478063548015363}
-  m_PrefabAsset: {fileID: 0}
