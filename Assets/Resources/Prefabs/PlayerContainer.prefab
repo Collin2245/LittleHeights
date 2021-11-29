@@ -171,6 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b1596f241a3ab4f4a94994403fb8b200, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  attackSpeed: 0
 --- !u!82 &2044785546
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3188,6 +3189,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe07dcecc975474a82865a0342a6177, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 0}
   activeArea: 0
   runSpeed: 7
 --- !u!1 &2862932624473102316
