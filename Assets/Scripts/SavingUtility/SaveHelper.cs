@@ -24,6 +24,7 @@ public class SaveHelper : MonoBehaviour
     MasterSave masterSave;
     CharacterJson characterJson;
     MasterWorldSave masterWorldSave;
+    CharacterInventory characterInventory;
     [SerializeField] 
     GameObject ButtonObj;
     [SerializeField]
@@ -39,6 +40,7 @@ public class SaveHelper : MonoBehaviour
         saveObject = new SaveObject();
         masterSave = new MasterSave();
         masterWorldSave = new MasterWorldSave();
+        characterInventory = new CharacterInventory();
         characterPath = Application.persistentDataPath + "/Characters/";
         if (!Directory.Exists(Application.persistentDataPath + "/Characters/"))
         {
@@ -100,10 +102,8 @@ public class SaveHelper : MonoBehaviour
 
     public void NewSave()
     {
-        int currSaves = Directory.GetFiles(characterPath).Length;
-        saveObject.saveSlot = currSaves + 1;
         saveObject.guid = Guid.NewGuid().ToString();
-        Guid test = Guid.Parse(saveObject.guid);
+        //Guid test = Guid.Parse(saveObject.guid);
         SaveMasterSave(UpdateCharacterSavePathFile((saveObject.guid).ToString()));
     }
 
@@ -127,6 +127,15 @@ public class SaveHelper : MonoBehaviour
         File.WriteAllBytes(worldPath, Encoding.Default.GetBytes(JsonConvert.SerializeObject(masterWorldSave)));
         Debug.Log(File.ReadAllText(worldPath));
         PersistentData.Instance.CurrentWorld = masterWorldSave;
+    }
+
+    public static void SaveCharacter(MasterSave masterSave)
+    {
+        PersistentData.Instance.CurrentSave = masterSave;
+        string charactersPath = Application.persistentDataPath + "/Characters/" + masterSave.saveObject.guid + ".data";
+        File.WriteAllBytes(charactersPath, Encoding.Default.GetBytes(JsonConvert.SerializeObject(masterSave)));
+        Debug.Log(File.ReadAllText(charactersPath));
+        PersistentData.Instance.CurrentSave = masterSave;
     }
 
 

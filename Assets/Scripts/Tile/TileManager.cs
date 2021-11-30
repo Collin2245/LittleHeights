@@ -62,8 +62,7 @@ public class TileManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.P))
         {
-            UpdateInstance();
-            SaveHelper.SaveWorld(PersistentData.Instance.CurrentWorld);
+            SaveWorld();
         }
     }
 
@@ -71,6 +70,12 @@ public class TileManager : MonoBehaviour
     {
         SavePlayerPos();
         ConvertToListOfList(tileInfo);
+    }
+
+    public void SaveWorld()
+    {
+        UpdateInstance();
+        SaveHelper.SaveWorld(PersistentData.Instance.CurrentWorld);
     }
 
     void ConvertToListOfList(Dictionary<MocVector2int, Dictionary<MocVector3int, TileInfo>> tileInfo)
