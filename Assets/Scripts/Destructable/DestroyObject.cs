@@ -108,6 +108,7 @@ public class DestroyObject : MonoBehaviour
             StopCoroutine(treeEnumerator);
             tileManager.GetComponent<TileManager>().extraMapCollide.SetTile(point, null);
             tileManager.GetComponent<TileManager>().GetTileInfoAtPoint().isTreeOn = false;
+            tileManager.GetComponent<TileManager>().GetTileInfoAtPoint().tileName = "";
         }
         else
         {

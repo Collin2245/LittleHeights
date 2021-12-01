@@ -33,4 +33,9 @@ public struct InventorySaveItem
 {
     public string name;
     public int count;
+    public InventorySaveItem(string nameInput, int countInput)
+    {
+        name = nameInput;
+        count = countInput;
+    }
 }

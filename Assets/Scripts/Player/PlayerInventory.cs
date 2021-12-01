@@ -82,6 +82,54 @@ public class PlayerInventory : MonoBehaviour
             itemHolder30,
         };
         audioSource = this.GetComponent<AudioSource>();
+        if (PersistentData.Instance.CurrentSave.characterInventory.InventoryDict == null)
+        {
+            //create inventory
+            PopulatePersistentData();
+        }
+        else
+        {
+            //load inventory
+            LoadInventory();
+        }
+        SaveInventory();
+    }
+    void SaveInventory()
+    {
+        PopulatePersistentData();
+        SaveHelper.SaveCharacter(PersistentData.Instance.CurrentSave);
+    }
+    void LoadInventory()
+    {
+        for (int i = 0; i < PersistentData.Instance.CurrentSave.characterInventory.InventoryDict.Count; i++)
+        {
+            if (PersistentData.Instance.CurrentSave.characterInventory.InventoryDict[i].count > 0)
+            {
+                LittleHeightsItem temp = new LittleHeightsItem();
+                temp.id = PersistentData.Instance.CurrentSave.characterInventory.InventoryDict[i].name;
+                temp.currAmount = PersistentData.Instance.CurrentSave.characterInventory.InventoryDict[i].count;
+                AddItemToIndex(i, temp);
+            }
+        }
+    }
+    void PopulatePersistentData()
+    {
+        InventorySaveItem blankItem = new InventorySaveItem("",0);
+        PersistentData.Instance.CurrentSave.characterInventory.InventoryDict = new Dictionary<int, InventorySaveItem>();
+        for(int i = 0; i < itemHolders.Length; i ++)
+        {
+            if(itemHolders[i].transform.childCount > 0)
+            {
+                LittleHeightsItem temp;
+                temp = itemHolders[i].GetComponentInChildren<LittleHeightsItem>();
+
+                PersistentData.Instance.CurrentSave.characterInventory.InventoryDict.Add(i, new InventorySaveItem(temp.id, temp.currAmount));
+            }
+            else
+            {
+                PersistentData.Instance.CurrentSave.characterInventory.InventoryDict.Add(i, blankItem);
+            }  
+        }
     }
 
     // Update is called once per frame
@@ -95,6 +143,10 @@ public class PlayerInventory : MonoBehaviour
         else
         {
             currentItem = null;
+        }
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            SaveInventory();
         }
         
     }
@@ -133,6 +185,19 @@ public class PlayerInventory : MonoBehaviour
             return;
         }
         Debug.Log("Inventory is full");
+    }
+
+    public void AddItemToIndex(int i, LittleHeightsItem item)
+    {
+        //itemHolders[i].gameObject.GetComponent<InventorySlot>().GetComponentInChildren<Item>().currAmount = item.currAmount;
+        GameObject temp = Instantiate(Resources.Load("Prefabs/ItemPrefab") as GameObject, itemHolders[i].transform);
+        LittleHeightsItem tempItem = temp.GetComponent<LittleHeightsItem>();
+        tempItem.id = item.id;
+        tempItem.currAmount = item.currAmount;
+        //need to set inventoryslot stuff
+        itemHolders[i].GetComponent<InventorySlot>().itemId = item.id;
+        itemHolders[i].GetComponent<InventorySlot>().currAmount = item.currAmount;
+        //Debug.Log("Inventory is full");
     }
 
     private bool TryToAddItemToExistingItem(LittleHeightsItem item)

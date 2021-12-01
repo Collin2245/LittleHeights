@@ -12,14 +12,14 @@ public class TryDoAction : MonoBehaviour
     TileInfo tileInfo;
     PlayerController player;
     public float attackSpeed;
-    float startTime;
+    float time;
     void Start()
     {
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
         destroyObject = GetComponent<DestroyObject>();
         player = GameObject.Find("Player").GetComponent<PlayerController>();
-        attackSpeed = 2.0f;
-        startTime = 0.0f;
+        attackSpeed = 0.8f;
+        time = 0.0f;
     }
 
     // Update is called once per frame
@@ -29,11 +29,7 @@ public class TryDoAction : MonoBehaviour
         {
             point = tileManager.baseMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             tileInfo = tileManager.GetTileInfoAtPoint();
-            if(Input.GetMouseButtonDown(0))
-            {
-                player.animator.Attack();
-            }
-            
+            CheckAttackAnimations();
             TryDestroyOrAttackObject();
         }
         else
@@ -43,6 +39,23 @@ public class TryDoAction : MonoBehaviour
         }
     }
 
+    void CheckAttackAnimations()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            time = attackSpeed;
+            player.animator.Attack();
+        }
+        else if (time >= 0)
+        {
+            time -= Time.deltaTime;
+        }
+        else if (time < 0)
+        {
+            player.animator.Attack();
+            time = attackSpeed;
+        }
+    }
     void TryDestroyOrAttackObject()
     {
         if (tileInfo.isTreeOn)

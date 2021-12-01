@@ -24,6 +24,7 @@ public class TileManager : MonoBehaviour
     public TileManager Instance;
     public Dictionary<string, TileBase> tileDict = new Dictionary<string, TileBase>();
     Dictionary<string, MocVector3int> playerPlacedDict;
+    TileInfo blankTile;
 
 
     void Start()
@@ -35,6 +36,7 @@ public class TileManager : MonoBehaviour
     {
         
         tiles = this.GetComponent<Tiles>();
+        blankTile = new TileInfo();
         //FillTileDict();
         //converts because json serialization is stupid sometimes
         tileInfoPersistent = PersistentData.Instance.CurrentWorld.tileInfo;
@@ -50,6 +52,7 @@ public class TileManager : MonoBehaviour
         //DrawChunk(chunkSize, scale, seed, new Vector2Int(chunkSize * startMult, chunkSize * startMult));
         DrawChunksAroundPlayer();
         Debug.Log("seed: " + seed);
+        SaveWorld();
     }
 
 
@@ -112,7 +115,7 @@ public class TileManager : MonoBehaviour
         point.x = pointV3.x;
         point.y = pointV3.y;
         point.z = pointV3.z;
-        float perlin = perlinAtPoint(point);
+        //float perlin = perlinAtPoint(point);
         //if (!tileInfo.)
         //{
 
@@ -130,7 +133,15 @@ public class TileManager : MonoBehaviour
         //    }
         //}
         //Debug.Log("Is water?" + tileInfo[point].isWater);
-        return tileInfo[chunk][point];
+        if(tileInfo[chunk].ContainsKey(point))
+        {
+            return tileInfo[chunk][point];
+        }
+        else
+        {
+            return blankTile;
+        }
+        
     }
     public TileInfo GetTileInfoAtPoint(MocVector2int chunk,  MocVector3int point)
     {
