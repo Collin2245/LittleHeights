@@ -198,11 +198,7 @@ public class TileManager : MonoBehaviour
 
                         
                         LoadTileWithPerlin(perlin, chunk, point);
-                        Debug.Log(tileInfo[chunk].Keys);
-                        var test = tileInfo[chunk];
-                        var test2 = tileInfo[chunk].ContainsKey(point);
-                      
-                        var test4 = "f";
+                        //Debug.Log(tileInfo[chunk].Keys);
                         if(tileInfo[chunk].ContainsKey(point))
                         {
                             LoadTile(chunk, point, tileInfo[chunk][point].tileName);

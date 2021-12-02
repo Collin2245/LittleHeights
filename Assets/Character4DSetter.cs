@@ -15,7 +15,6 @@ public class Character4DSetter : MonoBehaviour
         character4D = this.GetComponent<Character4D>();
         string jsonString =  JsonConvert.SerializeObject(PersistentData.Instance.CurrentSave.characterJson.characterJson);
         character4D.FromJson(jsonString, true);
-        character4D.GetComponent
     }
 
     // Update is called once per frame

@@ -25,6 +25,7 @@ public class SaveHelper : MonoBehaviour
     CharacterJson characterJson;
     MasterWorldSave masterWorldSave;
     CharacterInventory characterInventory;
+    WorldTime worldTime;
     [SerializeField] 
     GameObject ButtonObj;
     [SerializeField]
@@ -112,6 +113,9 @@ public class SaveHelper : MonoBehaviour
         masterWorldSave.guid = Guid.NewGuid().ToString();
         masterWorldSave.name = TextObjWorld.GetComponent<Text>().text;
         masterWorldSave.seed = UnityEngine.Random.Range(1f, 100000f);
+        worldTime.day = 0;
+        worldTime.time = 0;
+        masterWorldSave.worldTime = worldTime;
         masterWorldSave.tileInfo = new List<KeyValuePair<MocVector2int, List<KeyValuePair<MocVector3int, TileInfo>>>>();
         masterWorldSave.CharacterToWorldPos = new List<KeyValuePair<string, MocVector3int>>();
         worldPath = Application.persistentDataPath + "/Worlds/" + masterWorldSave.guid + ".data";

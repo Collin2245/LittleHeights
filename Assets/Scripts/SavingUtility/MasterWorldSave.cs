@@ -10,6 +10,7 @@ public struct MasterWorldSave
     public string name;
     public float seed;
     public string guid;
+    public WorldTime worldTime;
     public List<KeyValuePair<string, MocVector3int>> CharacterToWorldPos;
     public List<KeyValuePair<MocVector2int,List<KeyValuePair<MocVector3int, TileInfo>>>> tileInfo;
 }
@@ -59,4 +60,11 @@ public struct MocVector2int
     {
         return new MocVector2int(rValue.x, rValue.y);
     }
+}
+
+[System.Serializable]
+public struct WorldTime
+{
+    public float day;
+    public float time;
 }
