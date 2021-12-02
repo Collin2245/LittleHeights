@@ -197,7 +197,7 @@ public class TileManager : MonoBehaviour
                         float perlin = Mathf.PerlinNoise(xF, yF);
 
                         
-                        LoadTileWithPerlin(perlin, chunk, point);
+                        LoadTileWithPerlin(perlin, point);
                         //Debug.Log(tileInfo[chunk].Keys);
                         if(tileInfo[chunk].ContainsKey(point))
                         {
@@ -233,13 +233,15 @@ public class TileManager : MonoBehaviour
         float yF = ((float)point.y / (float)chunkSize * scale);
         return Mathf.PerlinNoise(xF, yF);
     }
-    private void LoadTileWithPerlin(float perlin,Vector2Int chunk, Vector3Int point)
+    private void LoadTileWithPerlin(float perlin, Vector3Int point)
     {
         int randomNum = Random.Range(0, 200);
         if (perlin <= 0.36f)
         {
             Color color = new Color(0.7f, 0.9f, 0.95f);
             baseMap.SetTile(point, tiles.waterRuleTile);
+            extraMapCollide.SetTile(point, tiles.animatedWaterTile);
+            extraMapCollide.SetColor(point, color);
             baseMap.SetColor(point, color);
         }
         else if (perlin > 0.36f && perlin <= 0.4f)

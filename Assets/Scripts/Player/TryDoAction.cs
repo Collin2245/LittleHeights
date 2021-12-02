@@ -13,6 +13,7 @@ public class TryDoAction : MonoBehaviour
     PlayerController player;
     public float attackSpeed;
     float time;
+    bool mouseUp;
     void Start()
     {
         tileManager = GameObject.FindGameObjectWithTag("TileManager").GetComponent<TileManager>();
@@ -29,7 +30,7 @@ public class TryDoAction : MonoBehaviour
         {
             point = tileManager.baseMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
             tileInfo = tileManager.GetTileInfoAtPoint();
-            CheckAttackAnimations();
+            CheckAttackAnimations(time);
             TryDestroyOrAttackObject();
         }
         else
@@ -39,9 +40,9 @@ public class TryDoAction : MonoBehaviour
         }
     }
 
-    void CheckAttackAnimations()
+    void CheckAttackAnimations(float time)
     {
-        if (Input.GetMouseButtonDown(0))
+        if (time <= 0)
         {
             time = attackSpeed;
             player.animator.Attack();
