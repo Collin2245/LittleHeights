@@ -11,6 +11,7 @@ public class TryDoAction : MonoBehaviour
     Vector3Int point;
     TileInfo tileInfo;
     PlayerController player;
+    Character4D character;
     public float attackSpeed;
     float time;
     bool mouseUp;
@@ -21,11 +22,13 @@ public class TryDoAction : MonoBehaviour
         player = GameObject.Find("Player").GetComponent<PlayerController>();
         attackSpeed = 0.8f;
         time = 0.0f;
+        character = player.GetComponentInChildren<Character4D>();
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
+        time -= Time.deltaTime;
         if (Input.GetMouseButton(0) && tileManager.GetComponent<MouseHoverScript>().isActiveArea)
         {
             point = tileManager.baseMap.WorldToCell(Camera.main.ScreenToWorldPoint(Input.mousePosition));
@@ -40,21 +43,12 @@ public class TryDoAction : MonoBehaviour
         }
     }
 
-    void CheckAttackAnimations(float time)
+    void CheckAttackAnimations(float timeInput)
     {
         if (time <= 0)
         {
             time = attackSpeed;
             player.animator.Attack();
-        }
-        else if (time >= 0)
-        {
-            time -= Time.deltaTime;
-        }
-        else if (time < 0)
-        {
-            player.animator.Attack();
-            time = attackSpeed;
         }
     }
     void TryDestroyOrAttackObject()
